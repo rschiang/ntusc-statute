@@ -1,189 +1,10 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="print.css" media="print" />
+  <link rel="stylesheet" href="screen.css" media="screen" />
   <title>國立臺灣大學學生代表大會議事規則</title>
-  <style>
-    @media screen {
-      html {
-        zoom: 2;
-      }
-    }
-
-    @media print {
-      @page {
-        size: 99mm 210mm;
-        border: 1pt solid black;
-        margin: 2em;
-        padding: 0.2em;
-        counter-increment: page;
-        font-family: "Songti TC", serif;
-        font-size: 8pt;
-      }
-
-      @page :left {
-        @left-top {
-          writing-mode: vertical-rl;
-          content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
-          padding: 0.325em 0.2em;
-        }
-        @left-bottom {
-          writing-mode: vertical-rl;
-          text-align: right;
-          content: counter(page, cjk-decimal);
-          padding: 0.325em 0.2em;
-        }
-      }
-
-      @page :right {
-        @right-top {
-          writing-mode: vertical-lr;
-          content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
-          padding: 0.325em 0.2em;
-        }
-        @right-bottom {
-          writing-mode: vertical-lr;
-          text-align: right;
-          content: counter(page, cjk-decimal);
-          padding: 0.325em 0.2em;
-        }
-      }
-
-      body {
-        padding: 0;
-      }
-
-      h1 {
-        string-set: statute-title content();
-      }
-
-      h6 {
-        string-set: statute-now attr(data-number);
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      font-family: "Songti TC", serif;
-      font-size: 8pt;
-      line-height: 1.375;
-    }
-
-    body {
-      padding: 0.675em;
-    }
-
-    h1 {
-      font-family: "Hiragino Mincho ProN", sans-serif;
-      font-weight: bold;
-      font-size: 12pt;
-      line-height: 3;
-      margin-top: -0.675rem;
-    }
-
-    h6 {
-      font-family: "Pingfang TC", sans-serif;
-      font-weight: 600;
-      font-size: inherit;
-      line-height: 1.675;
-    }
-
-    h6 .caption {
-      font-family: "Kaiti TC", cursive;
-      font-weight: normal;
-    }
-
-    ol {
-      list-style: none;
-      margin: 0 0 0 1em;
-      padding: 0;
-    }
-
-    ol.history {
-      font-size: .875em;
-      margin: 0 0 1em 3em;
-    }
-
-    ol > ol > ol {
-      margin: 0 0 0 3em;
-    }
-
-    body > ol > li, ol > ol > ol > li {
-      text-indent: -1em;
-    }
-
-    body>ol>li:nth-of-type(1):before { content:'①'; }
-    body>ol>li:nth-of-type(2):before { content:'②'; }
-    body>ol>li:nth-of-type(3):before { content:'③'; }
-    body>ol>li:nth-of-type(4):before { content:'④'; }
-    body>ol>li:nth-of-type(5):before { content:'⑤'; }
-    body>ol>li:nth-of-type(6):before { content:'⑥'; }
-    body>ol>li:nth-of-type(7):before { content:'⑦'; }
-    body>ol>li:nth-of-type(8):before { content:'⑧'; }
-    body>ol>li:nth-of-type(9):before { content:'⑨'; }
-    body>ol>li:nth-of-type(10):before { content:'⑩'; }
-    body>ol>li:nth-of-type(11):before { content:'⑪'; }
-    body>ol>li:nth-of-type(12):before { content:'⑫'; }
-    body>ol>li:nth-of-type(13):before { content:'⑬'; }
-    body>ol>li:nth-of-type(14):before { content:'⑭'; }
-    body>ol>li:nth-of-type(15):before { content:'⑮'; }
-    body>ol>li:nth-of-type(16):before { content:'⑯'; }
-    body>ol>li:nth-of-type(17):before { content:'⑰'; }
-    body>ol>li:nth-of-type(18):before { content:'⑱'; }
-    body>ol>li:nth-of-type(19):before { content:'⑲'; }
-    body>ol>li:nth-of-type(20):before { content:'⑳'; }
-    body>ol>li:nth-of-type(21):before { content:'㉑'; }
-    body>ol>li:nth-of-type(22):before { content:'㉒'; }
-    body>ol>li:nth-of-type(23):before { content:'㉓'; }
-    body>ol>li:nth-of-type(24):before { content:'㉔'; }
-    body>ol>li:nth-of-type(25):before { content:'㉕'; }
-    body>ol>li:nth-of-type(26):before { content:'㉖'; }
-    body>ol>li:nth-of-type(27):before { content:'㉗'; }
-    body>ol>li:nth-of-type(28):before { content:'㉘'; }
-    body>ol>li:nth-of-type(29):before { content:'㉙'; }
-    body>ol>li:nth-of-type(30):before { content:'㉚'; }
-    body>ol>li:nth-of-type(31):before { content:'㉛'; }
-    body>ol>li:nth-of-type(32):before { content:'㉜'; }
-    body>ol>li:nth-of-type(33):before { content:'㉝'; }
-    body>ol>li:nth-of-type(34):before { content:'㉞'; }
-    body>ol>li:nth-of-type(35):before { content:'㉟'; }
-    body>ol>li:nth-of-type(36):before { content:'㊱'; }
-    body>ol>li:nth-of-type(37):before { content:'㊲'; }
-    body>ol>li:nth-of-type(38):before { content:'㊳'; }
-    body>ol>li:nth-of-type(39):before { content:'㊴'; }
-    body>ol>li:nth-of-type(40):before { content:'㊵'; }
-    body>ol>li:nth-of-type(41):before { content:'㊶'; }
-    body>ol>li:nth-of-type(42):before { content:'㊷'; }
-    body>ol>li:nth-of-type(43):before { content:'㊸'; }
-    body>ol>li:nth-of-type(44):before { content:'㊹'; }
-    body>ol>li:nth-of-type(45):before { content:'㊺'; }
-    body>ol>li:nth-of-type(46):before { content:'㊻'; }
-    body>ol>li:nth-of-type(47):before { content:'㊼'; }
-    body>ol>li:nth-of-type(48):before { content:'㊽'; }
-    body>ol>li:nth-of-type(49):before { content:'㊾'; }
-    body>ol>li:nth-of-type(50):before { content:'㊿'; }
-
-    body>ol>li:only-of-type { text-indent: 0; }
-    body>ol>li:only-of-type:before { content: ''; }
-
-    ol>ol>ol>li:nth-of-type(1):before { content:'㈠'; }
-    ol>ol>ol>li:nth-of-type(2):before { content:'㈡'; }
-    ol>ol>ol>li:nth-of-type(3):before { content:'㈢'; }
-    ol>ol>ol>li:nth-of-type(4):before { content:'㈣'; }
-    ol>ol>ol>li:nth-of-type(5):before { content:'㈤'; }
-    ol>ol>ol>li:nth-of-type(6):before { content:'㈥'; }
-    ol>ol>ol>li:nth-of-type(7):before { content:'㈦'; }
-    ol>ol>ol>li:nth-of-type(8):before { content:'㈧'; }
-    ol>ol>ol>li:nth-of-type(9):before { content:'㈨'; }
-    ol>ol>ol>li:nth-of-type(10):before { content:'㈩'; }
-
-  </style>
-  <!-- ①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿ -->
-  <!-- ㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩ -->
 </head>
 <body>
   <h1>國立臺灣大學學生代表大會議事規則</h1>
@@ -242,8 +63,8 @@
   <ol class="statute">
     <li>秘書處收受提案後，應轉交議長處理下列事項：</li>
     <ol>
-      <li>一　審定提案程序及內容是否合法。</li>
-      <li>二　議案之合併、分開及其次序之變更。</li>
+      <li>審定提案程序及內容是否合法。</li>
+      <li>議案之合併、分開及其次序之變更。</li>
     </ol>
   </ol>
   <h6 data-number="八">第八條<span class="caption">（大會之召集）</span></h6>
@@ -274,10 +95,10 @@
   <ol class="statute">
     <li>大會每會期所舉行之預備會議，依下列程序進行之：</li>
     <ol>
-      <li>一　宣布開會。</li>
-      <li>二　學生代表報到。</li>
-      <li>三　主席報告。</li>
-      <li>四　議長選舉：</li>
+      <li>宣布開會。</li>
+      <li>學生代表報到。</li>
+      <li>主席報告。</li>
+      <li>議長選舉：</li>
       <ol>
         <li>候選人提名。</li>
         <li>政見發表與提問。</li>
@@ -285,7 +106,7 @@
         <li>開票。</li>
         <li>宣布選舉結果。</li>
       </ol>
-      <li>五　副議長選舉：</li>
+      <li>副議長選舉：</li>
       <ol>
         <li>候選人提名。</li>
         <li>政見發表與提問。</li>
@@ -293,25 +114,25 @@
         <li>開票。</li>
         <li>宣布選舉結果。</li>
       </ol>
-      <li>六　議長、副議長交接儀式。</li>
-      <li>七　選舉罷免監察委員會委員選舉：</li>
+      <li>議長、副議長交接儀式。</li>
+      <li>選舉罷免監察委員會委員選舉：</li>
       <ol>
         <li>候選人提名。</li>
         <li>舉手投票。</li>
         <li>開票。</li>
         <li>宣布選舉結果。</li>
       </ol>
-      <li>八　紀律委員會委員選舉：</li>
+      <li>紀律委員會委員選舉：</li>
       <ol>
         <li>候選人提名。</li>
         <li>舉手投票。</li>
         <li>開票。</li>
         <li>宣布選舉結果。</li>
       </ol>
-      <li>九　選填並確認各常設委員會名單。</li>
-      <li>十　討論該會期常會日期。</li>
-      <li>十一　自由發言。</li>
-      <li>十二　宣布散會。</li>
+      <li>選填並確認各常設委員會名單。</li>
+      <li>討論該會期常會日期。</li>
+      <li>十自由發言。</li>
+      <li>十宣布散會。</li>
     </ol>
     <li>前項會議之時程，由前屆議長定之。</li>
     <li>因故無法親自報到之學生代表得以書面或以文書型式經由通訊網路向大會報到。</li>
@@ -334,10 +155,10 @@
   <ol class="statute">
     <li>除下列情形外，每一學生代表就同一議題之發言，以兩次為限，每次不超過五分鐘：</li>
     <ol>
-      <li>一　原提案人說明提案要旨。</li>
-      <li>二　說明審查報告之要旨。</li>
-      <li>三　出席代表均已輪流講畢。</li>
-      <li>四　經主席許可，必要時主席應詢問在場學生代表有無異議。</li>
+      <li>原提案人說明提案要旨。</li>
+      <li>說明審查報告之要旨。</li>
+      <li>出席代表均已輪流講畢。</li>
+      <li>經主席許可，必要時主席應詢問在場學生代表有無異議。</li>
     </ol>
   </ol>
   <h6 data-number="十八">第十八條<span class="caption">（主席裁定及異議程序）</span></h6>
@@ -355,12 +176,12 @@
   <ol class="statute">
     <li>表決方式由主席就下列方式擇一裁定：</li>
     <ol>
-      <li>一　無異議表決。</li>
-      <li>二　口頭表決。</li>
-      <li>三　舉手表決。</li>
-      <li>四　起立表決。</li>
-      <li>五　投票表決。</li>
-      <li>六　點名表決。</li>
+      <li>無異議表決。</li>
+      <li>口頭表決。</li>
+      <li>舉手表決。</li>
+      <li>起立表決。</li>
+      <li>投票表決。</li>
+      <li>點名表決。</li>
     </ol>
     <li>前項第一款所列方式應重覆詢問三次，每次詢問至少間隔五秒，皆無異議方為通過。</li>
     <li>第一項第五款所列方式，於人事相關議案應以無記名為之，其餘議案應以記名為之。</li>
@@ -379,10 +200,10 @@
   <ol class="statute">
     <li>議案經表決通過或否決後，如因情勢變遷或有新資料發現而認為原決議案確有重加研討之必要時，得於下次會議以前提出復議，並應具備下列各款要件：</li>
     <ol>
-      <li>一　證明動議人確為原案議決時之出席代表，而未曾發言反對原決議案者；如原案議決時，係依投票記名表決或點名表決，並應證明為贊成原決議案者。</li>
-      <li>二　原議案尚未執行者。</li>
-      <li>三　具有與原決議案不同之理由。</li>
-      <li>四　學生代表十分之一以上之連署或附議。</li>
+      <li>證明動議人確為原案議決時之出席代表，而未曾發言反對原決議案者；如原案議決時，係依投票記名表決或點名表決，並應證明為贊成原決議案者。</li>
+      <li>原議案尚未執行者。</li>
+      <li>具有與原決議案不同之理由。</li>
+      <li>學生代表十分之一以上之連署或附議。</li>
     </ol>
   </ol>
   <h6 data-number="二十四">第二十四條<span class="caption">（額數問題）</span></h6>
@@ -432,16 +253,16 @@
   <ol class="statute">
     <li>大會公報應記載下列事項：</li>
     <ol>
-      <li>一　上期大會公報更正事項。</li>
-      <li>二　會次及其年、月、日、起止時分。</li>
-      <li>三　開會地點。</li>
-      <li>四　出席者、請假者、缺席者、列席者之姓名、人數。</li>
-      <li>五　主席。</li>
-      <li>六　記錄者姓名。</li>
-      <li>七　報告及報告者姓名、職別及報告後決定事項。</li>
-      <li>八　質詢及答覆要點。</li>
-      <li>九　討論事項，其表決方法與結果。</li>
-      <li>十　其他必要事項。</li>
+      <li>上期大會公報更正事項。</li>
+      <li>會次及其年、月、日、起止時分。</li>
+      <li>開會地點。</li>
+      <li>出席者、請假者、缺席者、列席者之姓名、人數。</li>
+      <li>主席。</li>
+      <li>記錄者姓名。</li>
+      <li>報告及報告者姓名、職別及報告後決定事項。</li>
+      <li>質詢及答覆要點。</li>
+      <li>討論事項，其表決方法與結果。</li>
+      <li>其他必要事項。</li>
     </ol>
   </ol>
   <h6 data-number="三十四">第三十四條<span class="caption">（大會公報及議事逐字稿之更正）</span></h6>

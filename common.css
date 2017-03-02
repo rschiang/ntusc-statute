@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Songti TC", serif;
+  font-size: 8pt;
+  line-height: 1.375;
+}
+
+body {
+  padding: 0.675em;
+}
+
+h1 {
+  font-family: "Hiragino Mincho ProN", sans-serif;
+  font-weight: bold;
+  font-size: 12pt;
+  line-height: 3;
+  margin-top: -0.675rem;
+}
+
+h6 {
+  font-family: "Pingfang TC", sans-serif;
+  font-weight: 600;
+  font-size: inherit;
+  line-height: 1.675;
+}
+
+h6 .caption {
+  font-family: "Kaiti TC", cursive;
+  font-weight: normal;
+}
+
+ol {
+  list-style: none;
+  margin: 0 0 0 1em;
+  padding: 0;
+}
+
+ol.history {
+  font-size: .875em;
+  margin: 0 0 1em 3em;
+}
+
+.statute > ol {
+  margin: 0;
+  counter-reset: counter;
+  list-style: none;
+}
+
+.statute > ol > li {
+  counter-increment: counter;
+}
+
+.statute > ol > li:before {
+  content: counter(counter, cjk-decimal) '\3000';
+}
+
+ol > ol > ol {
+  margin: 0 0 0 3em;
+}
+
+body > ol > li, ol > ol > ol > li {
+  text-indent: -1em;
+}
+
+body>ol>li:nth-of-type(1):before { content:'①'; }
+body>ol>li:nth-of-type(2):before { content:'②'; }
+body>ol>li:nth-of-type(3):before { content:'③'; }
+body>ol>li:nth-of-type(4):before { content:'④'; }
+body>ol>li:nth-of-type(5):before { content:'⑤'; }
+body>ol>li:nth-of-type(6):before { content:'⑥'; }
+body>ol>li:nth-of-type(7):before { content:'⑦'; }
+body>ol>li:nth-of-type(8):before { content:'⑧'; }
+body>ol>li:nth-of-type(9):before { content:'⑨'; }
+body>ol>li:nth-of-type(10):before { content:'⑩'; }
+body>ol>li:nth-of-type(11):before { content:'⑪'; }
+body>ol>li:nth-of-type(12):before { content:'⑫'; }
+body>ol>li:nth-of-type(13):before { content:'⑬'; }
+body>ol>li:nth-of-type(14):before { content:'⑭'; }
+body>ol>li:nth-of-type(15):before { content:'⑮'; }
+body>ol>li:nth-of-type(16):before { content:'⑯'; }
+body>ol>li:nth-of-type(17):before { content:'⑰'; }
+body>ol>li:nth-of-type(18):before { content:'⑱'; }
+body>ol>li:nth-of-type(19):before { content:'⑲'; }
+body>ol>li:nth-of-type(20):before { content:'⑳'; }
+body>ol>li:nth-of-type(21):before { content:'㉑'; }
+body>ol>li:nth-of-type(22):before { content:'㉒'; }
+body>ol>li:nth-of-type(23):before { content:'㉓'; }
+body>ol>li:nth-of-type(24):before { content:'㉔'; }
+body>ol>li:nth-of-type(25):before { content:'㉕'; }
+body>ol>li:nth-of-type(26):before { content:'㉖'; }
+body>ol>li:nth-of-type(27):before { content:'㉗'; }
+body>ol>li:nth-of-type(28):before { content:'㉘'; }
+body>ol>li:nth-of-type(29):before { content:'㉙'; }
+body>ol>li:nth-of-type(30):before { content:'㉚'; }
+body>ol>li:nth-of-type(31):before { content:'㉛'; }
+body>ol>li:nth-of-type(32):before { content:'㉜'; }
+body>ol>li:nth-of-type(33):before { content:'㉝'; }
+body>ol>li:nth-of-type(34):before { content:'㉞'; }
+body>ol>li:nth-of-type(35):before { content:'㉟'; }
+body>ol>li:nth-of-type(36):before { content:'㊱'; }
+body>ol>li:nth-of-type(37):before { content:'㊲'; }
+body>ol>li:nth-of-type(38):before { content:'㊳'; }
+body>ol>li:nth-of-type(39):before { content:'㊴'; }
+body>ol>li:nth-of-type(40):before { content:'㊵'; }
+body>ol>li:nth-of-type(41):before { content:'㊶'; }
+body>ol>li:nth-of-type(42):before { content:'㊷'; }
+body>ol>li:nth-of-type(43):before { content:'㊸'; }
+body>ol>li:nth-of-type(44):before { content:'㊹'; }
+body>ol>li:nth-of-type(45):before { content:'㊺'; }
+body>ol>li:nth-of-type(46):before { content:'㊻'; }
+body>ol>li:nth-of-type(47):before { content:'㊼'; }
+body>ol>li:nth-of-type(48):before { content:'㊽'; }
+body>ol>li:nth-of-type(49):before { content:'㊾'; }
+body>ol>li:nth-of-type(50):before { content:'㊿'; }
+
+body>ol>li:only-of-type { text-indent: 0; }
+body>ol>li:only-of-type:before { content: ''; }
+
+ol>ol>ol>li:nth-of-type(1):before { content:'㈠'; }
+ol>ol>ol>li:nth-of-type(2):before { content:'㈡'; }
+ol>ol>ol>li:nth-of-type(3):before { content:'㈢'; }
+ol>ol>ol>li:nth-of-type(4):before { content:'㈣'; }
+ol>ol>ol>li:nth-of-type(5):before { content:'㈤'; }
+ol>ol>ol>li:nth-of-type(6):before { content:'㈥'; }
+ol>ol>ol>li:nth-of-type(7):before { content:'㈦'; }
+ol>ol>ol>li:nth-of-type(8):before { content:'㈧'; }
+ol>ol>ol>li:nth-of-type(9):before { content:'㈨'; }
+ol>ol>ol>li:nth-of-type(10):before { content:'㈩'; }

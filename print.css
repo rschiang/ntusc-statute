@@ -1,0 +1,49 @@
+@page {
+  size: 99mm 210mm;
+  border: 1pt solid black;
+  margin: 2em;
+  padding: 0.2em;
+  counter-increment: page;
+  font-family: "Songti TC", serif;
+  font-size: 8pt;
+}
+
+@page :left {
+  @left-top {
+    writing-mode: vertical-rl;
+    content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
+    padding: 0.325em 0.2em;
+  }
+  @left-bottom {
+    writing-mode: vertical-rl;
+    text-align: right;
+    content: counter(page, cjk-decimal);
+    padding: 0.325em 0.2em;
+  }
+}
+
+@page :right {
+  @right-top {
+    writing-mode: vertical-lr;
+    content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
+    padding: 0.325em 0.2em;
+  }
+  @right-bottom {
+    writing-mode: vertical-lr;
+    text-align: right;
+    content: counter(page, cjk-decimal);
+    padding: 0.325em 0.2em;
+  }
+}
+
+body {
+  padding: 0;
+}
+
+h1 {
+  string-set: statute-title content();
+}
+
+h6 {
+  string-set: statute-now attr(data-number);
+}
