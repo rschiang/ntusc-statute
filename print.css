@@ -11,17 +11,13 @@
   margin: 1.375em 2.5em 1.375em 2em;
   @left-top {
     writing-mode: vertical-rl;
-    text-align: center;
     content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
     margin: 0 .325em 0 .625em;
-    background: #ccc;
   }
   @left-bottom {
     writing-mode: vertical-rl;
-    text-align: right;
     content: counter(page, cjk-decimal);
     margin: 0 .325em 0 .625em;
-    background: #aaa;
   }
 }
 
@@ -31,14 +27,12 @@
     writing-mode: vertical-lr;
     content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
     margin: 0 .625em 0 .325em;
-    background: #ccc;
   }
   @right-bottom {
     writing-mode: vertical-lr;
     text-align: right;
     content: counter(page, cjk-decimal);
     margin: 0 .625em 0 .325em;
-    background: #aaa;
   }
 }
 
@@ -52,4 +46,5 @@ header {
 
 h6 {
   string-set: statute-now attr(data-number);
+  page-break-after: auto;
 }
