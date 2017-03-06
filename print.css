@@ -45,7 +45,7 @@ body {
   padding: 0;
 }
 
-h1 {
+header {
   string-set: statute-title content();
 }
 
