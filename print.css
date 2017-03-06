@@ -1,7 +1,6 @@
 @page {
   size: 99mm 210mm;
   border: 1pt solid black;
-  margin: 1.375em 2em;
   padding: 0.5em;
   counter-increment: page;
   font-family: "Songti TC", serif;
@@ -9,6 +8,7 @@
 }
 
 @page :left {
+  margin: 1.375em 2.5em 1.375em 2em;
   @left-top {
     writing-mode: vertical-rl;
     text-align: center;
@@ -26,6 +26,7 @@
 }
 
 @page :right {
+  margin: 1.375em 2em 1.375em 2.5em;
   @right-top {
     writing-mode: vertical-lr;
     content: string(statute-title) '\ff08' string(statute-now, first) '\301c' string(statute-now, last) '\689d\fe36';
