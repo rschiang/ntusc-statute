@@ -55,4 +55,8 @@ def parse_act(buf):
 
 if __name__ == '__main__':
     f = open('../example.txt', 'r')
-    print(parse_act(f).to_markdown())
+    act = parse_act(f)
+
+    from renderer import MarkdownRenderer
+    renderer = MarkdownRenderer()
+    print(renderer.render(act).getvalue())
