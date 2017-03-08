@@ -47,7 +47,8 @@ class HtmlRenderer(Renderer):
 
     def render_chapter(self, chapter):
         buf = self.buf
-        buf.write('<h5>{number}　{caption}</h5>\n'.format(**chapter.__dict__))
+        grade = 4 if '章' in chapter.number else 5
+        buf.write('<h{grade}>{number}　{caption}</h{grade}>\n'.format(grade=grade, **chapter.__dict__))
 
     def render_article(self, article):
         buf = self.buf

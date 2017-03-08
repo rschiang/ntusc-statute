@@ -42,6 +42,7 @@ body {
 
 header {
   string-set: statute-title content();
+  margin-top: -0.5rem;
 }
 
 h6 {

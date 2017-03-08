@@ -22,12 +22,16 @@ header {
   margin-top: -0.675rem;
 }
 
-h5 {
+h2, h3, h4, h5 {
     font-family: "Yuanti TC", sans-serif;
-    font-weight: normal;
     font-size: 1.125rem;
+    font-weight: normal;
     line-height: 2rem;
     text-align: center;
+}
+
+h5 {
+    font-size: 1rem;
 }
 
 h6 {
