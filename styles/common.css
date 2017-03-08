@@ -71,6 +71,10 @@ ol {
   margin: 0 0 1em 3em;
 }
 
+.history .note {
+  font-family: "Kaiti TC", cursive;
+}
+
 .subsections {
   margin: 0;
   counter-reset: counter;

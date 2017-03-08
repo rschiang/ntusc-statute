@@ -30,8 +30,10 @@ class HtmlRenderer(Renderer):
         for h in act.history:
             buf.write('<li>')
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
-            buf.write(normalize_spaces(h))
-            if h[-1] not in '）)。':
+            h = normalize_spaces(h)
+            h = re.sub('(（編按：[^）]+）)', r'<span class="note">\1</span>', h)
+            buf.write(h)
+            if h[-1] not in '>）)。':  # Consider <span> as well
                 buf.write('。')
             buf.write('</li>\n')
         buf.write('</ol>\n')
