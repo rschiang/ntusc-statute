@@ -57,6 +57,6 @@ if __name__ == '__main__':
     f = open('../example.txt', 'r')
     act = parse_act(f)
 
-    from renderer import MarkdownRenderer
-    renderer = MarkdownRenderer()
+    from renderer import HtmlRenderer
+    renderer = HtmlRenderer()
     print(renderer.render(act).getvalue())

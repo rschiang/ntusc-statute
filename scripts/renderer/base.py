@@ -3,6 +3,13 @@ from statute import Chapter
 
 class Renderer(object):
 
+    # Public methods
+
+    def render(self, act):
+        pass
+
+    # Internal methods
+
     def render_act(self, act):
         for article in act.articles:
             if isinstance(article, str):
