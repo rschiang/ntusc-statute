@@ -22,11 +22,19 @@ header {
   margin-top: -0.675rem;
 }
 
+h5 {
+    font-family: "Yuanti TC", sans-serif;
+    font-weight: normal;
+    font-size: 1.125rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
 h6 {
   font-family: "Pingfang TC", sans-serif;
   font-weight: 600;
   font-size: inherit;
-  line-height: 1.675;
+  line-height: 1.75rem;
 }
 
 h6 .caption {
