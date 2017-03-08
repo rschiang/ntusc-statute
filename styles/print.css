@@ -40,6 +40,10 @@ body {
   padding: 0;
 }
 
+article {
+  page-break-before: always;
+}
+
 header {
   string-set: statute-title content(), statute-unit '', statute-suffix '';
   margin-top: 0.75rem;
@@ -49,7 +53,10 @@ header {
   string-set: statute-suffix '\6cbf\9769';
 }
 
+h2, h3, h4, h5, h6 {
+  page-break-after: auto;
+}
+
 h6 {
   string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '\689d';
-  page-break-after: auto;
 }

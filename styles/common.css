@@ -39,8 +39,8 @@ h6 {
   font-family: "Pingfang TC", sans-serif;
   font-weight: 600;
   font-size: inherit;
-  line-height: 1.375rem;
-  margin: .1875rem 0;
+  line-height: 1.5rem;
+  margin: .125rem 0 .125rem;
 }
 
 h6 .caption {

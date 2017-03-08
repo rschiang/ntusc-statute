@@ -2,6 +2,7 @@
 import re
 from .base import Renderer
 from io import StringIO
+from utils import normalize_spaces
 
 class HtmlRenderer(Renderer):
 
@@ -28,11 +29,9 @@ class HtmlRenderer(Renderer):
         buf.write('<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
-            h = h.replace('\u3000', '')
-            h = re.sub('(?<=[\u3400-\u4DB5\u4E00-\u9FD5])([\\d\\-]+)', '\u2009\\1', h)
-            h = re.sub('([\\d\\-]+)(?=[\u3400-\u4DB5\u4E00-\u9FD5])', '\\1\u2009', h)
-            buf.write(h)
-            if not h.endswith('。'):
+            h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
+            buf.write(normalize_spaces(h))
+            if h[-1] not in '）)。':
                 buf.write('。')
             buf.write('</li>\n')
         buf.write('</ol>\n')
@@ -67,7 +66,7 @@ class HtmlRenderer(Renderer):
         buf.write('</h6>\n')
         if single_p:
             buf.write('<p>')
-            buf.write(article.subitems[0].caption)
+            buf.write(normalize_spaces(article.subitems[0].caption))
             buf.write('</p>\n')
         else:
             buf.write('<ol class="paragraphs">')
@@ -77,7 +76,7 @@ class HtmlRenderer(Renderer):
     def render_paragraph(self, paragraph):
         buf = self.buf
         buf.write('<li>')
-        buf.write(paragraph.caption)
+        buf.write(normalize_spaces(paragraph.caption))
         buf.write('</li>\n')
         if paragraph.subitems:
             buf.write('<ol class="subsections">\n')
@@ -88,7 +87,7 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         caption = re.sub(r'^[〇ㄧ一二三四五六七八九十]+、\s*', '', subsection.caption)
         buf.write('<li>')
-        buf.write(caption)
+        buf.write(normalize_spaces(caption))
         buf.write('</li>\n')
         if subsection.subitems:
             buf.write('<ol class="items">\n')
@@ -99,5 +98,5 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         item = re.sub(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*', '', item)
         buf.write('<li>')
-        buf.write(item)
+        buf.write(normalize_spaces(item))
         buf.write('</li>\n')
