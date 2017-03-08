@@ -26,12 +26,13 @@ h2, h3, h4, h5 {
     font-family: "Yuanti TC", sans-serif;
     font-size: 1.125rem;
     font-weight: normal;
-    line-height: 2rem;
+    margin: .25rem 0;
+    line-height: 1.75rem;
     text-align: center;
 }
 
 h5 {
-    font-size: 1rem;
+    font-size: 1.07725rem;
 }
 
 h6 {

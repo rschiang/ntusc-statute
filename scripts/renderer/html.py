@@ -61,16 +61,16 @@ class HtmlRenderer(Renderer):
             buf.write('<span class="caption">（')
             buf.write(article.caption)
             buf.write('）</span>')
-        elif single_p and re.match(r'^[（\(]刪除[\)）]', article.subitems[0].caption):
-            buf.write('<span class="caption">（刪除）</span></h6>\n')
-            return
-        # Prints single or multiple paragraphs
+        if single_p and re.match(r'^[（\(]刪除[\)）]', article.subitems[0].caption):
+            buf.write('<span class="caption deleted">（刪除）</span></h6>\n')
+            return  # Short circuit
+        buf.write('</h6>\n')
         if single_p:
-            buf.write('</h6>\n<p>')
+            buf.write('<p>')
             buf.write(article.subitems[0].caption)
             buf.write('</p>\n')
         else:
-            buf.write('</h6>\n<ol class="paragraphs">')
+            buf.write('<ol class="paragraphs">')
             super().render_article(article)
             buf.write('</ol>\n')
 
