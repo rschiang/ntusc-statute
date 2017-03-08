@@ -54,7 +54,12 @@ def parse_act(buf):
 
 
 if __name__ == '__main__':
-    f = open('example.txt', 'r')
+    import sys
+    if len(sys.argv) < 2:
+        print('Usage: python parser.py [file] > output.html')
+        sys.exit()
+
+    f = open(sys.argv[1], 'r')
     act = parse_act(f)
 
     from renderer import HtmlRenderer
