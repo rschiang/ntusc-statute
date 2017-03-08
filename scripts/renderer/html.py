@@ -1,4 +1,5 @@
 # renderer/html.py - Renders to HTML5 statute
+import re
 from .base import Renderer
 from io import StringIO
 
@@ -67,8 +68,9 @@ class HtmlRenderer(Renderer):
 
     def render_subsection(self, subsection):
         buf = self.buf
+        caption = re.sub(r'^[〇ㄧ一二三四五六七八九十]+、\s*', '', subsection.caption)
         buf.write('<li>')
-        buf.write(subsection.caption)
+        buf.write(caption)
         buf.write('</li>\n')
         if subsection.subitems:
             buf.write('<ol class="items">\n')
@@ -77,6 +79,7 @@ class HtmlRenderer(Renderer):
 
     def render_item(self, item):
         buf = self.buf
+        item = re.sub(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*', '', item)
         buf.write('<li>')
         buf.write(item)
         buf.write('</li>\n')
