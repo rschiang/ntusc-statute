@@ -9,10 +9,10 @@ class HtmlRenderer(Renderer):
         self.buf = buf or StringIO()
         self.buf.write('''<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="styles/common.css" />
-  <link rel="stylesheet" href="styles/print.css" media="print" />
-  <link rel="stylesheet" href="styles/screen.css" media="screen" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles/common.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+    <link rel="stylesheet" href="styles/screen.css" media="screen" />
 </head>
 <body>\n''')
         self.render_act(act)
@@ -28,7 +28,11 @@ class HtmlRenderer(Renderer):
         buf.write('<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
+            h = re.sub('(?<=[\u3400-\u4DB5\u4E00-\u9FD5])([\\d\\-]+)', '\u2009\\1', h)
+            h = re.sub('([\\d\\-]+)(?=[\u3400-\u4DB5\u4E00-\u9FD5])', '\\1\u2009', h)
             buf.write(h)
+            if not h.endswith('。'):
+                buf.write('。')
             buf.write('</li>\n')
         buf.write('</ol>\n')
         super().render_act(act)
