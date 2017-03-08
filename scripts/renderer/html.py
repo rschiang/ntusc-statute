@@ -52,6 +52,7 @@ class HtmlRenderer(Renderer):
 
     def render_article(self, article):
         buf = self.buf
+        single_p = (len(article.subitems) == 1)
         buf.write('<h6 data-number="')
         buf.write(re.sub(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?', r'\1\2', article.number))
         buf.write('">')
@@ -60,13 +61,16 @@ class HtmlRenderer(Renderer):
             buf.write('<span class="caption">（')
             buf.write(article.caption)
             buf.write('）</span>')
-        buf.write('</h6>\n')
-        if len(article.subitems) == 1:
-            buf.write('<p>')
+        elif single_p and re.match(r'^[（\(]刪除[\)）]', article.subitems[0].caption):
+            buf.write('<span class="caption">（刪除）</span></h6>\n')
+            return
+        # Prints single or multiple paragraphs
+        if single_p:
+            buf.write('</h6>\n<p>')
             buf.write(article.subitems[0].caption)
             buf.write('</p>\n')
         else:
-            buf.write('<ol class="paragraphs">')
+            buf.write('</h6>\n<ol class="paragraphs">')
             super().render_article(article)
             buf.write('</ol>\n')
 
