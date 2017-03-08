@@ -6,7 +6,16 @@ class HtmlRenderer(Renderer):
 
     def render(self, act, buf=None):
         self.buf = buf or StringIO()
+        self.buf.write('''<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="styles/common.css" />
+  <link rel="stylesheet" href="styles/print.css" media="print" />
+  <link rel="stylesheet" href="styles/screen.css" media="screen" />
+</head>
+<body>\n''')
         self.render_act(act)
+        self.buf.write('</body>\n</html>')
         return self.buf
 
     def render_act(self, act):
