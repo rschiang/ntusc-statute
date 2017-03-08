@@ -35,10 +35,12 @@ def parse_act(buf):
                 chapter = Chapter(number=m.group(1), caption=m.group(2))
                 act.articles.append(chapter)
             elif indent == 2:  # Article
-                m = re.match(r'^(\S+)　【(\S+)】', line)
-                assert m
-                article = Article(number=m.group(1), caption=m.group(2))
-                act.articles.append(article)
+                m = re.match(r'^(\S+)(　【(\S+)】)?', line)
+                if m:
+                    article = Article(number=m.group(1), caption=(m.group(3) or ''))
+                    act.articles.append(article)
+                else:
+                    act.articles.append(line)  # Foreword text
             elif indent == 4:  # Paragraph
                 paragraph = Paragraph(caption=line)
                 article.subitems.append(paragraph)
@@ -50,6 +52,8 @@ def parse_act(buf):
 
         return act
     except AssertionError:
+        import sys
+        sys.stderr.write(line)
         raise  # parse failed, malformed file
 
 

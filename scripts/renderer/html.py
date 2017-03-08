@@ -28,6 +28,7 @@ class HtmlRenderer(Renderer):
         buf.write('<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
+            h = h.replace('\u3000', '')
             h = re.sub('(?<=[\u3400-\u4DB5\u4E00-\u9FD5])([\\d\\-]+)', '\u2009\\1', h)
             h = re.sub('([\\d\\-]+)(?=[\u3400-\u4DB5\u4E00-\u9FD5])', '\\1\u2009', h)
             buf.write(h)
@@ -50,7 +51,13 @@ class HtmlRenderer(Renderer):
 
     def render_article(self, article):
         buf = self.buf
-        buf.write('<h6 data-number="">{number}<span class="caption">（{caption}）</span></h6>\n'.format(**article.__dict__))
+        buf.write('<h6 data-number="">')
+        buf.write(article.number)
+        if article.caption:
+            buf.write('<span class="caption">（')
+            buf.write(article.caption)
+            buf.write('）</span>')
+        buf.write('</h6>\n')
         if len(article.subitems) == 1:
             buf.write('<p>')
             buf.write(article.subitems[0].caption)
