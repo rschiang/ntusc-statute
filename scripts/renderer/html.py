@@ -52,7 +52,9 @@ class HtmlRenderer(Renderer):
 
     def render_article(self, article):
         buf = self.buf
-        buf.write('<h6 data-number="">')
+        buf.write('<h6 data-number="')
+        buf.write(re.sub(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?', r'\1\2', article.number))
+        buf.write('">')
         buf.write(article.number)
         if article.caption:
             buf.write('<span class="caption">（')

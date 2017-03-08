@@ -11,7 +11,7 @@
   margin: 1.375em 3em 1.375em 2.5em;
   @left-top {
     writing-mode: vertical-rl;
-    content: string(statute-title) '\ff08' string(statute-now, first) '\ff5e' string(statute-now, last) '\689d\fe36';
+    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit) string(statute-now, last) string(statute-suffix) '\fe36';
     margin: 0 .575em 0 .925em;
   }
   @left-bottom {
@@ -25,7 +25,7 @@
   margin: 1.375em 2.5em 1.375em 3em;
   @right-top {
     writing-mode: vertical-lr;
-    content: string(statute-title) '\ff08' string(statute-now, first) '\ff5e' string(statute-now, last) '\689d\fe36';
+    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit) string(statute-now, last) string(statute-suffix, last) '\fe36';
     margin: 0 .925em 0 .575em;
   }
   @right-bottom {
@@ -41,11 +41,15 @@ body {
 }
 
 header {
-  string-set: statute-title content();
+  string-set: statute-title content(), statute-unit '', statute-suffix '';
   margin-top: -0.5rem;
 }
 
+.history {
+  string-set: statute-suffix '\6cbf\9769';
+}
+
 h6 {
-  string-set: statute-now attr(data-number);
+  string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '\689d';
   page-break-after: auto;
 }
