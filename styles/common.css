@@ -18,8 +18,8 @@ header {
   font-family: "Hiragino Mincho ProN", sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
-  line-height: 3;
-  margin-top: -0.675rem;
+  line-height: 2rem;
+  margin: .575rem 0 1.25rem;
 }
 
 h2, h3, h4, h5 {
@@ -39,12 +39,21 @@ h6 {
   font-family: "Pingfang TC", sans-serif;
   font-weight: 600;
   font-size: inherit;
-  line-height: 1.75rem;
+  line-height: 1.375rem;
+  margin: .1875rem 0;
 }
 
 h6 .caption {
   font-family: "Kaiti TC", cursive;
   font-weight: normal;
+}
+
+h6 .deleted {
+  word-break: keep-all;
+}
+
+h6 span:not(:last-of-type) {
+  margin-right: -.5em;
 }
 
 p {
