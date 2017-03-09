@@ -6,8 +6,10 @@ from utils import normalize_spaces
 
 class HtmlRenderer(Renderer):
 
-    def render(self, act, buf=None):
+    def __init__(self, buf=None):
         self.buf = buf or StringIO()
+
+    def render(self, act):
         self.render_head()
         self.render_act(act)
         self.render_tail()

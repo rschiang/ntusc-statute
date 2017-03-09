@@ -30,12 +30,12 @@ def parse_act(buf):
             indent = len(indented_line) - len(line)
 
             if indent == 0:    # Chapter title
-                m = re.match(r'^(\S+)　(\S+)', line)
+                m = re.match(r'^(\S+)\s+(\S+)', line)
                 assert m
                 chapter = Chapter(number=m.group(1), caption=m.group(2))
                 act.articles.append(chapter)
             elif indent == 2:  # Article
-                m = re.match(r'^(\S+)(　【(\S+)】)?', line)
+                m = re.match(r'^(\S+)(\s*【(\S+)】)?', line)
                 if m:
                     article = Article(number=m.group(1), caption=(m.group(3) or ''))
                     act.articles.append(article)
