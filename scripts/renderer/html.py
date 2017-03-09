@@ -2,6 +2,7 @@
 import re
 from .base import Renderer
 from io import StringIO
+from statute import Chapter
 from utils import normalize_spaces
 
 class HtmlRenderer(Renderer):
@@ -42,7 +43,17 @@ class HtmlRenderer(Renderer):
         buf.write('</ul>\n')
 
     def render_index_act(self, act):
-        self.buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**act.__dict__))
+        buf = self.buf
+        buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**act.__dict__))
+        chapters = [i for i in act.articles if isinstance(i, Chapter) and '章' in i.number]
+        if chapters:
+            buf.write('<ul class="chapters">\n')
+            for chapter in chapters:
+                self.render_index_chapter(chapter)
+            buf.write("</ul>")
+
+    def render_index_chapter(self, chapter):
+        self.buf.write('<li><a href="#{bookmark_id}">{number}　{caption}</a></li>\n'.format(**chapter.__dict__))
 
     def render_index_tail(self):
         self.buf.write('</nav>\n')
@@ -86,7 +97,11 @@ class HtmlRenderer(Renderer):
     def render_chapter(self, chapter):
         buf = self.buf
         grade = 4 if '章' in chapter.number else 5
-        buf.write('<h{grade}>{number}　{caption}</h{grade}>\n'.format(grade=grade, **chapter.__dict__))
+        if chapter.bookmark_id:
+            buf.write('<h{} id="{}">'.format(grade, chapter.bookmark_id))
+        else:
+            buf.write('<h{}>'.format(grade))
+        buf.write('{number}　{caption}</h{grade}>\n'.format(grade=grade, **chapter.__dict__))
 
     def render_article(self, article):
         buf = self.buf

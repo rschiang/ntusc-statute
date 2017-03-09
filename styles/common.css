@@ -80,6 +80,10 @@ ol, ul {
   padding: 0;
 }
 
+.chapters {
+  margin-left: 1em;
+}
+
 ol {
   margin-left: 1em;
 }

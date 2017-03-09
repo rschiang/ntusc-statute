@@ -34,6 +34,7 @@ def generate(path='source/laws/', output='statute.html'):
                 with open(file_path, 'r') as file_buf:
                     act = parse_act(file_buf)
                     act.bookmark_id = '{}_{:02}'.format(category.slug, count)
+                    act.update_bookmark_id()
                     category.acts.append(act)
 
     # Build cover and TOC

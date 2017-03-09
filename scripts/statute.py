@@ -20,10 +20,19 @@ class Act(object):
     def __repr__(self):
         return '<Act {} ({})({})>'.format(self.name, len(self.history), len(self.articles))
 
+    def update_bookmark_id(self):
+        count = 0
+        for subitem in self.articles:
+            if isinstance(subitem, Chapter):
+                count += 1
+                subitem.bookmark_id = '{}_{:02}'.format(self.bookmark_id, count)
+        return count
+
 class Chapter(object):
     def __init__(self, number='', caption=''):
         self.number = number
         self.caption = caption
+        self.bookmark_id = None
 
     def __repr__(self):
         return '<Chapter {number} {caption}>'.format(**self.__dict__)
