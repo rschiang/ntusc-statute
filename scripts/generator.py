@@ -39,6 +39,7 @@ def generate(path='source/laws/', output='statute.html'):
                     category.acts.append(act)
 
     # Build cover and TOC
+    renderer.render_section('intro', '我們貢獻這所大學于宇宙之精神。')
     renderer.render_index_head()
     for category in CATEGORIES:
         renderer.render_index_category(category)

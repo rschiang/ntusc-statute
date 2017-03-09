@@ -45,9 +45,25 @@
   }
 }
 
+@page index:left:blank {
+  border: none;
+  @left-top {
+    content: '';
+  }
+}
+
 @page category {
   margin: 8.5mm; /* = 24pt (<section> 1em) */
   border: none;
+  @left-bottom {
+    content: '';
+  }
+}
+
+@page category:nth(1) { /* #intro */
+  @right-bottom {
+    content: '';
+  }
 }
 
 @page statute:left {
@@ -74,6 +90,7 @@ body {
 
 nav {
   page: index;
+  counter-reset: page 1;
   page-break-before: right;
   page-break-after: always;
 }
@@ -92,6 +109,13 @@ section {
   vertical-align: middle;
 }
 
+#intro {
+  writing-mode: vertical-lr;
+  margin: 11rem 13.25rem;
+  line-height: 1em;
+  text-align: center;
+}
+
 article {
   page: statute;
   page-break-before: always;
@@ -100,8 +124,12 @@ article {
 
 header {
   string-set: statute-title content(), statute-prefix '', statute-unit '', statute-suffix '';
-  margin-top: 0.75rem;
+  margin: .75rem -.1rem 1.25rem -.15rem;
   prince-bookmark-level: 2;
+}
+
+#supreme_01 {
+  word-break: keep-all;
 }
 
 #admin_03 ~ .history, #appendix_01 ~ .history {

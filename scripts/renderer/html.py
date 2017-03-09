@@ -16,15 +16,20 @@ class HtmlRenderer(Renderer):
         self.render_tail()
         return self.buf
 
-    def render_head(self):
-        self.buf.write('<html lang="zh-Hant">\n'
-                       '<head>\n'
-                       '<meta charset="utf-8" />\n'
-                       '<link rel="stylesheet" href="styles/common.css" />\n'
-                       '<link rel="stylesheet" href="styles/print.css" media="print" />\n'
-                       '<link rel="stylesheet" href="styles/screen.css" media="screen" />\n'
-                       '</head>'
-                       '<body>\n')
+    def render_head(self, title=None):
+        buf = self.buf
+        buf.write('<html lang="zh-Hant">\n'
+                  '<head>\n'
+                  '<meta charset="utf-8" />\n'
+                  '<link rel="stylesheet" href="styles/common.css" />\n'
+                  '<link rel="stylesheet" href="styles/print.css" media="print" />\n'
+                  '<link rel="stylesheet" href="styles/screen.css" media="screen" />\n')
+        if title:
+            buf.write('<title>')
+            buf.write(title)
+            buf.write('</title>')
+        buf.write('</head>\n'
+                  '<body>\n')
 
     def render_tail(self):
         self.buf.write('</body>\n'
@@ -58,8 +63,13 @@ class HtmlRenderer(Renderer):
     def render_index_tail(self):
         self.buf.write('</nav>\n')
 
+    def render_section(self, slug, caption):
+        self.buf.write('<section id="{slug}">\n'
+                       '{caption}\n'
+                       '</section>\n'.format(slug=slug, caption=caption))
+
     def render_category(self, category):
-        self.buf.write('<section id="{slug}" data-category="{slug}" data-category-label="{label}">\n'
+        self.buf.write('<section id="{slug}" data-category-label="{label}">\n'
                        '{caption}\n'
                        '</section>\n'.format(**category.__dict__))
 
@@ -78,6 +88,7 @@ class HtmlRenderer(Renderer):
         for h in act.history:
             buf.write('<li>')
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
+            h = re.sub(r'^(\d+)\.(\d+)\.(\d+)\s*', r'民國\1年\2月\3日', h)
             h = normalize_spaces(h)
             h = re.sub('(（編按：[^）]+）)', r'<span class="note">\1</span>', h)
             buf.write(h)

@@ -18,3 +18,7 @@ a {
 a:hover {
     color: #61a4b3;
 }
+
+#intro {
+    font-size: 1.5rem;
+}

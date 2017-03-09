@@ -23,6 +23,10 @@ section {
   vertical-align: middle;
 }
 
+#intro {
+  font-family: 'Source Han Sans TC', sans-serif;
+}
+
 header {
   font-family: "Hiragino Mincho ProN", "MSungHK", serif;
   font-weight: bold;
@@ -74,6 +78,11 @@ p {
     margin: 0 0 0 1em;
 }
 
+.history + p, p + p:last-child { /* foreword and endnotes */
+  margin: 0;
+  text-indent: 1em;
+}
+
 ol, ul {
   list-style: none;
   margin: 0;
@@ -82,6 +91,8 @@ ol, ul {
 
 .chapters {
   margin-left: 1em;
+  font-size: .875em;
+  line-height: 1.375rem;
 }
 
 ol {
