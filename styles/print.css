@@ -52,7 +52,7 @@
 
 @page statute:left {
   @left-top {
-    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last) '\fe36';
+    content: string(statute-title) string(statute-prefix, last) string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last);
   }
 }
 
@@ -64,7 +64,7 @@
 
 @page statute:right {
   @right-top {
-    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last) '\fe36';
+    content: string(statute-title) string(statute-prefix, last) string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last);
   }
 }
 
@@ -99,13 +99,13 @@ article {
 }
 
 header {
-  string-set: statute-title content(), statute-unit '', statute-suffix '';
+  string-set: statute-title content(), statute-prefix '', statute-unit '', statute-suffix '';
   margin-top: 0.75rem;
   prince-bookmark-level: 2;
 }
 
-.history {
-  string-set: statute-suffix '\6cbf\9769';
+#admin_03 ~ .history, #appendix_01 ~ .history {
+  string-set: statute-now ''; /* Witchcraft */
 }
 
 h2, h3, h4, h5, h6 {
@@ -113,9 +113,9 @@ h2, h3, h4, h5, h6 {
 }
 
 h6 {
-  string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '\689d';
+  string-set: statute-now attr(data-number), statute-prefix '\ff08', statute-unit '\ff5c', statute-suffix '\689d\fe36';
 }
 
 h6[data-appendix] {
-  string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '';
+  string-set: statute-now attr(data-number), statute-prefix '\ff08', statute-unit '\ff5c', statute-suffix '\fe36';
 }

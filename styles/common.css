@@ -5,7 +5,7 @@
 }
 
 html, body {
-  font-family: "Songti TC", serif;
+  font-family: "Songti TC", "Hiragino Mincho ProN", "MSungHK", serif;
   font-size: 8pt;
   line-height: 1.375;
 }
@@ -183,6 +183,58 @@ ol {
 .history>li:nth-of-type(48):before { content:'㊽'; }
 .history>li:nth-of-type(49):before { content:'㊾'; }
 .history>li:nth-of-type(50):before { content:'㊿'; }
+.history>li:nth-of-type(51):before { content:'Ⓐ'; }
+.history>li:nth-of-type(52):before { content:'Ⓑ'; }
+.history>li:nth-of-type(53):before { content:'Ⓒ'; }
+.history>li:nth-of-type(54):before { content:'Ⓓ'; }
+.history>li:nth-of-type(55):before { content:'Ⓔ'; }
+.history>li:nth-of-type(56):before { content:'Ⓕ'; }
+.history>li:nth-of-type(57):before { content:'Ⓖ'; }
+.history>li:nth-of-type(58):before { content:'Ⓗ'; }
+.history>li:nth-of-type(59):before { content:'Ⓘ'; }
+.history>li:nth-of-type(60):before { content:'Ⓙ'; }
+.history>li:nth-of-type(61):before { content:'Ⓚ'; }
+.history>li:nth-of-type(62):before { content:'Ⓛ'; }
+.history>li:nth-of-type(63):before { content:'Ⓜ'; }
+.history>li:nth-of-type(64):before { content:'Ⓝ'; }
+.history>li:nth-of-type(65):before { content:'Ⓞ'; }
+.history>li:nth-of-type(66):before { content:'Ⓟ'; }
+.history>li:nth-of-type(67):before { content:'Ⓠ'; }
+.history>li:nth-of-type(68):before { content:'Ⓡ'; }
+.history>li:nth-of-type(69):before { content:'Ⓢ'; }
+.history>li:nth-of-type(70):before { content:'Ⓣ'; }
+.history>li:nth-of-type(71):before { content:'Ⓤ'; }
+.history>li:nth-of-type(72):before { content:'Ⓥ'; }
+.history>li:nth-of-type(73):before { content:'Ⓦ'; }
+.history>li:nth-of-type(74):before { content:'Ⓧ'; }
+.history>li:nth-of-type(75):before { content:'Ⓨ'; }
+.history>li:nth-of-type(76):before { content:'Ⓩ'; }
+.history>li:nth-of-type(77):before { content:'ⓐ'; }
+.history>li:nth-of-type(78):before { content:'ⓑ'; }
+.history>li:nth-of-type(79):before { content:'ⓒ'; }
+.history>li:nth-of-type(80):before { content:'ⓓ'; }
+.history>li:nth-of-type(81):before { content:'ⓔ'; }
+.history>li:nth-of-type(82):before { content:'ⓕ'; }
+.history>li:nth-of-type(83):before { content:'ⓖ'; }
+.history>li:nth-of-type(84):before { content:'ⓗ'; }
+.history>li:nth-of-type(85):before { content:'ⓘ'; }
+.history>li:nth-of-type(86):before { content:'ⓙ'; }
+.history>li:nth-of-type(87):before { content:'ⓚ'; }
+.history>li:nth-of-type(88):before { content:'ⓛ'; }
+.history>li:nth-of-type(89):before { content:'ⓜ'; }
+.history>li:nth-of-type(90):before { content:'ⓝ'; }
+.history>li:nth-of-type(91):before { content:'ⓞ'; }
+.history>li:nth-of-type(92):before { content:'ⓟ'; }
+.history>li:nth-of-type(93):before { content:'ⓠ'; }
+.history>li:nth-of-type(94):before { content:'ⓡ'; }
+.history>li:nth-of-type(95):before { content:'ⓢ'; }
+.history>li:nth-of-type(96):before { content:'ⓣ'; }
+.history>li:nth-of-type(97):before { content:'ⓤ'; }
+.history>li:nth-of-type(98):before { content:'ⓥ'; }
+.history>li:nth-of-type(99):before { content:'ⓦ'; }
+.history>li:nth-of-type(100):before { content:'ⓧ'; }
+.history>li:nth-of-type(101):before { content:'ⓨ'; }
+.history>li:nth-of-type(102):before { content:'ⓩ'; }
 
 .items>li:nth-of-type(1):before { content:'㈠'; }
 .items>li:nth-of-type(2):before { content:'㈡'; }

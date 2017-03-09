@@ -17,6 +17,7 @@ CATEGORIES = [
     CategoryTask(slug='admin', caption='行政部門', label='行政', folders=['3_會長暨行政部門篇']),
     CategoryTask(slug='legis', caption='立法部門', label='立法', folders=['4_立法部門篇']),
     CategoryTask(slug='judicial', caption='司法部門', label='司法', folders=['5_司法部門篇']),
+    CategoryTask(slug='appendix', caption='附錄', label='司法', folders=['7_附錄', '../../statute/appendix/']),
     ]
 
 def generate(path='source/laws/', output='statute.html'):

@@ -96,6 +96,7 @@ class HtmlRenderer(Renderer):
 
     def render_chapter(self, chapter):
         buf = self.buf
+        chapter.number = chapter.number.replace('ㄧ', '一')  # Those who mistaken bopomofo with kanji should apologize
         grade = 4 if '章' in chapter.number else 5
         if chapter.bookmark_id:
             buf.write('<h{} id="{}">'.format(grade, chapter.bookmark_id))
@@ -105,6 +106,7 @@ class HtmlRenderer(Renderer):
 
     def render_article(self, article):
         buf = self.buf
+        article.number = article.number.replace('ㄧ', '一')  # Those who mistaken bopomofo with kanji should apologize
         if '附件' in article.number:
             buf.write('<h6 data-appendix data-number="')
             buf.write(re.sub(r'^附件（?([〇ㄧ一二三四五六七八九十]+)）?', r'附件\1', article.number))
