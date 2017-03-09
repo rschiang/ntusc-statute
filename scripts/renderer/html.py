@@ -29,19 +29,27 @@ class HtmlRenderer(Renderer):
         self.buf.write('</body>\n'
                        '</html>\n')
 
+    def render_index_head(self):
+        self.buf.write('<nav>\n'
+                       '<header>目錄</header>\n')
+
+    def render_index_category(self, category):
+        pass
+
+    def render_index_article(self, article):
+        pass
+
+    def render_index_tail(self):
+        self.buf.write('</nav>\n')
+
     def render_category(self, caption, slug, label):
         self.buf.write('<section id="{slug}" data-category="{slug}" data-category-label="{label}">\n'
                        '{caption}\n'
                        '</section>\n'.format(caption=caption, slug=slug, label=label))
 
-    def render_act(self, act, element_id=None, category=None):
+    def render_act(self, act, element_id=None):
         buf = self.buf
-        if category:
-            buf.write('<article class="act" data-category="')
-            buf.write(category)
-            buf.write('">\n')
-        else:
-            buf.write('<article class="act">\n')
+        buf.write('<article class="act">\n')
         if element_id:
             buf.write('<header id="')
             buf.write(element_id)
