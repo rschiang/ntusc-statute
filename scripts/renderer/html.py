@@ -8,22 +8,34 @@ class HtmlRenderer(Renderer):
 
     def render(self, act, buf=None):
         self.buf = buf or StringIO()
-        self.buf.write('''<html lang="zh-Hant">
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles/common.css" />
-    <link rel="stylesheet" href="styles/print.css" media="print" />
-    <link rel="stylesheet" href="styles/screen.css" media="screen" />
-</head>
-<body>\n''')
+        self.render_head()
         self.render_act(act)
-        self.buf.write('</body>\n</html>')
+        self.render_tail()
         return self.buf
 
-    def render_act(self, act):
+    def render_head(self):
+        self.buf.write('<html lang="zh-Hant">\n'
+                       '<head>\n'
+                       '<meta charset="utf-8" />\n'
+                       '<link rel="stylesheet" href="styles/common.css" />\n'
+                       '<link rel="stylesheet" href="styles/print.css" media="print" />\n'
+                       '<link rel="stylesheet" href="styles/screen.css" media="screen" />\n'
+                       '</head>'
+                       '<body>\n')
+
+    def render_tail(self):
+        self.buf.write('</body>\n'
+                       '</html>\n')
+
+    def render_act(self, act, element_id=None):
         buf = self.buf
         buf.write('<article class="act">\n')
-        buf.write('<header>')
+        if element_id:
+            buf.write('<header id="')
+            buf.write(element_id)
+            buf.write('">')
+        else:
+            buf.write('<header>')
         buf.write(act.name)
         buf.write('</header>\n')
         buf.write('<ol class="history">\n')
