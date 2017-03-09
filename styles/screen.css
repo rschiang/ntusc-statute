@@ -6,3 +6,7 @@ body {
     max-width: 35em;
     margin: auto;
 }
+
+article + article {
+    margin-top: 2.5rem;
+}

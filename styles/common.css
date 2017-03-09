@@ -14,6 +14,15 @@ body {
   padding: 0.675em;
 }
 
+section {
+  font-family: "Hiragino Mincho ProN", "MSungHK", serif;
+  font-weight: bold;
+  font-size: 3rem;
+  margin: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+
 header {
   font-family: "Hiragino Mincho ProN", "MSungHK", serif;
   font-weight: bold;
