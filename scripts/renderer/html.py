@@ -5,6 +5,13 @@ from io import StringIO
 from statute import Chapter
 from utils import normalize_spaces
 
+RE_ARTICLE_NUMBERING = re.compile(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?')
+RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([〇ㄧ一二三四五六七八九十]+)）?')
+RE_SUBSECTION_NUMBERING = re.compile(r'^[〇ㄧ一二三四五六七八九十]+、\s*')
+RE_ITEM_NUMBERING = re.compile(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*')
+RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
+RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|附註)：[^）]+）)')
+
 class HtmlRenderer(Renderer):
 
     def __init__(self, buf=None):
@@ -90,7 +97,7 @@ class HtmlRenderer(Renderer):
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
             h = re.sub(r'^(\d+)\.(\d+)\.(\d+)\s*', r'民國\1年\2月\3日', h)
             h = normalize_spaces(h)
-            h = re.sub('(（編按：[^）]+）)', r'<span class="note">\1</span>', h)
+            h = self.apply_emphasis(h)
             buf.write(h)
             if h[-1] not in '>）)。':  # Consider <span> as well
                 buf.write('。')
@@ -102,7 +109,7 @@ class HtmlRenderer(Renderer):
     def render_text(self, text):
         buf = self.buf
         buf.write('<p>')
-        buf.write(text)
+        buf.write(self.apply_emphasis(text))
         buf.write('</p>\n')
 
     def render_chapter(self, chapter):
@@ -120,17 +127,17 @@ class HtmlRenderer(Renderer):
         article.number = article.number.replace('ㄧ', '一')  # Those who mistaken bopomofo with kanji should apologize
         if '附件' in article.number:
             buf.write('<h6 data-appendix data-number="')
-            buf.write(re.sub(r'^附件（?([〇ㄧ一二三四五六七八九十]+)）?', r'附件\1', article.number))
+            buf.write(RE_ATTACHMENT_NUMBERING.sub(r'附件\1', article.number))
         else:
             buf.write('<h6 data-number="')
-            buf.write(re.sub(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?', r'\1\2', article.number))
+            buf.write(RE_ARTICLE_NUMBERING.sub(r'\1\2', article.number))
         buf.write('">')
         buf.write(article.number)
         if article.caption:
             buf.write('<span class="caption">（')
             buf.write(article.caption)
             buf.write('）</span>')
-        if len(article.subitems) == 1 and re.match(r'^[（\(]刪除[\)）]', article.subitems[0].caption):
+        if len(article.subitems) == 1 and RE_DELETED_FORMAT.match(article.subitems[0].caption):
             buf.write('\u200b<span class="caption deleted">（刪除）</span></h6>\n')
             return  # Short circuit
         buf.write('</h6>\n')
@@ -142,7 +149,7 @@ class HtmlRenderer(Renderer):
     def render_paragraph(self, paragraph):
         buf = self.buf
         buf.write('<li>')
-        buf.write(normalize_spaces(paragraph.caption))
+        buf.write(self.apply_emphasis(normalize_spaces(paragraph.caption)))
         buf.write('</li>\n')
         if paragraph.subitems:
             buf.write('<ol class="subsections">\n')
@@ -151,9 +158,9 @@ class HtmlRenderer(Renderer):
 
     def render_subsection(self, subsection):
         buf = self.buf
-        caption = re.sub(r'^[〇ㄧ一二三四五六七八九十]+、\s*', '', subsection.caption)
+        caption = RE_SUBSECTION_NUMBERING.sub('', subsection.caption)
         buf.write('<li>')
-        buf.write(normalize_spaces(caption))
+        buf.write(self.apply_emphasis(normalize_spaces(caption)))
         buf.write('</li>\n')
         if subsection.subitems:
             buf.write('<ol class="items">\n')
@@ -162,7 +169,10 @@ class HtmlRenderer(Renderer):
 
     def render_item(self, item):
         buf = self.buf
-        item = re.sub(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*', '', item)
+        item = RE_ITEM_NUMBERING.sub('', item)
         buf.write('<li>')
-        buf.write(normalize_spaces(item))
+        buf.write(self.apply_emphasis(normalize_spaces(item)))
         buf.write('</li>\n')
+
+    def apply_emphasis(self, text):
+        return RE_EMPHASIS_FORMAT.sub(r'<span class="note">\1</span>', text)
