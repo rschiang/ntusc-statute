@@ -29,9 +29,19 @@ class HtmlRenderer(Renderer):
         self.buf.write('</body>\n'
                        '</html>\n')
 
-    def render_act(self, act, element_id=None):
+    def render_category(self, caption, slug, label):
+        self.buf.write('<section id="{slug}" data-category="{slug}" data-category-label="{label}">\n'
+                       '{caption}\n'
+                       '</section>\n'.format(caption=caption, slug=slug, label=label))
+
+    def render_act(self, act, element_id=None, category=None):
         buf = self.buf
-        buf.write('<article class="act">\n')
+        if category:
+            buf.write('<article class="act" data-category="')
+            buf.write(category)
+            buf.write('">\n')
+        else:
+            buf.write('<article class="act">\n')
         if element_id:
             buf.write('<header id="')
             buf.write(element_id)

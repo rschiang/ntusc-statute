@@ -39,7 +39,7 @@ def parse_act(buf):
                 chapter = Chapter(number=m.group(1), caption=m.group(2))
                 act.articles.append(chapter)
             elif indent == 2:  # Article
-                m = re.match(r'^(?P<number>(第|附件)\S+)(\s*【(?P<caption>\S+)】)?', line)
+                m = re.match(r'^(?P<number>(第|附件)[^【\s]+)\s*(【(?P<caption>\S+)】)?', line)
                 if m:
                     article = Article(number=m.group('number'), caption=(m.group('caption') or ''))
                     act.articles.append(article)

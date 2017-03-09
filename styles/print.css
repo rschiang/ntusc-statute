@@ -14,10 +14,26 @@
     content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last) '\fe36';
     margin: 0 .575em 0 .925em;
   }
+  @left-middle {
+    height: 6rem;
+    padding: 0 .375rem 0 .875rem;
+    font-size: 1.25rem;
+    content: string(category-title);
+    font-family: 'Pingfang TC', sans-serif;
+    font-weight: 600;
+    color: #212121;
+    background: rgba(0, 0, 0, .2);
+  }
   @left-bottom {
     writing-mode: vertical-rl;
     content: counter(page, cjk-decimal);
     margin: 0 .575em 0.25em .925em;
+  }
+}
+
+@page :left:blank {
+  @left-top {
+    content: '\8cc7\6599\88dc\5145\6b04';
   }
 }
 
@@ -28,7 +44,18 @@
     content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last) '\fe36';
     margin: 0 .925em 0 .575em;
   }
+  @right-middle {
+    height: 6rem;
+    padding: 0 .875rem 0 .375rem;
+    font-size: 1.25rem;
+    content: string(category-title);
+    font-family: 'Pingfang TC', sans-serif;
+    font-weight: 600;
+    color: #212121;
+    background: rgba(0, 0, 0, .2);
+  }
   @right-bottom {
+    height: 7rem;
     writing-mode: vertical-lr;
     text-align: right;
     content: counter(page, cjk-decimal);
@@ -40,10 +67,29 @@ body {
   padding: 0;
 }
 
+nav {
+  page: index;
+}
+
+section {
+  string-set: category-title attr(data-category-label);
+  text-align: center;
+  vertical-align: middle;
+  page-break-before: right;
+  page-break-after: always;
+}
+
 article {
   page-break-before: always;
   page-break-after: always;
 }
+
+[data-category='supreme'] { page: supreme; }
+[data-category='admin'] { page: admin; }
+[data-category='legis'] { page: legis; }
+[data-category='judicial'] { page: judicial; }
+[data-category='case'] { page: case; }
+[data-category='appendix'] { page: appendix; }
 
 header {
   string-set: statute-title content(), statute-unit '', statute-suffix '';
