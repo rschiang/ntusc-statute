@@ -60,6 +60,10 @@ nav {
   page: index;
 }
 
+.indices a::after {
+    content: leader('.') target-counter(attr(href url), page, decimal);
+}
+
 section {
   page: category;
   string-set: category-title attr(data-category-label);

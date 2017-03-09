@@ -10,3 +10,11 @@ body {
 article + article {
     margin-top: 2.5rem;
 }
+
+a {
+    border: 1px dotted rgba()
+}
+
+a:hover {
+    color: #61a4b3;
+}
