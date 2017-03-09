@@ -22,22 +22,26 @@ def parse_act(buf):
                 act.history.append(line.strip())
 
         while True:
-            indented_line = buf.readline().rstrip()
+            indented_line = buf.readline()
             if not indented_line:
                 break
+
+            indented_line = indented_line.rstrip()
+            if not indented_line:
+                continue
 
             line = indented_line.lstrip()
             indent = len(indented_line) - len(line)
 
             if indent == 0:    # Chapter title
-                m = re.match(r'^(\S+)\s+(\S+)', line)
+                m = re.match(r'^(第\S+)\s+(\S+)', line)
                 assert m
                 chapter = Chapter(number=m.group(1), caption=m.group(2))
                 act.articles.append(chapter)
             elif indent == 2:  # Article
-                m = re.match(r'^(\S+)(\s*【(\S+)】)?', line)
+                m = re.match(r'^(?P<number>(第|附件)\S+)(\s*【(?P<caption>\S+)】)?', line)
                 if m:
-                    article = Article(number=m.group(1), caption=(m.group(3) or ''))
+                    article = Article(number=m.group('number'), caption=(m.group('caption') or ''))
                     act.articles.append(article)
                 else:
                     act.articles.append(line)  # Foreword text
@@ -66,6 +70,6 @@ if __name__ == '__main__':
     f = open(sys.argv[1], 'r')
     act = parse_act(f)
 
-    from renderer import HtmlRenderer
-    renderer = HtmlRenderer()
+    from renderer import MarkdownRenderer
+    renderer = MarkdownRenderer()
     print(renderer.render(act).getvalue())

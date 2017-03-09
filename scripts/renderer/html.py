@@ -68,8 +68,12 @@ class HtmlRenderer(Renderer):
     def render_article(self, article):
         buf = self.buf
         single_p = (len(article.subitems) == 1)
-        buf.write('<h6 data-number="')
-        buf.write(re.sub(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?', r'\1\2', article.number))
+        if '附件' in article.number:
+            buf.write('<h6 data-appendix data-number="')
+            buf.write(re.sub(r'^附件（?([〇ㄧ一二三四五六七八九十]+)）?', r'附件\1', article.number))
+        else:
+            buf.write('<h6 data-number="')
+            buf.write(re.sub(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?', r'\1\2', article.number))
         buf.write('">')
         buf.write(article.number)
         if article.caption:
@@ -82,18 +86,22 @@ class HtmlRenderer(Renderer):
         buf.write('</h6>\n')
         if single_p:
             buf.write('<p>')
-            buf.write(normalize_spaces(article.subitems[0].caption))
+            self.render_paragraph(article.subitems[0], single_p=True)
             buf.write('</p>\n')
         else:
             buf.write('<ol class="paragraphs">')
             super().render_article(article)
             buf.write('</ol>\n')
 
-    def render_paragraph(self, paragraph):
+    def render_paragraph(self, paragraph, single_p=False):
         buf = self.buf
-        buf.write('<li>')
-        buf.write(normalize_spaces(paragraph.caption))
-        buf.write('</li>\n')
+        caption = normalize_spaces(paragraph.caption)
+        if not single_p:
+            buf.write('<li>')
+            buf.write(caption)
+            buf.write('</li>\n')
+        else:
+            buf.write(caption)
         if paragraph.subitems:
             buf.write('<ol class="subsections">\n')
             super().render_paragraph(paragraph)

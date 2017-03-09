@@ -10,7 +10,7 @@ CATEGORIES = [
     ('admin', ['3_會長暨行政部門篇']),
     ('legis', ['4_立法部門篇']),
     ('judicial', ['5_司法部門篇']),
-]
+    ]
 
 def generate(path='source/laws/', output='statute.html'):
     buf = open(output, 'w+')
@@ -19,8 +19,8 @@ def generate(path='source/laws/', output='statute.html'):
     for slug, folders in CATEGORIES:
         count = 0
         for pattern in (os.path.join(path, f, '*.txt') for f in folders):
-            print(pattern)
             for file_path in sorted(glob.glob(pattern)):
+                print(file_path)
                 count += 1
                 with open(file_path, 'r') as file_buf:
                     act = parse_act(file_buf)

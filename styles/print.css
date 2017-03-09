@@ -11,7 +11,7 @@
   margin: 1.375em 3em 1.375em 2.5em;
   @left-top {
     writing-mode: vertical-rl;
-    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit) string(statute-now, last) string(statute-suffix) '\fe36';
+    content: string(statute-title) '\ff08' string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last) '\fe36';
     margin: 0 .575em 0 .925em;
   }
   @left-bottom {
@@ -42,6 +42,7 @@ body {
 
 article {
   page-break-before: always;
+  page-break-after: always;
 }
 
 header {
@@ -59,4 +60,8 @@ h2, h3, h4, h5, h6 {
 
 h6 {
   string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '\689d';
+}
+
+h6[data-appendix] {
+  string-set: statute-now attr(data-number), statute-unit '\ff5c', statute-suffix '';
 }

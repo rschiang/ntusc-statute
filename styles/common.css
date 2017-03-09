@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  font-family: "Hiragino Mincho ProN", sans-serif;
+  font-family: "Hiragino Mincho ProN", "MSungHK", serif;
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 2rem;
