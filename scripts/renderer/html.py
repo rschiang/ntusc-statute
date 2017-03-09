@@ -34,25 +34,30 @@ class HtmlRenderer(Renderer):
                        '<header>目錄</header>\n')
 
     def render_index_category(self, category):
-        pass
+        buf = self.buf
+        buf.write('<h4><a href="#{slug}">{caption}</a></h4>\n'.format(**category.__dict__))
+        buf.write('<ul class="indices">\n')
+        for act in category.acts:
+            self.render_index_act(act)
+        buf.write('</ul>\n')
 
-    def render_index_article(self, article):
-        pass
+    def render_index_act(self, act):
+        self.buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**act.__dict__))
 
     def render_index_tail(self):
         self.buf.write('</nav>\n')
 
-    def render_category(self, caption, slug, label):
+    def render_category(self, category):
         self.buf.write('<section id="{slug}" data-category="{slug}" data-category-label="{label}">\n'
                        '{caption}\n'
-                       '</section>\n'.format(caption=caption, slug=slug, label=label))
+                       '</section>\n'.format(**category.__dict__))
 
-    def render_act(self, act, element_id=None):
+    def render_act(self, act):
         buf = self.buf
         buf.write('<article class="act">\n')
-        if element_id:
+        if act.bookmark_id:
             buf.write('<header id="')
-            buf.write(element_id)
+            buf.write(act.bookmark_id)
             buf.write('">')
         else:
             buf.write('<header>')

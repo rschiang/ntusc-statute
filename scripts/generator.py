@@ -4,21 +4,19 @@ import glob
 import os.path
 from parser import parse_act
 from renderer import HtmlRenderer
+from statute import Category
 
-class Category(object):
-    def __init__(self, slug=None, caption=None, label=None, folders=None, acts=None):
-        self.slug = slug
-        self.caption = caption
-        self.label = label
+class CategoryTask(Category):
+    def __init__(self, slug, caption, label, folders=None, acts=None):
         self.folders = folders or []
-        self.acts = acts or []
+        super().__init__(slug=slug, caption=caption, label=label, acts=acts)
 
 
 CATEGORIES = [
-    Category(slug='supreme', caption='基本法與綜合性法規', label='基本法', folders=['1_基本法', '2_綜合性法規']),
-    Category(slug='admin', caption='行政部門', label='行政', folders=['3_會長暨行政部門篇']),
-    Category(slug='legis', caption='立法部門', label='立法', folders=['4_立法部門篇']),
-    Category(slug='judicial', caption='司法部門', label='司法', folders=['5_司法部門篇']),
+    CategoryTask(slug='supreme', caption='基本法與綜合性法規', label='基本法', folders=['1_基本法', '2_綜合性法規']),
+    CategoryTask(slug='admin', caption='行政部門', label='行政', folders=['3_會長暨行政部門篇']),
+    CategoryTask(slug='legis', caption='立法部門', label='立法', folders=['4_立法部門篇']),
+    CategoryTask(slug='judicial', caption='司法部門', label='司法', folders=['5_司法部門篇']),
     ]
 
 def generate(path='source/laws/', output='statute.html'):
@@ -35,16 +33,20 @@ def generate(path='source/laws/', output='statute.html'):
                 print(file_path)
                 with open(file_path, 'r') as file_buf:
                     act = parse_act(file_buf)
-                    hash_id = '{}_{:02}'.format(category.slug, count)
-                    category.acts.append((hash_id, act))
+                    act.bookmark_id = '{}_{:02}'.format(category.slug, count)
+                    category.acts.append(act)
 
     # Build cover and TOC
+    renderer.render_index_head()
+    for category in CATEGORIES:
+        renderer.render_index_category(category)
+    renderer.render_index_tail()
 
     # Render individual categories
     for category in CATEGORIES:
-        renderer.render_category(category.caption, category.slug, category.label)
-        for hash_id, act in category.acts:
-            renderer.render_act(act, hash_id)
+        renderer.render_category(category)
+        for act in category.acts:
+            renderer.render_act(act)
 
     renderer.render_tail()
     buf.close()

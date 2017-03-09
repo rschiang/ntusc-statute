@@ -1,10 +1,21 @@
 # statute.py - DOM for statute text
 
+class Category(object):
+    def __init__(self, slug='', caption='', label='', acts=None):
+        self.slug = slug
+        self.caption = caption
+        self.label = label
+        self.acts = acts or []
+
+    def __repr__(self):
+        return '<Category {} ({})({})>'.format(self.name, len(self.history), len(self.articles))
+
 class Act(object):
     def __init__(self, name='', history=None, articles=None):
         self.name = name
         self.history = history or []
         self.articles = articles or []
+        self.bookmark_id = None
 
     def __repr__(self):
         return '<Act {} ({})({})>'.format(self.name, len(self.history), len(self.articles))
