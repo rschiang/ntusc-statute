@@ -23,7 +23,7 @@ class HtmlRenderer(Renderer):
         self.render_tail()
         return self.buf
 
-    def render_head(self, title=None):
+    def render_head(self, title=None, meta=None):
         buf = self.buf
         buf.write('<html lang="zh-Hant">\n'
                   '<head>\n'
@@ -35,6 +35,13 @@ class HtmlRenderer(Renderer):
             buf.write('<title>')
             buf.write(title)
             buf.write('</title>')
+        if meta:
+            for name, content in meta.items():
+                buf.write('<meta name="')
+                buf.write(name)
+                buf.write('" content="')
+                buf.write(content)
+                buf.write('" />\n')
         buf.write('</head>\n'
                   '<body>\n')
 

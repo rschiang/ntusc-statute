@@ -22,3 +22,7 @@ a:hover {
 #intro {
     font-size: 1.5rem;
 }
+
+nav header::before {
+    content: '法規彙編';
+}

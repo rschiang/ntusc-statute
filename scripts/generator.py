@@ -23,7 +23,10 @@ CATEGORIES = [
 def generate(path='source/laws/', output='statute.html'):
     buf = open(output, 'w+')
     renderer = HtmlRenderer(buf=buf)
-    renderer.render_head()
+    renderer.render_head(title='國立臺灣大學學生會簡明法規彙編', meta={
+        'author': '國立臺灣大學開源社',
+        'description': '收錄自治規程、規則條文、以及相關之公眾法規。',
+        })
 
     # Read in
     for category in CATEGORIES:
