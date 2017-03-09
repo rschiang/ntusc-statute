@@ -28,6 +28,13 @@
 @page category {
   margin: 8.5mm; /* = 24pt (<section> 1em) */
   border: none;
+  @right-top {
+    content: '\76ee\9304';
+  }
+}
+
+@page :nth(1 of category) {
+  counter-reset: page 1;
 }
 
 @page statute:left {
@@ -58,6 +65,8 @@ body {
 
 nav {
   page: index;
+  page-break-before: right;
+  page-break-after: always;
 }
 
 .indices a::after {
