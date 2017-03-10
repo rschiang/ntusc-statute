@@ -13,6 +13,9 @@ RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
 
+def apply_emphasis(text):
+    return RE_EMPHASIS_FORMAT.sub(r'<span class="note">\1</span>', text)
+
 class HtmlRenderer(Renderer):
 
     def __init__(self, buf=None):
@@ -105,7 +108,7 @@ class HtmlRenderer(Renderer):
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
             h = RE_NUMERIC_DATE_FORMAT.sub(r'民國\1年\2月\3日', h)
             h = normalize_spaces(h)
-            h = self.apply_emphasis(h)
+            h = apply_emphasis(h)
             buf.write(h)
             if h[-1] not in '>）)。':  # Consider <span> as well
                 buf.write('。')
@@ -117,7 +120,7 @@ class HtmlRenderer(Renderer):
     def render_text(self, text):
         buf = self.buf
         buf.write('<p>')
-        buf.write(self.apply_emphasis(text))
+        buf.write(apply_emphasis(text))
         buf.write('</p>\n')
 
     def render_chapter(self, chapter):
@@ -157,7 +160,7 @@ class HtmlRenderer(Renderer):
     def render_paragraph(self, paragraph):
         buf = self.buf
         buf.write('<li>')
-        buf.write(self.apply_emphasis(normalize_spaces(paragraph.caption)))
+        buf.write(apply_emphasis(normalize_spaces(paragraph.caption)))
         buf.write('</li>\n')
         if paragraph.subitems:
             buf.write('<ol class="subsections">\n')
@@ -168,7 +171,7 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         caption = RE_SUBSECTION_NUMBERING.sub('', subsection.caption)
         buf.write('<li>')
-        buf.write(self.apply_emphasis(normalize_spaces(caption)))
+        buf.write(apply_emphasis(normalize_spaces(caption)))
         buf.write('</li>\n')
         if subsection.subitems:
             buf.write('<ol class="items">\n')
@@ -179,8 +182,5 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         item = RE_ITEM_NUMBERING.sub('', item)
         buf.write('<li>')
-        buf.write(self.apply_emphasis(normalize_spaces(item)))
+        buf.write(apply_emphasis(normalize_spaces(item)))
         buf.write('</li>\n')
-
-    def apply_emphasis(self, text):
-        return RE_EMPHASIS_FORMAT.sub(r'<span class="note">\1</span>', text)
