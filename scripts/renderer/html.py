@@ -11,6 +11,7 @@ RE_SUBSECTION_NUMBERING = re.compile(r'^[〇ㄧ一二三四五六七八九十]+�
 RE_ITEM_NUMBERING = re.compile(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*')
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|附註)：[^）]+）)')
+RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
 
 class HtmlRenderer(Renderer):
 
@@ -102,7 +103,7 @@ class HtmlRenderer(Renderer):
         for h in act.history:
             buf.write('<li>')
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
-            h = re.sub(r'^(\d+)\.(\d+)\.(\d+)\s*', r'民國\1年\2月\3日', h)
+            h = RE_NUMERIC_DATE_FORMAT.sub(r'民國\1年\2月\3日', h)
             h = normalize_spaces(h)
             h = self.apply_emphasis(h)
             buf.write(h)

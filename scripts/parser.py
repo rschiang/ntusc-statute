@@ -1,5 +1,6 @@
 # parser.py - parses statute text to DOM
 import re
+import sys
 from io import StringIO
 from statute import Act, Chapter, Article, Paragraph, Subsection
 
@@ -56,13 +57,11 @@ def parse_act(buf):
 
         return act
     except AssertionError:
-        import sys
         sys.stderr.write(line)
         raise  # parse failed, malformed file
 
 
 if __name__ == '__main__':
-    import sys
     if len(sys.argv) < 2:
         print('Usage: python parser.py [file] > output.html')
         sys.exit()

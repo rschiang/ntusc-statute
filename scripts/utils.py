@@ -2,8 +2,8 @@
 import re
 
 RE_CJK_PATTERN = '[\u3400-\u4DB5\u4E00-\u9FD5]'
-RE_CJK_BOUNDARY_PRE = re.compile(r'(?<=' + RE_CJK_PATTERN + r')([\d\-A-Za-z]+)')
-RE_CJK_BOUNDARY_POST = re.compile(r'([\d\-A-Za-z]+)(?=' + RE_CJK_PATTERN + r')')
+RE_CJK_BOUNDARY_PRE = re.compile(r'(?<=' + RE_CJK_PATTERN + r')\s*([\d\-A-Za-z]+)')
+RE_CJK_BOUNDARY_POST = re.compile(r'([\d\-A-Za-z]+)\s*(?=' + RE_CJK_PATTERN + r')')
 
 UNICODE_THIN_SPACE = '\u2009'
 RE_REPL_PRE = UNICODE_THIN_SPACE + r'\1'
