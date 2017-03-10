@@ -1,0 +1,28 @@
+html, body {
+    font-size: 14pt;
+}
+
+body {
+    max-width: 35em;
+    margin: auto;
+}
+
+article + article {
+    margin-top: 2.5rem;
+}
+
+a {
+    border: 1px dotted rgba()
+}
+
+a:hover {
+    color: #61a4b3;
+}
+
+#intro {
+    font-size: 1.5rem;
+}
+
+nav header::before {
+    content: '法規彙編';
+}

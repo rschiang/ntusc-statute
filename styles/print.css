@@ -1,0 +1,165 @@
+@page {
+  size: 99mm 210mm;
+  padding: 0.5em;
+  counter-increment: page;
+  font-family: "Songti TC", serif;
+  font-size: 8pt;
+  border: 1pt solid black;
+}
+
+@page :left {
+  margin: 1.375em 3em 1.375em 2.5em;
+  @left-top {
+    writing-mode: vertical-rl;
+    margin: 0 .575em 0 .925em;
+  }
+  @left-bottom {
+    writing-mode: vertical-rl;
+    content: counter(page, cjk-decimal);
+    margin: 0 .575em 0.25em .925em;
+  }
+}
+
+@page :right {
+  margin: 1.375em 2.5em 1.375em 3em;
+  @right-top {
+    writing-mode: vertical-lr;
+    margin: 0 .925em 0 .575em;
+  }
+  @right-bottom {
+    writing-mode: vertical-lr;
+    content: counter(page, cjk-decimal);
+    margin: 0 .925em 0.25em .575em;
+  }
+}
+
+@page index:left {
+  @left-top {
+    content: '\76ee\9304';
+  }
+}
+
+@page index:right {
+  @right-top {
+    content: '\76ee\9304';
+  }
+}
+
+@page index:left:blank {
+  border: none;
+  @left-top {
+    content: '';
+  }
+}
+
+@page category {
+  margin: 8.5mm; /* = 24pt (<section> 1em) */
+  border: none;
+  @right-bottom {
+    content: '';
+  }
+}
+
+@page statute:left {
+  @left-top {
+    content: string(statute-title) string(statute-prefix, last) string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last);
+  }
+}
+
+@page statute:left:blank {
+  @left-top {
+    content: '\8cc7\6599\88dc\5145\6b04';
+  }
+}
+
+@page statute:right {
+  @right-top {
+    content: string(statute-title) string(statute-prefix, last) string(statute-now, first) string(statute-unit, last) string(statute-now, last) string(statute-suffix, last);
+  }
+}
+
+@page interpretation:left {
+  @left-top {
+    content: '\5b78\751f\6cd5\9662\89e3\91cb\6587';
+  }
+}
+
+@page interpretation:left:blank {
+  @left-top {
+    content: '\8cc7\6599\88dc\5145\6b04';
+  }
+}
+
+@page interpretation:right {
+  @right-top {
+    content: '\5b78\751f\6cd5\9662\89e3\91cb\6587';
+  }
+}
+
+body {
+  padding: 0;
+}
+
+nav {
+  page: index;
+  counter-reset: page 1;
+  page-break-before: right;
+  page-break-after: always;
+}
+
+.indices a::after {
+    content: leader('.') target-counter(attr(href url), page, decimal);
+}
+
+section {
+  page: category;
+  string-set: category-title attr(data-category-label);
+  page-break-before: right;
+  page-break-after: always;
+  bookmark-level: 1;
+  margin: 10.5em auto;
+  vertical-align: middle;
+}
+
+#intro {
+  writing-mode: vertical-lr;
+  margin: 11rem 13.25rem;
+  line-height: 1em;
+  text-align: center;
+}
+
+article {
+  page: statute;
+  page-break-before: always;
+  page-break-after: always;
+}
+
+article.interpretation {
+  page: interpretation;
+}
+
+header {
+  string-set: statute-title content(), statute-prefix '', statute-unit '', statute-suffix '';
+  margin: .75rem -.1rem 1.25rem -.15rem;
+  bookmark-level: 2;
+}
+
+#supreme_01 {
+  word-break: keep-all;
+}
+
+#admin_03 ~ .history, #appendix_01 ~ .history {
+  string-set: statute-now ''; /* Witchcraft */
+}
+
+h2, h3, h4, h5, h6 {
+  page-break-after: auto;
+}
+
+.act h6 {
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\689d\fe36';
+}
+
+.act h6[data-appendix] {
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\fe36';
+}
