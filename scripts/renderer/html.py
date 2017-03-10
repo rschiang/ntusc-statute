@@ -3,7 +3,7 @@ import re
 from .base import Renderer
 from io import StringIO
 from statute import Act, Chapter, Heading
-from utils import RE_CJK_NUMERICS, normalize_brackets, normalize_spaces
+from utils import RE_CJK_NUMERICS, RE_CJK_NUMERICS_MIXED, normalize_brackets, normalize_spaces
 
 # Article-specific
 RE_ARTICLE_NUMBERING = re.compile(r'^第([' + RE_CJK_NUMERICS + r']+)條(之[' + RE_CJK_NUMERICS + r']+)?')
@@ -19,7 +19,7 @@ RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>\d+)\s*年\s*(
 RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
 RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
 RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
-RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS + r']、|\d\.\s?)([^。；]+：)')
+RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS_MIXED + r']、|\d\.\s?)([^。；]+：)')
 RE_INTP_FOOTER_FORMAT = re.compile(r'^(註\s?[\d' + RE_CJK_NUMERICS + r']+：.+)$')
 
 def apply_emphasis(text):
@@ -208,7 +208,7 @@ class HtmlRenderer(Renderer):
         buf.write('</header>\n'
                   '<div class="meta">')
         meta = normalize_spaces('，'.join(intp.meta))
-        meta = RE_INTP_META_REMARK_FORMAT.sub('<span class="note">\1</span>', meta)
+        meta = RE_INTP_META_REMARK_FORMAT.sub(r'<span class="note">\1</span>', meta)
         buf.write(meta)
         buf.write('</div>\n')
         for subentry in intp.subentries:
@@ -221,16 +221,16 @@ class HtmlRenderer(Renderer):
 
     def render_heading(self, heading):
         grade = 5 if heading.is_chapter else 6
-        caption = normalize_spaces(heading.caption)
+        caption = normalize_spaces(normalize_brackets(heading.caption))
         self.buf.write('<h{}>{}</h{}>\n'.format(grade, caption, grade))
 
     def render_interpretation_text(self, text):
         buf = self.buf
 
         # Apply formats
-        text = normalize_spaces(text)
         text = normalize_brackets(text)
-        text = RE_INTP_CITATION_FORMAT.sub('<cite>\1</cite>', text)
+        text = normalize_spaces(text)
+        text = RE_INTP_CITATION_FORMAT.sub(r'<cite>\1</cite>', text)
         text = RE_INTP_REMARK_FORMAT.sub(r'<span class="note">\1</span>', text)
 
         # Sniff subheading and footnote

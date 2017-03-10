@@ -109,8 +109,12 @@ ol {
 }
 
 .interpretation p {
-  text-align: justify;
   line-height: 1.375rem;
+  margin-bottom: 2pt;
+}
+
+.interpretation .footnote {
+  margin-bottom: 0;
 }
 
 .interpretation .subheading {
@@ -126,8 +130,12 @@ ol {
 .interpretation time::before { content: '\ff08'; }
 .interpretation time::after { content: '\ff09'; }
 
-.note, .interpretation time {
+.note, .interpretation time, cite {
   font-family: "Kaiti TC", cursive;
+}
+
+cite {
+  font-style: normal;
 }
 
 .footnote {
@@ -138,6 +146,10 @@ ol {
 
 p:not(.footnote) + .footnote {
   margin-top: 1em;
+}
+
+.footnote + h5 {
+  margin-top: .5rem;
 }
 
 .subsections {
