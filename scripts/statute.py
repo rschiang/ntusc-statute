@@ -68,7 +68,7 @@ class Interpretation(Entry):
         super().__init__(name=name, bookmark_id=bookmark_id)
         self.meta = meta or []
         self.subentries = subentries or []
-        self.date = (None, None, None)
+        self.date = None
 
     def __repr__(self):
         return '<Interpretation {} ({})({})>'.format(self.name, len(self.meta), len(self.subentries))

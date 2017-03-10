@@ -110,6 +110,12 @@ ol {
 
 .interpretation p {
   text-align: justify;
+  line-height: 1.375rem;
+}
+
+.interpretation .subheading {
+  font-family: "Pingfang TC", sans-serif;
+  font-weight: 600;
 }
 
 .interpretation time {
@@ -122,6 +128,16 @@ ol {
 
 .note, .interpretation time {
   font-family: "Kaiti TC", cursive;
+}
+
+.footnote {
+  font-size: .875em;
+  margin-left: 3em;
+  text-indent: -3em;
+}
+
+p:not(.footnote) + .footnote {
+  margin-top: 1em;
 }
 
 .subsections {

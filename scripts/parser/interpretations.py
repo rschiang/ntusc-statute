@@ -7,7 +7,7 @@ from utils import RE_CJK_NUMERICS, normalize_spaces
 
 RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>\d+)\s*年\s*(?P<month>\d+)\s*月\s*(?P<day>\d+)\s*日')
 RE_CHAPTER_FORMAT = re.compile(r'(解釋(文|理由)|聲請|公告)書?')
-RE_HEADING_FORMAT = re.compile(r'([（\(][' + RE_CJK_NUMERICS + r'][）\)]、?|[' + RE_CJK_NUMERICS + r']、|\d\. )[^。]+$')
+RE_HEADING_FORMAT = re.compile(r'([（\(][' + RE_CJK_NUMERICS + r'][）\)]、?|[' + RE_CJK_NUMERICS + r']、|\d\.\s?)[^。]+$')
 
 def parse_interpretation(buf):
     if isinstance(buf, str):
@@ -16,6 +16,8 @@ def parse_interpretation(buf):
     try:
         intp = Interpretation()
         intp.name = normalize_spaces(buf.readline().strip())
+        if intp.name.startswith('解釋'):
+            intp.name = intp.name[2:]  # Remove redundant title
         assert intp.name
         assert buf.readline() == '\n'
 
@@ -49,10 +51,10 @@ def parse_interpretation(buf):
             line = indented_line.lstrip()
             indent = len(indented_line) - len(line)
 
-            if indent == 0:
+            if indent == 0 and RE_CHAPTER_FORMAT.fullmatch(line):
                 heading = Heading(line, is_chapter=True)
                 intp.subentries.append(heading)
-            if ((indent == 2 and not line.startswith('邱丞正、')) or RE_HEADING_FORMAT.fullmatch(line)):  # workaround for bad indent
+            elif (indent <= 2 and not line.startswith('邱丞正、')) or RE_HEADING_FORMAT.fullmatch(line):  # workaround for bad indent
                 heading = Heading(line)
                 intp.subentries.append(heading)
             else:
