@@ -78,11 +78,6 @@ p {
     margin: 0 0 0 1em;
 }
 
-.history + p, p + p:last-child { /* foreword and endnotes */
-  margin: 0;
-  text-indent: 1em;
-}
-
 ol, ul {
   list-style: none;
   margin: 0;
@@ -99,12 +94,33 @@ ol {
   margin-left: 1em;
 }
 
-.history {
+.history, .interpretation .meta {
   font-size: .875em;
   margin: 0 0 1em 3em;
 }
 
-.note {
+.history + p, p + p:last-child { /* foreword and endnotes */
+  margin: 0;
+  text-indent: 1em;
+}
+
+.interpretation h6 {
+  bookmark-level: none;
+}
+
+.interpretation p {
+  text-align: justify;
+}
+
+.interpretation time {
+  display: block;
+  text-align: right;
+}
+
+.interpretation time::before { content: '\ff08'; }
+.interpretation time::after { content: '\ff09'; }
+
+.note, .interpretation time {
   font-family: "Kaiti TC", cursive;
 }
 

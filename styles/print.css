@@ -104,7 +104,7 @@ section {
   string-set: category-title attr(data-category-label);
   page-break-before: right;
   page-break-after: always;
-  prince-bookmark-level: 1;
+  bookmark-level: 1;
   margin: 10.5em auto;
   vertical-align: middle;
 }
@@ -125,7 +125,7 @@ article {
 header {
   string-set: statute-title content(), statute-prefix '', statute-unit '', statute-suffix '';
   margin: .75rem -.1rem 1.25rem -.15rem;
-  prince-bookmark-level: 2;
+  bookmark-level: 2;
 }
 
 #supreme_01 {
@@ -141,9 +141,9 @@ h2, h3, h4, h5, h6 {
 }
 
 h6 {
-  string-set: statute-now attr(data-number), statute-prefix '\ff08', statute-unit '\ff5c', statute-suffix '\689d\fe36';
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\689d\fe36';
 }
 
 h6[data-appendix] {
-  string-set: statute-now attr(data-number), statute-prefix '\ff08', statute-unit '\ff5c', statute-suffix '\fe36';
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\fe36';
 }
