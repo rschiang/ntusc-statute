@@ -1,8 +1,9 @@
-# parser.py - parses statute text to DOM
+# parser/acts.py - parses statute text to DOM
 import re
 import sys
 from io import StringIO
 from statute import Act, Chapter, Article, Paragraph, Subsection
+from utils import normalize_spaces
 
 def parse_act(buf):
     if isinstance(buf, str):
@@ -10,7 +11,7 @@ def parse_act(buf):
 
     try:
         act = Act()
-        act.name = buf.readline().strip()
+        act.name = normalize_spaces(buf.readline().strip())
         assert act.name
         assert buf.readline() == '\n'
 
@@ -63,7 +64,7 @@ def parse_act(buf):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Usage: python parser.py [file] > output.html')
+        print('Usage: python parser/acts.py [file] > output.html')
         sys.exit()
 
     f = open(sys.argv[1], 'r')

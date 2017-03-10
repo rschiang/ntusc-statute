@@ -1,6 +1,8 @@
 # utils.py - additional functions
 import re
 
+# Common constants
+RE_CJK_NUMERICS = r'〇ㄧ一二三四五六七八九十'
 RE_CJK_PATTERN = '[\u3400-\u4DB5\u4E00-\u9FD5]'
 RE_CJK_BOUNDARY_PRE = re.compile(r'(?<=' + RE_CJK_PATTERN + r')\s*([\d\-A-Za-z]+)')
 RE_CJK_BOUNDARY_POST = re.compile(r'([\d\-A-Za-z]+)\s*(?=' + RE_CJK_PATTERN + r')')

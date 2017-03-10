@@ -2,16 +2,25 @@
 import re
 from .base import Renderer
 from io import StringIO
-from statute import Chapter
-from utils import normalize_spaces
+from statute import Act, Chapter, Heading
+from utils import RE_CJK_NUMERICS, normalize_spaces
 
-RE_ARTICLE_NUMBERING = re.compile(r'^第([〇ㄧ一二三四五六七八九十]+)條(之[〇ㄧ一二三四五六七八九十]+)?')
-RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([〇ㄧ一二三四五六七八九十]+)）?')
-RE_SUBSECTION_NUMBERING = re.compile(r'^[〇ㄧ一二三四五六七八九十]+、\s*')
-RE_ITEM_NUMBERING = re.compile(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*')
+# Article-specific
+RE_ARTICLE_NUMBERING = re.compile(r'^第([' + RE_CJK_NUMERICS + r']+)條(之[' + RE_CJK_NUMERICS + r']+)?')
+RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([' + RE_CJK_NUMERICS + r']+)）?')
+RE_SUBSECTION_NUMBERING = re.compile(r'^[' + RE_CJK_NUMERICS + r']+、\s*')
+RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
+
+# Interpretation-specific
+RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>\d+)\s*年\s*(?P<month>\d+)\s*月\s*(?P<day>\d+)\s*日')
+RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
+RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
+RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
+RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS + r']、|\d\. )[^。；]+：')
+RE_INTP_FOOTER_FORMAT = re.compile(r'^(註\s[\d' + RE_CJK_NUMERICS + r']+：.+)$')
 
 def apply_emphasis(text):
     return RE_EMPHASIS_FORMAT.sub(r'<span class="note">\1</span>', text)
@@ -61,19 +70,20 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         buf.write('<h4><a href="#{slug}">{caption}</a></h4>\n'.format(**category.__dict__))
         buf.write('<ul class="indices">\n')
-        for act in category.acts:
-            self.render_index_act(act)
+        for entry in category.entries:
+            self.render_index_entry(entry)
         buf.write('</ul>\n')
 
-    def render_index_act(self, act):
+    def render_index_entry(self, entry):
         buf = self.buf
-        buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**act.__dict__))
-        chapters = [i for i in act.articles if isinstance(i, Chapter) and '章' in i.number]
-        if chapters:
-            buf.write('<ul class="chapters">\n')
-            for chapter in chapters:
-                self.render_index_chapter(chapter)
-            buf.write("</ul>")
+        buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**entry.__dict__))
+        if isinstance(entry, Act):
+            chapters = [i for i in entry.articles if isinstance(i, Chapter) and '章' in i.number]
+            if chapters:
+                buf.write('<ul class="chapters">\n')
+                for chapter in chapters:
+                    self.render_index_chapter(chapter)
+                buf.write("</ul>")
 
     def render_index_chapter(self, chapter):
         self.buf.write('<li><a href="#{bookmark_id}">{number}　{caption}</a></li>\n'.format(**chapter.__dict__))
@@ -101,8 +111,8 @@ class HtmlRenderer(Renderer):
         else:
             buf.write('<header>')
         buf.write(act.name)
-        buf.write('</header>\n')
-        buf.write('<ol class="history">\n')
+        buf.write('</header>\n'
+                  '<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
             h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
@@ -184,3 +194,46 @@ class HtmlRenderer(Renderer):
         buf.write('<li>')
         buf.write(apply_emphasis(normalize_spaces(item)))
         buf.write('</li>\n')
+
+    def render_interpretation(self, intp):
+        buf = self.buf
+        buf.write('<article class="interpretation">\n')
+        if intp.bookmark_id:
+            buf.write('<header id="')
+            buf.write(intp.bookmark_id)
+            buf.write('">')
+        else:
+            buf.write('<header>')
+        buf.write(intp.name)
+        buf.write('</header>\n'
+                  '<div class="meta">')
+        meta = normalize_spaces('，'.join(intp.meta))
+        meta = RE_INTP_META_REMARK_FORMAT.sub('<span class="note">\1</span>', meta)
+        buf.write(meta)
+        buf.write('</div>\n')
+        for subentry in intp.subentries:
+            if isinstance(subentry, Heading):
+                self.render_heading(subentry)
+            else:
+                self.render_interpretation_text(subentry)
+
+    def render_heading(self, heading):
+        grade = 5 if heading.is_chapter else 6
+        caption = normalize_spaces(heading.caption)
+        self.buf.write('<h{}>{}</h{}>'.format(grade, caption, grade))
+
+    def render_interpretation_text(self, text):
+        buf = self.buf
+
+        # Apply formats
+        text = normalize_spaces(text)
+        text = RE_INTP_CITATION_FORMAT.sub('<cite>\1</cite>', text)
+        text = RE_INTP_REMARK_FORMAT.sub(r'<span class="note">\1</span>', text)
+
+        # Sniff subheading and footnote
+        if RE_INTP_FOOTER_FORMAT.fullmatch(text):
+            buf.write('<p class="footnote">')
+        else:
+            text = RE_INTP_SUBHEADING_FORMAT.sub(r'<span class="subheading">\1</span>', text)
+        buf.write(text)
+        buf.write('</p>')
