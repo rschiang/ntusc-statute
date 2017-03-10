@@ -10,7 +10,7 @@ RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([〇ㄧ一二三四五六七�
 RE_SUBSECTION_NUMBERING = re.compile(r'^[〇ㄧ一二三四五六七八九十]+、\s*')
 RE_ITEM_NUMBERING = re.compile(r'^\([〇ㄧ一二三四五六七八九十]+\)\s*')
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
-RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|附註)：[^）]+）)')
+RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
 
 class HtmlRenderer(Renderer):
@@ -35,7 +35,7 @@ class HtmlRenderer(Renderer):
         if title:
             buf.write('<title>')
             buf.write(title)
-            buf.write('</title>')
+            buf.write('</title>\n')
         if meta:
             for name, content in meta.items():
                 buf.write('<meta name="')
@@ -112,7 +112,7 @@ class HtmlRenderer(Renderer):
             buf.write('</li>\n')
         buf.write('</ol>\n')
         super().render_act(act)
-        buf.write('</article>')
+        buf.write('</article>\n')
 
     def render_text(self, text):
         buf = self.buf
