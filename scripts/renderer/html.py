@@ -30,6 +30,7 @@ class HtmlRenderer(Renderer):
 
     def __init__(self, buf=None):
         self.buf = buf or StringIO()
+        self.raw_mode = False
 
     def render(self, act):
         self.render_head()
@@ -134,9 +135,16 @@ class HtmlRenderer(Renderer):
 
     def render_text(self, text):
         buf = self.buf
-        buf.write('<p>')
-        buf.write(apply_emphasis(text))
-        buf.write('</p>\n')
+        if text == '<Raw>':
+            self.raw_mode = True
+        elif text == '</Raw>':
+            self.raw_mode = False
+        elif self.raw_mode:
+            buf.write(text)
+        else:
+            buf.write('<p>')
+            buf.write(apply_emphasis(text))
+            buf.write('</p>\n')
 
     def render_chapter(self, chapter):
         buf = self.buf
@@ -168,15 +176,9 @@ class HtmlRenderer(Renderer):
             return  # Short circuit
         buf.write('</h6>\n')
         if article.subitems:
-            # Determine raw inline block
-            if article.subitems[0].caption == '<Raw>':
-                # HACK: Assume properly enclosed <Raw> block without mixed content
-                for raw_item in article.subitems[1:-1]:
-                    buf.write(raw_item.caption)
-            else:
-                buf.write('<ol class="paragraphs">')
-                super().render_article(article)
-                buf.write('</ol>\n')
+            buf.write('<ol class="paragraphs">')
+            super().render_article(article)
+            buf.write('</ol>\n')
 
     def render_paragraph(self, paragraph):
         buf = self.buf
