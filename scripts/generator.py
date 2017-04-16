@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # generator.py - iterate and generate statute
 import glob
-import os.path
+import os
 from parser import parse_act, parse_interpretation
 from renderer import HtmlRenderer
 from statute import Category
@@ -21,7 +21,7 @@ CATEGORIES = [
     CategoryTask(slug='appendix', caption='附錄', label='司法', folders=['7_附錄', '../../statute/appendix/']),
     ]
 
-def generate(path='source/laws/', output='statute.html'):
+def generate(path='source/laws/', output='statute.html', is_printing=True):
     buf = open(output, 'w+')
     renderer = HtmlRenderer(buf=buf)
     renderer.render_head(title='國立臺灣大學學生會簡明法規彙編', meta={
@@ -48,8 +48,12 @@ def generate(path='source/laws/', output='statute.html'):
                         entry.update_bookmark_id()
                     category.entries.append(entry)
 
+    # Append online version artifacts
+    if not is_printing:
+        renderer.render_file('statute/online/badge.html')
+        renderer.render_section('intro', '我們貢獻這所大學于宇宙之精神。')
+
     # Build cover and TOC
-    renderer.render_section('intro', '我們貢獻這所大學于宇宙之精神。')
     renderer.render_index_head()
     for category in CATEGORIES:
         renderer.render_index_category(category)
@@ -65,9 +69,13 @@ def generate(path='source/laws/', output='statute.html'):
             for entry in category.entries:
                 renderer.render_act(entry)
 
+    # Append print version artifacts
+    if is_printing:
+        renderer.render_section('intro', '我們貢獻這所大學于宇宙之精神。')
+
     renderer.render_tail()
     buf.close()
 
 
 if __name__ == '__main__':
-    generate()
+    generate(is_printing=(os.environ.get('TARGET') != 'display'))

@@ -241,3 +241,7 @@ class HtmlRenderer(Renderer):
             buf.write('<p>')
         buf.write(text)
         buf.write('</p>\n')
+
+    def render_file(self, path):
+        with open(path, 'r') as f:
+            self.buf.write(f.read())
