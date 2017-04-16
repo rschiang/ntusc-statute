@@ -223,6 +223,7 @@ class HtmlRenderer(Renderer):
                 self.render_interpretation_text(subentry)
         if intp.date:
             buf.write('<time>民國 {} 年 {} 月 {} 日</time>\n'.format(*intp.date))
+        buf.write('</article>')
 
     def render_heading(self, heading):
         grade = 5 if heading.is_chapter else 6
