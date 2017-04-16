@@ -1,5 +1,6 @@
 # renderer/html.py - Renders to HTML5 statute
 import re
+import utils
 from .base import Renderer
 from io import StringIO
 from statute import Act, Chapter, Heading
@@ -11,11 +12,11 @@ RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([' + RE_CJK_NUMERICS + r']+)�
 RE_SUBSECTION_NUMBERING = re.compile(r'^[' + RE_CJK_NUMERICS + r']+、\s*')
 RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
-RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註)：[^）]+）)')
+RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註|原名稱)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
+RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>[' + RE_CJK_NUMERICS + r']+)\s*年\s*(?P<month>[' + RE_CJK_NUMERICS + r']+)\s*月\s*(?P<day>[' + RE_CJK_NUMERICS + r']+)\s*日')
 
 # Interpretation-specific
-RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>\d+)\s*年\s*(?P<month>\d+)\s*月\s*(?P<day>\d+)\s*日')
 RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
 RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
 RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
@@ -115,8 +116,11 @@ class HtmlRenderer(Renderer):
                   '<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
-            h = h.replace('中華民國', '民國').replace('學生代表大會', '學代會')
+            h = h.replace('學生代表大會', '學代會')
             h = RE_NUMERIC_DATE_FORMAT.sub(r'民國\1年\2月\3日', h)
+            h = RE_REPUBLIC_DATE_FORMAT.sub(utils.repl_cjk_date, h)
+            h = h.replace('中華民國', '民國')
+            h = utils.normalize_bracketed_numbers(h)
             h = normalize_spaces(h)
             h = apply_emphasis(h)
             buf.write(h)
