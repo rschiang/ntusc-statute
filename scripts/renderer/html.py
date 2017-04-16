@@ -168,9 +168,15 @@ class HtmlRenderer(Renderer):
             return  # Short circuit
         buf.write('</h6>\n')
         if article.subitems:
-            buf.write('<ol class="paragraphs">')
-            super().render_article(article)
-            buf.write('</ol>\n')
+            # Determine raw inline block
+            if article.subitems[0].caption == '<Raw>':
+                # HACK: Assume properly enclosed <Raw> block without mixed content
+                for raw_item in article.subitems[1:-1]:
+                    buf.write(raw_item.caption)
+            else:
+                buf.write('<ol class="paragraphs">')
+                super().render_article(article)
+                buf.write('</ol>\n')
 
     def render_paragraph(self, paragraph):
         buf = self.buf

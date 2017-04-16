@@ -84,6 +84,25 @@ ol, ul {
   padding: 0;
 }
 
+table {
+  font-size: inherit;
+  width: 100%;
+  border: none;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+article table {
+  font-size: .7rem;
+  line-height: .875rem;
+  text-align: center;
+}
+
+article th, article td {
+  border: 1px solid;
+  padding: .5em;
+}
+
 .chapters {
   margin-left: 1em;
   font-size: .875em;
@@ -99,7 +118,7 @@ ol {
   margin: 0 0 1em 3em;
 }
 
-.history + p, p + p:last-child { /* foreword and endnotes */
+.history + p { /* foreword */
   margin: 0;
   text-indent: 1em;
 }
@@ -144,7 +163,7 @@ cite {
   text-indent: -3em;
 }
 
-p:not(.footnote) + .footnote {
+p:not(.footnote) + .footnote, table + .footnote {
   margin-top: 1em;
 }
 
@@ -177,12 +196,6 @@ p:not(.footnote) + .footnote {
 #cip {
   margin: 1em;
   min-height: 1em;
-}
-
-table {
-  font-size: inherit;
-  border: none;
-  width: 100%;
 }
 
 .book.title {
