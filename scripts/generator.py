@@ -71,6 +71,7 @@ def generate(path='source/laws/', output='statute.html', is_printing=True):
 
     # Append print version artifacts
     if is_printing:
+        renderer.render_file('statute/print/copyright.html')
         renderer.render_section('intro', '我們貢獻這所大學于宇宙之精神。')
 
     renderer.render_tail()

@@ -96,6 +96,17 @@
   }
 }
 
+@page others {
+  border: none;
+  padding: 0;
+  @left-bottom {
+    content: '';
+  }
+  @right-bottom {
+    content: '';
+  }
+}
+
 body {
   padding: 0;
 }
@@ -162,4 +173,15 @@ h2, h3, h4, h5, h6 {
 
 .act h6[data-appendix] {
   string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\fe36';
+}
+
+#copyright {
+  page: others;
+  page-break-before: right;
+  page-break-after: always;
+}
+
+#cip {
+    width: 100%;
+    margin-top: 100%;
 }
