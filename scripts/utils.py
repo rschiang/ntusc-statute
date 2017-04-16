@@ -2,8 +2,8 @@
 import re
 
 # Common constants
-RE_CJK_NUMERICS = r'〇ㄧ一二三四五六七八九十百'
-RE_CJK_NUMERICS_MIXED = r'〇ㄧ一二三四五六七八九十壹貳參肆伍陸柒捌玖拾'
+RE_CJK_NUMERICS = r'〇ㄧ一二三四五六七八九十百零'
+RE_CJK_NUMERICS_MIXED = r'〇ㄧ一二三四五六七八九十零壹貳參肆伍陸柒捌玖拾'
 RE_CJK_NUMERICS_SINGLE = r'一二三四五六七八九十'
 RE_CJK_PATTERN = '[\u3400-\u4DB5\u4E00-\u9FD5]'
 RE_CJK_BOUNDARY_PRE = re.compile(r'(?<=' + RE_CJK_PATTERN + r')\s*([\d\-A-Za-z\(]+)')
@@ -42,7 +42,7 @@ def normalize_bracketed_numbers(text):
 def convert_cjk_number(text):
     # Sniff alphanumerics
     if text.isdecimal():
-        return text
+        return text.lstrip('0')
 
     # Normalize numeric representation
     text = text.replace('〇', '零').replace('ㄧ', '一')

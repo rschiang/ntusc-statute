@@ -14,7 +14,7 @@ RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註|原名稱)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
-RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>[' + RE_CJK_NUMERICS + r']+)\s*年\s*(?P<month>[' + RE_CJK_NUMERICS + r']+)\s*月\s*(?P<day>[' + RE_CJK_NUMERICS + r']+)\s*日')
+RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>[\d' + RE_CJK_NUMERICS + r']+)\s*年\s*(?P<month>[\d' + RE_CJK_NUMERICS + r']+)\s*月\s*(?P<day>[\d' + RE_CJK_NUMERICS + r']+)\s*日')
 
 # Interpretation-specific
 RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
@@ -79,7 +79,8 @@ class HtmlRenderer(Renderer):
         buf = self.buf
         buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**entry.__dict__))
         if isinstance(entry, Act):
-            chapters = [i for i in entry.articles if isinstance(i, Chapter) and '章' in i.number]
+            all_chapters = [i for i in entry.articles if isinstance(i, Chapter)]
+            chapters = [i for i in all_chapters if '編' in i.number] or [i for i in all_chapters if '章' in i.number]
             if chapters:
                 buf.write('<ul class="chapters">\n')
                 for chapter in chapters:
