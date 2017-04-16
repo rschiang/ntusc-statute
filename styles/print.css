@@ -178,9 +178,18 @@ h2, h3, h4, h5, h6 {
   string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\fe36';
 }
 
+.act h6[data-appendix-table] {
+  string-set: statute-now '', statute-prefix '\fe35', statute-unit '', statute-suffix attr(data-number) '\fe36';
+  page-break-before: always;
+}
+
+article th, article td {
+    border: .4pt solid;
+}
+
 #copyright {
   page: others;
-  page-break-before: right;
+  page-break-before: left;
   page-break-after: always;
 }
 

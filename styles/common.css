@@ -163,8 +163,12 @@ cite {
   text-indent: -3em;
 }
 
-p:not(.footnote) + .footnote, table + .footnote {
+p:not(.footnote) + .footnote {
   margin-top: 1em;
+}
+
+table + .footnote {
+  margin-top: .5em;
 }
 
 .footnote + h5 {
