@@ -55,6 +55,9 @@
 @page category {
   margin: 8.5mm; /* = 24pt (<section> 1em) */
   border: none;
+  @left-bottom {
+    content: '';
+  }
   @right-bottom {
     content: '';
   }

@@ -179,32 +179,38 @@ p:not(.footnote) + .footnote {
   min-height: 1em;
 }
 
-#book_title {
+table {
+  font-size: inherit;
+  border: none;
+  width: 100%;
+}
+
+.book.title {
   font-family: "Source Han Sans TC", sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
+  text-align: left;
   padding-bottom: .75rem;
 }
 
-#book_title .subtitle {
+.book.title .secondary {
   display: block;
   font-size: .875rem;
   line-height: 1;
 }
 
-#copyright dt {
+#copyright td {
+  padding-bottom: .375em;
+}
+
+#copyright td:first-child:not(:only-child) {
   font-family: "PingFang TC", "Source Han Sans TC", sans-serif;
   font-weight: 600;
   text-align: justify;
   text-justify: inter-character;
+  vertical-align: top;
   width: 6em;
-  float: left;
-  clear: right;
-}
-
-#copyright dd {
-  display: block;
-  margin-bottom: .375em;
+  padding-right: 2em;
 }
 
 .paragraphs>li:nth-of-type(1):before { content:'①'; }
