@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-scripts/generator.py
+scripts/generate.py
 prince statute.html

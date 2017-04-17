@@ -31,6 +31,7 @@ class HtmlRenderer(Renderer):
     def __init__(self, buf=None):
         self.buf = buf or StringIO()
         self.raw_mode = False
+        self.href_format = '#{}'
 
     def render(self, act):
         self.render_head()
@@ -38,14 +39,14 @@ class HtmlRenderer(Renderer):
         self.render_tail()
         return self.buf
 
-    def render_head(self, title=None, meta=None):
+    def render_head(self, title=None, meta=None, base=None):
         buf = self.buf
         buf.write('<html lang="zh-Hant">\n'
                   '<head>\n'
                   '<meta charset="utf-8" />\n'
-                  '<link rel="stylesheet" href="styles/common.css" />\n'
-                  '<link rel="stylesheet" href="styles/print.css" media="print" />\n'
-                  '<link rel="stylesheet" href="styles/screen.css" media="screen" />\n')
+                  '<link rel="stylesheet" href="{base}styles/common.css" />\n'
+                  '<link rel="stylesheet" href="{base}styles/print.css" media="print" />\n'
+                  '<link rel="stylesheet" href="{base}styles/screen.css" media="screen" />\n'.format(base=base))
         if title:
             buf.write('<title>')
             buf.write(title)
@@ -70,7 +71,8 @@ class HtmlRenderer(Renderer):
 
     def render_index_category(self, category):
         buf = self.buf
-        buf.write('<h4><a href="#{slug}">{caption}</a></h4>\n'.format(**category.__dict__))
+        href = self.href_format.format(category.slug)
+        buf.write('<h4><a href="{href}">{caption}</a></h4>\n'.format(href=href, caption=category.caption))
         buf.write('<ul class="indices">\n')
         for entry in category.entries:
             self.render_index_entry(entry)
@@ -78,7 +80,8 @@ class HtmlRenderer(Renderer):
 
     def render_index_entry(self, entry):
         buf = self.buf
-        buf.write('<li><a href="#{bookmark_id}">{name}</a></li>\n'.format(**entry.__dict__))
+        href = self.href_format.format(entry.bookmark_id)
+        buf.write('<li><a href="{href}">{name}</a></li>\n'.format(href=href, name=entry.name.name))
         if isinstance(entry, Act):
             all_chapters = [i for i in entry.articles if isinstance(i, Chapter)]
             chapters = [i for i in all_chapters if '編' in i.number] or [i for i in all_chapters if '章' in i.number]
@@ -89,7 +92,8 @@ class HtmlRenderer(Renderer):
                 buf.write("</ul>")
 
     def render_index_chapter(self, chapter):
-        self.buf.write('<li><a href="#{bookmark_id}">{number}　{caption}</a></li>\n'.format(**chapter.__dict__))
+        href = self.href_format.format(chapter.bookmark_id)
+        self.buf.write('<li><a href="{href}">{number}　{caption}</a></li>\n'.format(href=href, **chapter.__dict__))
 
     def render_index_tail(self):
         self.buf.write('</nav>\n')
