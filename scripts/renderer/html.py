@@ -39,7 +39,7 @@ class HtmlRenderer(Renderer):
         self.render_tail()
         return self.buf
 
-    def render_head(self, title=None, meta=None, base=None):
+    def render_head(self, title=None, meta=None, base=''):
         buf = self.buf
         buf.write('<html lang="zh-Hant">\n'
                   '<head>\n'
@@ -81,7 +81,7 @@ class HtmlRenderer(Renderer):
     def render_index_entry(self, entry):
         buf = self.buf
         href = self.href_format.format(entry.bookmark_id)
-        buf.write('<li><a href="{href}">{name}</a></li>\n'.format(href=href, name=entry.name.name))
+        buf.write('<li><a href="{href}">{name}</a></li>\n'.format(href=href, name=entry.name))
         if isinstance(entry, Act):
             all_chapters = [i for i in entry.articles if isinstance(i, Chapter)]
             chapters = [i for i in all_chapters if '編' in i.number] or [i for i in all_chapters if '章' in i.number]

@@ -1,0 +1,52 @@
+{
+    "title": "國立臺灣大學學生會簡明法規彙編",
+    "meta": {
+        "author": "國立臺灣大學開源社",
+        "description": "收錄自治規程、規則條文、以及相關之公眾法規。"
+    },
+    "source": "source/laws/",
+    "output": "statute.html",
+    "generator": "printing",
+    "categories": [
+        {
+            "slug": "supreme",
+            "caption": "基本法與綜合性法規",
+            "label": "基本法",
+            "folders": ["1_基本法", "2_綜合性法規"]
+        },
+        {
+            "slug": "admin",
+            "caption": "行政部門",
+            "label": "行政",
+            "folders": ["3_會長暨行政部門篇"]
+        },
+        {
+            "slug": "legis",
+            "caption": "立法部門",
+            "label": "立法",
+            "folders": ["4_立法部門篇"]
+        },
+        {
+            "slug": "judicial",
+            "caption": "司法部門",
+            "label": "司法",
+            "folders": ["5_司法部門篇"]
+        },
+        {
+            "slug": "interpret",
+            "caption": "學生法院解釋",
+            "label": "解釋",
+            "folders": ["6_學生法院解釋"]
+        },
+        {
+            "slug": "appendix",
+            "caption": "附錄",
+            "label": "附錄",
+            "folders": ["7_附錄", "../../statute/appendix/"]
+        }
+    ],
+    "append": [
+        { "section": "intro", "content": "我們貢獻這所大學于宇宙之精神。" },
+        { "path": "statute/printing/copyright.html" }
+    ]
+}

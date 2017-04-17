@@ -1,8 +1,31 @@
 # generator/task.py - Derived models for generator use
 import glob
+import json
 import os
 import parser
 from statute import Category
+
+class Task(object):
+    def __init__(self, source, output, generator=None, base_url='', title='', meta=None, categories=None, prepend=None, append=None):
+        self.source = source
+        self.output = output
+        self.generator = generator
+        self.base_url = base_url
+        self.title = title
+        self.meta = meta or {}
+        self.prepend = prepend or []
+        self.append = append or []
+        self.categories = []
+        if categories:
+            for item in categories:
+                category = CategoryTask(**item)
+                self.categories.append(category)
+
+    @classmethod
+    def from_json(cls, buf):
+        entity = json.load(buf)
+        return cls(**entity)
+
 
 class CategoryTask(Category):
     def __init__(self, slug, caption, label, folders=None, entries=None):
