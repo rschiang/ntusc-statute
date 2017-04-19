@@ -5,7 +5,7 @@ from renderer import HtmlRenderer
 def generate(task):
     buf = open(task.output, 'w+')
     renderer = HtmlRenderer(buf=buf)
-    renderer.render_head(title=task.title, meta=task.meta, base=task.base)
+    renderer.render_head(title=task.title, meta=task.meta, base_url=task.base_url)
 
     # Read in
     for category in task.categories:

@@ -10,7 +10,7 @@ def generate_index_page(task, renderer):
         prepend_path = task.options['index'].get('prepend')
         append_path = task.options['index'].get('append')
 
-    renderer.render_head(title=task.title, meta=task.meta, base=task.base)
+    renderer.render_head(title=task.title, meta=task.meta, base_url=task.base_url)
 
     # Render index prepend file if applicable
     if prepend_path:
@@ -28,7 +28,7 @@ def generate_index_page(task, renderer):
 
 def generate_entry(task, renderer, entry, is_intp=False):
     # Process header and prepends
-    renderer.render_head(title=task.title, meta=task.meta, base=task.base)
+    renderer.render_head(title=task.title, meta=task.meta, base_url=task.base_url)
     for item in task.prepend:
         render_custom_item(renderer, item)
 
@@ -39,7 +39,7 @@ def generate_entry(task, renderer, entry, is_intp=False):
         renderer.render_act(entry)
 
     # Process appends and tail
-    for item in task.prepend:
+    for item in task.append:
         render_custom_item(renderer, item)
     renderer.render_tail()
 
@@ -53,21 +53,29 @@ def generate(task):
         entry_id, _, ch_id = bookmark_id.partition('_ch')
         category, _, order = entry_id.partition('_')
         if ch_id:
-            return '{}{}/{}.html#{}'.format(task.base, category, order, bookmark_id)
+            return '{}{}/{}.html#{}'.format(task.base_url, category, order, bookmark_id)
+        elif order:
+            return '{}{}/{}.html'.format(task.base_url, category, order)
         else:
-            return '{}{}/{}.html'.format(task.base, category, order)
+            return '#'  # Does not support category index page
 
     # Generate index (TOC) page
     with open(os.path.join(task.output, 'index.html'), 'w+') as buf:
         renderer = HtmlRenderer(buf)
         renderer.href_formatter = format_href
-        generate_index_page(task, buf)
+        generate_index_page(task, renderer)
 
     # Render individual categories
     for category in task.categories:
+        # Create the folder if not exists
+        folder = os.path.join(task.output, category.slug)
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+
+        # Render each file
         for entry in category.entries:
-            category, _, order = entry.bookmark_id.partition('_')
-            path = '{}/{}.html'.format(category, order)
+            catgory_name, _, order = entry.bookmark_id.partition('_')
+            path = '{}/{}.html'.format(catgory_name, order)
             with open(os.path.join(task.output, path), 'w+') as buf:
                 renderer.buf = buf
                 generate_entry(task, renderer, entry, category.is_intp)

@@ -42,14 +42,14 @@ class HtmlRenderer(Renderer):
         self.render_tail()
         return self.buf
 
-    def render_head(self, title=None, meta=None, base=''):
+    def render_head(self, title=None, meta=None, base_url=''):
         buf = self.buf
         buf.write('<html lang="zh-Hant">\n'
                   '<head>\n'
                   '<meta charset="utf-8" />\n'
-                  '<link rel="stylesheet" href="{base}styles/common.css" />\n'
-                  '<link rel="stylesheet" href="{base}styles/print.css" media="print" />\n'
-                  '<link rel="stylesheet" href="{base}styles/screen.css" media="screen" />\n'.format(base=base))
+                  '<link rel="stylesheet" href="{base_url}styles/common.css" />\n'
+                  '<link rel="stylesheet" href="{base_url}styles/print.css" media="print" />\n'
+                  '<link rel="stylesheet" href="{base_url}styles/screen.css" media="screen" />\n'.format(base_url=base_url))
         if title:
             buf.write('<title>')
             buf.write(title)
