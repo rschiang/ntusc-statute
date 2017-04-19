@@ -9,6 +9,8 @@ def do_generate(target_file):
 
     if task.generator == "printing":
         generator.printing.generate(task)
+    elif task.generator == "online":
+        generator.online.generate(task)
     else:
         sys.stderr.write('Unknown generator {}, stopped.'.format(task.generator))
         return

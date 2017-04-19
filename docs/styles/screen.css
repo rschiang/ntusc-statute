@@ -1,0 +1,63 @@
+html, body {
+    font-size: 14pt;
+    margin: 0;
+    padding: 0;
+}
+
+hgroup.book.title, footer {
+    margin: 0;
+    padding: 1.325rem 1rem;
+    text-align: center;
+}
+
+nav, article {
+    max-width: 35em;
+    margin: auto;
+    padding: 1rem .675rem;
+}
+
+article + article {
+    margin-top: .5rem;
+}
+
+a:hover {
+    color: #61a4b3;
+}
+
+nav a {
+    border-bottom: 1px dotted rgba(0, 0, 0, 0);
+}
+
+nav a:hover {
+    border-bottom-color: #61a4b3;
+}
+
+#intro {
+    margin: 0;
+    padding: 15% .67em 15% 1em; /* Cancel out letter spacing */
+    font-size: 2em;
+    font-weight: 500;
+    background: #313546 url(../assets/library.jpg) center / cover;
+    color: white;
+    text-shadow: 0 0 8px rgba(114, 179, 192, .87);
+    letter-spacing: .33em;
+    text-align: center;
+}
+
+nav header::before {
+    content: '法規彙編';
+}
+
+footer {
+    background: #fafafa;
+    text-align: center;
+}
+
+.ntuosc-logo {
+    transition: filter 280ms ease;
+    filter: grayscale(100%);
+}
+
+.ntuosc-logo:hover {
+    filter: grayscale(0%);
+}

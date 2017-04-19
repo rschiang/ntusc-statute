@@ -29,7 +29,7 @@ class Act(Entry):
         for subitem in self.articles:
             if isinstance(subitem, Chapter):
                 count += 1
-                subitem.bookmark_id = '{}_{:02}'.format(self.bookmark_id, count)
+                subitem.bookmark_id = '{}_ch{:02}'.format(self.bookmark_id, count)
         return count
 
 class Chapter(object):

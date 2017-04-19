@@ -4,10 +4,10 @@
         "author": "國立臺灣大學開源社",
         "description": "收錄自治規程、規則條文、以及相關之公眾法規。"
     },
-    "base": "docs/",
+    "base": "https://rschiang.github.io/ntusc-statute/",
     "source": "source/laws/",
-    "output": "statute.html",
-    "generator": "printing",
+    "output": "docs/",
+    "generator": "online",
     "categories": [
         {
             "slug": "supreme",
@@ -47,7 +47,14 @@
         }
     ],
     "append": [
-        { "section": "intro", "content": "我們貢獻這所大學于宇宙之精神。" },
-        { "path": "statute/printing/copyright.html" }
-    ]
+        { "path": "statute/online/controls.html" },
+        { "path": "statute/online/badge.html" },
+        { "path": "statute/online/footer.html" },
+    ],
+    "options": {
+        "index": {
+            "prepend": "statute/online/header.html",
+            "append": "statute/online/footer.html"
+        }
+    }
 }

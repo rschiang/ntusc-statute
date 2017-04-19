@@ -1,16 +1,11 @@
 # generator/printing.py
+from .task import render_custom_item
 from renderer import HtmlRenderer
-
-def render_custom_item(renderer, item):
-    if 'path' in item:
-        renderer.render_file(item['path'])
-    elif 'section' in item:
-        renderer.render_section(item['section'], item['content'])
 
 def generate(task):
     buf = open(task.output, 'w+')
     renderer = HtmlRenderer(buf=buf)
-    renderer.render_head(title=task.title, meta=task.meta)
+    renderer.render_head(title=task.title, meta=task.meta, base=task.base)
 
     # Read in
     for category in task.categories:

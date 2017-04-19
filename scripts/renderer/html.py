@@ -23,6 +23,9 @@ RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
 RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS_MIXED + r']、|\d\.\s?)([^。；]+：)')
 RE_INTP_FOOTER_FORMAT = re.compile(r'^(註\s?[\d' + RE_CJK_NUMERICS + r']+：.+)$')
 
+def format_href(bookmark_id):
+    return '#{}'.format(bookmark_id)
+
 def apply_emphasis(text):
     return RE_EMPHASIS_FORMAT.sub(r'<span class="note">\1</span>', text)
 
@@ -31,7 +34,7 @@ class HtmlRenderer(Renderer):
     def __init__(self, buf=None):
         self.buf = buf or StringIO()
         self.raw_mode = False
-        self.href_format = '#{}'
+        self.href_formatter = format_href
 
     def render(self, act):
         self.render_head()
@@ -71,7 +74,7 @@ class HtmlRenderer(Renderer):
 
     def render_index_category(self, category):
         buf = self.buf
-        href = self.href_format.format(category.slug)
+        href = self.href_formatter(category.slug)
         buf.write('<h4><a href="{href}">{caption}</a></h4>\n'.format(href=href, caption=category.caption))
         buf.write('<ul class="indices">\n')
         for entry in category.entries:
@@ -80,7 +83,7 @@ class HtmlRenderer(Renderer):
 
     def render_index_entry(self, entry):
         buf = self.buf
-        href = self.href_format.format(entry.bookmark_id)
+        href = self.href_formatter(entry.bookmark_id)
         buf.write('<li><a href="{href}">{name}</a></li>\n'.format(href=href, name=entry.name))
         if isinstance(entry, Act):
             all_chapters = [i for i in entry.articles if isinstance(i, Chapter)]
@@ -92,7 +95,7 @@ class HtmlRenderer(Renderer):
                 buf.write("</ul>")
 
     def render_index_chapter(self, chapter):
-        href = self.href_format.format(chapter.bookmark_id)
+        href = self.href_formatter(chapter.bookmark_id)
         self.buf.write('<li><a href="{href}">{number}　{caption}</a></li>\n'.format(href=href, **chapter.__dict__))
 
     def render_index_tail(self):

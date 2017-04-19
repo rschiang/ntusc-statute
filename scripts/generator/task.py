@@ -6,7 +6,7 @@ import parser
 from statute import Category
 
 class Task(object):
-    def __init__(self, source, output, generator=None, base_url='', title='', meta=None, categories=None, prepend=None, append=None):
+    def __init__(self, source, output, generator=None, base_url='', title='', meta=None, categories=None, prepend=None, append=None, options=None):
         self.source = source
         self.output = output
         self.generator = generator
@@ -15,6 +15,7 @@ class Task(object):
         self.meta = meta or {}
         self.prepend = prepend or []
         self.append = append or []
+        self.options = options or {}
         self.categories = []
         if categories:
             for item in categories:
@@ -53,3 +54,10 @@ class CategoryTask(Category):
             entry.bookmark_id = bookmark_id
             entry.update_bookmark_id()
         return entry
+
+
+def render_custom_item(renderer, item):
+    if 'path' in item:
+        renderer.render_file(item['path'])
+    elif 'section' in item:
+        renderer.render_section(item['section'], item['content'])
