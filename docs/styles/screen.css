@@ -58,7 +58,8 @@ hgroup.gray.book.title, footer {
 
 .gray.book.title a {
     display: block;
-    width: 7rem;
+    width: 7em;
+    margin: auto;
     transition: color 280ms ease;
     color: rgba(0, 0, 0, .54);
     border: none;
