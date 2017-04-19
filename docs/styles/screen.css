@@ -48,9 +48,25 @@ nav header::before {
     content: '法規彙編';
 }
 
-footer {
+hgroup.gray.book.title, footer {
     background: #fafafa;
-    text-align: center;
+}
+
+.gray.book.title span {
+    display: block;
+}
+
+.gray.book.title a {
+    display: block;
+    width: 7rem;
+    transition: color 280ms ease;
+    color: rgba(0, 0, 0, .54);
+    border: none;
+}
+
+.gray.book.title a:hover {
+    color: rgba(0, 0, 0, .87);
+    border: none;
 }
 
 .ntuosc-logo {

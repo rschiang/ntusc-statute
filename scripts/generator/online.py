@@ -28,7 +28,7 @@ def generate_index_page(task, renderer):
 
 def generate_entry(task, renderer, entry, is_intp=False):
     # Process header and prepends
-    renderer.render_head(title=task.title, meta=task.meta, base_url=task.base_url)
+    renderer.render_head(title=entry.name, meta=task.options.get('entry_meta', task.meta), base_url=task.base_url)
     for item in task.prepend:
         render_custom_item(renderer, item)
 

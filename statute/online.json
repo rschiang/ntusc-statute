@@ -46,15 +46,23 @@
             "folders": ["7_附錄", "../../statute/appendix/"]
         }
     ],
+    "prepend": [
+        { "path": "statute/online/header.html" }
+    ],
     "append": [
-        { "path": "statute/online/controls.html" },
         { "path": "statute/online/badge.html" },
         { "path": "statute/online/footer.html" }
     ],
     "options": {
         "index": {
-            "prepend": "statute/online/header.html",
+            "prepend": "statute/online/header_hero.html",
             "append": "statute/online/footer.html"
+        },
+        "entry_meta": {
+            "og:type": "article",
+            "og:site_name": "國立臺灣大學學生會簡明法規彙編",
+            "author": "國立臺灣大學開源社",
+            "description": "《簡明法規彙編》收錄自治規程、規則條文、以及相關之公眾法規，並提供紙本與線上版本。"
         }
     }
 }
