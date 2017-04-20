@@ -79,6 +79,17 @@ hgroup.gray.book.title, footer {
     filter: grayscale(0%);
 }
 
+/* Mobile devices */
+@media screen and (max-width: 30em) {
+    .gray.book.title a {
+        width: auto;
+    }
+
+    nav, article {
+        padding: .5rem;
+    }
+}
+
 /* Web font fallback for mobile devices, from Google Font Early Access */
 @font-face {
    font-family: 'Noto Sans TC';
