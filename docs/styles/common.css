@@ -5,7 +5,7 @@
 }
 
 html, body {
-  font-family: Palatino, "Songti TC", "Hiragino Mincho ProN", "MSungHK", serif;
+  font-family: Palatino, "Songti TC", "Hiragino Mincho ProN", "MSungHK", "Noto Serif TC", serif;
   font-size: 8pt;
   line-height: 1.375;
 }
@@ -15,7 +15,7 @@ body {
 }
 
 section {
-  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", serif;
+  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", "Noto Serif TC", serif;
   font-weight: bold;
   font-size: 3rem;
   margin: 1em;
@@ -24,11 +24,11 @@ section {
 }
 
 #intro {
-  font-family: 'Source Han Sans TC', sans-serif;
+  font-family: "Source Han Sans TC", "Noto Sans TC", sans-serif;
 }
 
 header {
-  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", serif;
+  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", "Noto Serif TC", serif;
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -36,7 +36,7 @@ header {
 }
 
 h2, h3, h4, h5 {
-    font-family: "Yuanti TC", sans-serif;
+    font-family: "Yuanti TC", cwTeXYen, sans-serif;
     font-size: 1.125rem;
     font-weight: normal;
     margin: .25rem 0;
@@ -57,7 +57,7 @@ h6 {
 }
 
 h6 .caption {
-  font-family: "Kaiti TC", cursive;
+  font-family: "Kaiti TC", cwTeXKai, BiaoKai, cursive;
   font-weight: normal;
 }
 
@@ -203,7 +203,7 @@ table + .footnote {
 }
 
 .book.title {
-  font-family: "Source Han Sans TC", sans-serif;
+  font-family: "Source Han Sans TC", "Noto Sans TC", sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   text-align: left;
@@ -221,7 +221,7 @@ table + .footnote {
 }
 
 #copyright td:first-child:not(:only-child) {
-  font-family: "PingFang TC", "Source Han Sans TC", sans-serif;
+  font-family: "PingFang TC", "Source Han Sans TC", "Noto Sans TC", sans-serif;
   font-weight: 600;
   text-align: justify;
   text-justify: inter-character;
