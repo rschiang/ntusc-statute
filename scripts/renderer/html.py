@@ -56,14 +56,14 @@ class HtmlRenderer(Renderer):
             buf.write(title)
             buf.write('</title>\n')
         if meta:
-            for name, content in meta.items():
+            for name in sorted(meta.keys()):
                 if name.startswith('og:'):
                     buf.write('<meta property="')
                 else:
                     buf.write('<meta name="')
                 buf.write(name)
                 buf.write('" content="')
-                buf.write(content)
+                buf.write(meta[name])
                 buf.write('" />\n')
         buf.write('</head>\n'
                   '<body>\n')
