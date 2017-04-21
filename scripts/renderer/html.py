@@ -47,6 +47,7 @@ class HtmlRenderer(Renderer):
         buf.write('<html lang="zh-Hant">\n'
                   '<head>\n'
                   '<meta charset="utf-8" />\n'
+                  '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
                   '<link rel="stylesheet" href="{base_url}styles/common.css" />\n'
                   '<link rel="stylesheet" href="{base_url}styles/print.css" media="print" />\n'
                   '<link rel="stylesheet" href="{base_url}styles/screen.css" media="screen" />\n'.format(base_url=base_url))
