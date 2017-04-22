@@ -10,7 +10,7 @@ hgroup.book.title, footer {
     text-align: center;
 }
 
-nav, article {
+nav, article, #readme {
     max-width: 35em;
     margin: auto;
     padding: 1rem .675rem;
@@ -24,12 +24,16 @@ a:hover {
     color: #61a4b3;
 }
 
-nav a {
+nav a, #readme a {
     border-bottom: 1px dotted rgba(0, 0, 0, 0);
 }
 
-nav a:hover {
+nav a:hover, #readme a:hover {
     border-bottom-color: #61a4b3;
+}
+
+img {
+    max-width: 100%;
 }
 
 #intro {
@@ -77,6 +81,33 @@ hgroup.gray.book.title, footer {
 
 .ntuosc-logo:hover {
     filter: grayscale(0%);
+}
+
+#readme figure {
+    float: left;
+    max-width: 7.25em;
+    margin: 0 .75em .5em 0;
+    padding: 4px;
+    border: 1px solid #eee;
+}
+
+#readme::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#readme p {
+    text-indent: 2em;
+    margin-top: .5em;
+}
+
+#readme abbr {
+    text-decoration: none;
+}
+
+#readme abbr:hover {
+    background: #fafafa;
 }
 
 /* Mobile devices */
