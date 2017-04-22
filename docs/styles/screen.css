@@ -37,6 +37,7 @@ img {
 }
 
 #intro {
+    position: relative;
     margin: 0;
     padding: 15% .67em 15% 1em; /* Cancel out letter spacing */
     font-size: 2em;
@@ -46,6 +47,20 @@ img {
     text-shadow: 0 0 8px rgba(114, 179, 192, .87);
     letter-spacing: .33em;
     text-align: center;
+}
+
+#intro::after {
+    content: "總圖書館星軌，由游鈞量同學拍攝。";
+    display: block;
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    font-size: .625rem;
+    font-weight: normal;
+    opacity: .28;
+    text-shadow: none;
+    letter-spacing: normal;
+    text-align: right;
 }
 
 nav header::before {
