@@ -113,8 +113,8 @@ hgroup.gray.book.title, footer {
 }
 
 #readme p {
-    text-indent: 2em;
-    margin-top: .5em;
+    text-indent: 1em;
+    margin: .5em 0 0;
 }
 
 #readme abbr {
