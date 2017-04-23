@@ -32,7 +32,7 @@ def generate(task):
                 renderer.render_act(entry)
 
     # Process appends
-    for item in task.prepend:
+    for item in task.append:
         render_custom_item(renderer, item)
 
     renderer.render_tail()
