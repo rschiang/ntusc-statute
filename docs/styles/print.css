@@ -1,5 +1,5 @@
 @page {
-  size: 99mm 210mm;
+  size: 99mm 165mm;
   padding: 0.5em;
   counter-increment: page;
   font-family: "Songti TC", serif;
@@ -8,7 +8,7 @@
 }
 
 @page :left {
-  margin: 1.375em 3em 1.375em 2.5em;
+  margin: 1.375em 4.5em 1.375em 2.5em;
   @left-top {
     writing-mode: vertical-rl;
     margin: 0 .575em 0 .925em;
@@ -21,7 +21,7 @@
 }
 
 @page :right {
-  margin: 1.375em 2.5em 1.375em 3em;
+  margin: 1.375em 2.5em 1.375em 4.5em;
   @right-top {
     writing-mode: vertical-lr;
     margin: 0 .925em 0 .575em;
@@ -131,13 +131,13 @@ section {
   page-break-before: right;
   page-break-after: always;
   bookmark-level: 1;
-  margin: 10.5em auto;
+  margin: 8em auto;
   vertical-align: middle;
 }
 
 #intro {
   writing-mode: vertical-lr;
-  margin: 11rem 13.25rem;
+  margin: 3rem 14rem;
   line-height: 1em;
   text-align: center;
 }
