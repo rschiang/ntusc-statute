@@ -162,8 +162,11 @@ header {
   word-break: keep-all;
 }
 
-#admin_03 ~ .history, #appendix_01 ~ .history {
-  string-set: statute-now ''; /* Witchcraft */
+#admin_03 ~ .history,
+#appendix_01 ~ .history,
+#appendix_05 ~ .history,
+#appendix_06 ~ .history {
+  string-set: statute-now ''; /* Witchcraft to clear lingering number from previous act */
 }
 
 h2, h3, h4, h5, h6 {
