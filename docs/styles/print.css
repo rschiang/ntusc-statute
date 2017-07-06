@@ -12,6 +12,7 @@
   @left-top {
     writing-mode: vertical-rl;
     margin: 0 .575em 0 .925em;
+    font-family: "Source Han Serif TC", serif;
   }
   @left-bottom {
     writing-mode: vertical-rl;
@@ -25,6 +26,7 @@
   @right-top {
     writing-mode: vertical-lr;
     margin: 0 .925em 0 .575em;
+    font-family: "Source Han Serif TC", serif;
   }
   @right-bottom {
     writing-mode: vertical-lr;
@@ -174,11 +176,11 @@ h2, h3, h4, h5, h6 {
 }
 
 .act h6 {
-  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\689d\fe36';
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\ff5e', statute-suffix '\689d\fe36';
 }
 
 .act h6[data-appendix] {
-  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\fe31', statute-suffix '\fe36';
+  string-set: statute-now attr(data-number), statute-prefix '\fe35', statute-unit '\ff5e', statute-suffix '\fe36';
 }
 
 .act h6[data-appendix-table] {
