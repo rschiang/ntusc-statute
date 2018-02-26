@@ -10,10 +10,6 @@ hgroup.book.title, footer {
     text-align: center;
 }
 
-footer {
-    position: relative;
-}
-
 nav, article, #readme {
     max-width: 35em;
     margin: auto;
@@ -112,7 +108,6 @@ hgroup.gray.book.title, footer {
     font-family: Roboto, system-ui, "PingFang TC", sans-serif;
     font-size: .75em;
     height: 1.325rem;
-    position: absolute;
     width: 100%;
 }
 
