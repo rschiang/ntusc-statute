@@ -230,6 +230,40 @@ table + .footnote {
   padding-right: 2em;
 }
 
+.squared.icon {
+  border-radius: .25em;
+  border: .05em solid black;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 0.8em;
+  height: 1.2em;
+  line-height: 1.1em;
+  margin: auto .08em auto .02em;
+  min-width: 1.2em;
+  padding: .05em;
+  position: relative;
+  text-indent: 0;
+  top: -0.05em;
+}
+
+.bracketed.number {
+  display: inline-block;
+  letter-spacing: -.075em;
+  transform-origin: left center;
+  transform: scale(.75,.94);
+  width: 1em;
+}
+
+.bracketed.number::before {
+  content: '(';
+  margin-right: -.03em;
+}
+
+.bracketed.number::after {
+  content: ')';
+  margin-left: -.06em;
+}
+
 .paragraphs>li:nth-of-type(1):before { content:'①'; }
 .paragraphs>li:nth-of-type(2):before { content:'②'; }
 .paragraphs>li:nth-of-type(3):before { content:'③'; }
