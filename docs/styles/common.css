@@ -98,6 +98,26 @@ article table {
   text-align: center;
 }
 
+table.left-aligned {
+  text-align: left;
+}
+
+table.left-aligned td {
+  vertical-align: top;
+}
+
+table.left-aligned.bulleted li {
+  list-style: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+table.left-aligned th,
+table.left-aligned td.header {
+  text-align: center;
+  vertical-align: middle;
+}
+
 article th, article td {
   border: 1px solid;
   padding: .5em;
@@ -246,9 +266,14 @@ table + .footnote {
   top: -0.05em;
 }
 
+.squared.icon:first-of-type {
+  margin-left: .28em;
+}
+
 .bracketed.number {
   display: inline-block;
   letter-spacing: -.075em;
+  text-indent: 0;
   transform-origin: left center;
   transform: scale(.75,.94);
   width: 1em;
