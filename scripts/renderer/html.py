@@ -44,7 +44,8 @@ class HtmlRenderer(Renderer):
 
     def render_head(self, title=None, meta=None, base_url=''):
         buf = self.buf
-        buf.write('<html lang="zh-Hant">\n'
+        buf.write('<!DOCTYPE html>\n'
+                  '<html lang="zh-Hant">\n'
                   '<head>\n'
                   '<meta charset="utf-8" />\n'
                   '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'

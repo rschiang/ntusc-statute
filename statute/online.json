@@ -73,6 +73,11 @@
             "author": "國立臺灣大學開源社",
             "description": "《簡明法規彙編》收錄自治規程、規則條文、以及相關之公眾法規，並提供紙本與線上版本。",
             "og:image": "https://rschiang.github.io/ntusc-statute/assets/social-cover.png"
+        },
+        "version_ref": {
+            "statute": ".git/modules/source/HEAD",
+            "build": ".git/HEAD",
+            "output": "docs/version.json"
         }
     }
 }

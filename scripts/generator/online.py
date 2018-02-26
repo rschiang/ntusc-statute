@@ -1,5 +1,7 @@
-# generator/printing.py
+# generator/online.py
+import json
 import os
+from datetime import datetime
 from .task import render_custom_item
 from renderer import HtmlRenderer
 
@@ -79,3 +81,22 @@ def generate(task):
             with open(os.path.join(task.output, path), 'w+') as buf:
                 renderer.buf = buf
                 generate_entry(task, renderer, entry, category.is_intp)
+
+    # Write out build version
+    if 'version_ref' in task.options:
+        version = {
+            'statute': read_git_head(task.options['version_ref']['statute']),
+            'build': read_git_head(task.options['version_ref']['build']),
+            'date': datetime.now().date().isoformat(),
+            }
+        with open(task.options['version_ref']['output'], 'w+') as buf:
+            json.dump(version, buf, indent=2, sort_keys=True)
+
+def read_git_head(path):
+    with open(path, 'r') as head_buf:
+        head = head_buf.read().strip()
+    if head.startswith('ref: '):
+        ref_path = os.path.join(os.path.dirname(path), head[5:])
+        with open(ref_path, 'r') as ref_buf:
+            return ref_buf.read().strip()
+    return head
