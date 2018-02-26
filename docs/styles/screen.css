@@ -20,6 +20,10 @@ article + article {
     margin-top: .5rem;
 }
 
+h6[data-appendix-table] {
+    margin-top: .875rem;
+}
+
 a:hover {
     color: #61a4b3;
 }
