@@ -10,6 +10,10 @@ hgroup.book.title, footer {
     text-align: center;
 }
 
+footer {
+    position: relative;
+}
+
 nav, article, #readme {
     max-width: 35em;
     margin: auto;
@@ -100,6 +104,24 @@ hgroup.gray.book.title, footer {
 
 .ntuosc-logo:hover {
     filter: grayscale(0%);
+}
+
+#version-info {
+    bottom: 0;
+    color: #757575;
+    font-family: Roboto, system-ui, "PingFang TC", sans-serif;
+    font-size: .75em;
+    height: 1.325rem;
+    position: absolute;
+    width: 100%;
+}
+
+#version-info .commit {
+    background: #e0f7fa;
+    border-radius: 4px;
+    color: #039be5;
+    font-family: "Roboto Mono", Consolas, Menlo, monospace;
+    padding: 0.2em 0.4em;
 }
 
 #readme figure {

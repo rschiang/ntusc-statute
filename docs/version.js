@@ -1,4 +1,4 @@
-fetch('version.json').then(function(response) {
+fetch('https://rschiang.github.io/ntusc-statute/version.json').then(function(response) {
   var version = JSON.parse(response.body);
   var footer = document.querySelector('footer');
   var root = document.createElement('div');
