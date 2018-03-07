@@ -6,13 +6,19 @@ from io import StringIO
 from statute import Act, Chapter, Heading
 from utils import RE_CJK_NUMERICS, RE_CJK_NUMERICS_MIXED, normalize_brackets, normalize_spaces
 
+# History specific
+RE_HIST_STATUTE_FORMAT = re.compile(r'([條項款])條文')
+RE_HIST_INS_FORMAT = re.compile(r'(\d)\s*條之\s*(\d+)\s*(條文)?')
+
 # Article-specific
 RE_ARTICLE_NUMBERING = re.compile(r'^第([' + RE_CJK_NUMERICS + r']+)條(之[' + RE_CJK_NUMERICS + r']+)?')
 RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([' + RE_CJK_NUMERICS + r']+)）?')
 RE_SUBSECTION_NUMBERING = re.compile(r'^[' + RE_CJK_NUMERICS + r']+、\s*')
 RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
+
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註|原名稱)：[^）]+）)')
+RE_JARGON_PATTERN = r'[a-zA-ZÀ-ɏβ][a-zA-ZÀ-ɏβ\- ]{2,}'
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
 RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>[\d' + RE_CJK_NUMERICS + r']+)\s*年\s*(?P<month>[\d' + RE_CJK_NUMERICS + r']+)\s*月\s*(?P<day>[\d' + RE_CJK_NUMERICS + r']+)\s*日')
 
@@ -21,6 +27,8 @@ RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
 RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
 RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
 RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS_MIXED + r']、|\d\.\s?)([^。；]+：)')
+RE_INTP_JARGON_FORMAT = re.compile(r'(\(' + RE_JARGON_PATTERN + r'?\))')
+RE_INTP_JARGON_INLINE_FORMAT = re.compile(r'(?<=[（，」])(' + RE_JARGON_PATTERN + r'?)(?=[），「])')
 RE_INTP_FOOTER_FORMAT = re.compile(r'^(註\s?[\d' + RE_CJK_NUMERICS + r']+：.+)$')
 
 def format_href(bookmark_id):
@@ -131,9 +139,12 @@ class HtmlRenderer(Renderer):
         for h in act.history:
             buf.write('<li>')
             h = h.replace('學生代表大會', '學代會')
+            h = h.replace('選舉罷免執行委員會', '選委會')
             h = RE_NUMERIC_DATE_FORMAT.sub(r'民國\1年\2月\3日', h)
             h = RE_REPUBLIC_DATE_FORMAT.sub(utils.repl_cjk_date, h)
             h = h.replace('中華民國', '民國')
+            h = RE_HIST_INS_FORMAT.sub(r'\1-\2條', h)
+            h = RE_HIST_STATUTE_FORMAT.sub(r'\1', h)
             h = utils.normalize_bracketed_numbers(h)
             h = normalize_spaces(h)
             h = apply_emphasis(h)
@@ -256,6 +267,8 @@ class HtmlRenderer(Renderer):
         # Apply formats
         text = normalize_brackets(text)
         text = normalize_spaces(text)
+        text = RE_INTP_JARGON_FORMAT.sub(r'<span class="jargon">\1</span>', text)
+        text = RE_INTP_JARGON_INLINE_FORMAT.sub(r'<span class="jargon">\1</span>', text)
         text = RE_INTP_CITATION_FORMAT.sub(r'<cite>\1</cite>', text)
         text = RE_INTP_REMARK_FORMAT.sub(r'<span class="note">\1</span>', text)
 
