@@ -795,7 +795,7 @@
   </tr>
   </table>
   <p class="footnote">◎：必要；○：可以；表決額數未標明基準者，為參與表決之人數。</p>
-  <p class="footnote">註一：如係特別議程，需要參加表決之三分之二通過。</p>
-  <p class="footnote">註二：先徵詢有無異議，如無異議，即不必再行表決。</p>
-  <p class="footnote">註三：如係唱名表決，需要出席人五分之一以上之贊同。</p>
+  <p class="numbered footnote">註一：如係特別議程，需要參加表決之三分之二通過。</p>
+  <p class="numbered footnote">註二：先徵詢有無異議，如無異議，即不必再行表決。</p>
+  <p class="numbered footnote">註三：如係唱名表決，需要出席人五分之一以上之贊同。</p>
   </Raw>
