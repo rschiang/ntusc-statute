@@ -235,6 +235,7 @@ p:not(.footnote) + .footnote {
   font-family: "Source Han Sans TC", "Noto Sans TC", sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
+  line-height: 2.0625rem;
   text-align: left;
   padding-bottom: .75rem;
 }
@@ -242,7 +243,7 @@ p:not(.footnote) + .footnote {
 .book.title .secondary {
   display: block;
   font-size: .875rem;
-  line-height: 1;
+  line-height: 1.375rem;
 }
 
 #copyright td {
