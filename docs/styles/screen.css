@@ -40,6 +40,12 @@ img {
     max-width: 100%;
 }
 
+.squared.icon {
+  padding: .05em .1em;
+  position: relative;
+  top: -.05em;
+}
+
 #intro {
     position: relative;
     margin: 0;
@@ -159,7 +165,7 @@ hgroup.gray.book.title, footer {
 
 /* Web font fallback for mobile devices, from Google Font Early Access */
 @font-face {
-   font-family: 'Noto Sans TC';
+   font-family: 'Noto Sans CJK';
    font-style: normal;
    font-weight: 400;
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff2) format('woff2'),
@@ -167,7 +173,7 @@ hgroup.gray.book.title, footer {
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.otf) format('opentype');
  }
 @font-face {
-   font-family: 'Noto Sans TC';
+   font-family: 'Noto Sans CJK';
    font-style: normal;
    font-weight: 500;
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff2) format('woff2'),
@@ -175,7 +181,7 @@ hgroup.gray.book.title, footer {
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.otf) format('opentype');
  }
 @font-face {
-   font-family: 'Noto Sans TC';
+   font-family: 'Noto Sans CJK';
    font-style: normal;
    font-weight: 700;
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff2) format('woff2'),

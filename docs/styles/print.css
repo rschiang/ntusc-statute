@@ -124,7 +124,7 @@ nav {
 }
 
 .indices a::after {
-    content: leader('.') target-counter(attr(href url), page, decimal);
+  content: leader('.') target-counter(attr(href url), page, decimal);
 }
 
 section {
@@ -189,8 +189,9 @@ h2, h3, h4, h5, h6 {
 }
 
 article th, article td {
-    border: .4pt solid;
+  border: .4pt solid;
 }
+
 
 #copyright {
   page: others;

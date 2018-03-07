@@ -5,9 +5,9 @@
 }
 
 html, body {
-  font-family: Palatino, "Songti TC", "Hiragino Mincho ProN", "MSungHK", "Source Han Serif TC", serif;
+  font-family: Palatino, "Songti TC", "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", serif;
   font-size: 8pt;
-  line-height: 1.375;
+  line-height: 1.375rem;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
 }
 
 section {
-  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", "Source Han Serif TC", serif;
+  font-family: Didot, "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", "MSungHK", serif;
   font-weight: bold;
   font-size: 3rem;
   margin: 1em;
@@ -24,15 +24,15 @@ section {
 }
 
 #intro {
-  font-family: "Source Han Sans TC", "Noto Sans TC", sans-serif;
+  font-family: "Source Han Sans", "Noto Sans CJK", sans-serif;
 }
 
 header {
-  font-family: Didot, "Hiragino Mincho ProN", "MSungHK", "Source Han Serif TC", serif;
+  font-family: Didot, "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", "MSungHK", serif;
   font-weight: bold;
   font-size: 1.5rem;
-  line-height: 2rem;
-  margin: .575rem 0 1.25rem;
+  line-height: 1.5rem;
+  margin: .565rem 0 1.935rem;
 }
 
 h2, h3, h4, h5 {
@@ -40,7 +40,6 @@ h2, h3, h4, h5 {
     font-size: 1.125rem;
     font-weight: normal;
     margin: .25rem 0;
-    line-height: 1.75rem;
     text-align: center;
 }
 
@@ -49,11 +48,10 @@ h5 {
 }
 
 h6 {
-  font-family: "Pingfang TC", sans-serif;
+  font-family: "Pingfang TC", "Source Han Sans", "Noto Sans CJK", sans-serif;
   font-weight: 600;
   font-size: inherit;
-  line-height: 1.5rem;
-  margin: .125rem 0 .125rem;
+  margin: .125rem 0;
 }
 
 h6 .caption {
@@ -67,6 +65,11 @@ h6 .deleted {
 
 h6 span:not(:last-of-type) {
   margin-right: -.5em;
+}
+
+h6[data-appendix] {
+  margin-left: 4em;
+  text-indent: -4em;
 }
 
 a {
@@ -126,7 +129,6 @@ article th, article td {
 .chapters {
   margin-left: 1em;
   font-size: .875em;
-  line-height: 1.375rem;
 }
 
 ol {
@@ -135,6 +137,7 @@ ol {
 
 .history, .interpretation .meta {
   font-size: .875em;
+  line-height: 1.125rem;
   margin: 0 0 1em 3em;
 }
 
@@ -148,8 +151,12 @@ ol {
 }
 
 .interpretation p {
-  line-height: 1.375rem;
   margin-bottom: 2pt;
+}
+
+.interpretation .jargon {
+  font-family: Baskerville, "Source Han Serif", "Noto Serif CJK", sans-serif;
+  font-weight: lighter;
 }
 
 .interpretation .footnote {
@@ -157,8 +164,8 @@ ol {
 }
 
 .interpretation .subheading {
-  font-family: "Pingfang TC", sans-serif;
-  font-weight: 600;
+  font-family: "Pingfang TC", "Source Han Sans", "Noto Sans CJK", sans-serif;
+  font-weight: 500;
 }
 
 .interpretation time {
@@ -178,39 +185,41 @@ cite {
 }
 
 .footnote {
-  font-size: .875em;
+  font-size: .875rem;
   margin-left: 3em;
   text-indent: -3em;
 }
 
-p:not(.footnote) + .footnote {
-  margin-top: 1em;
+h6 + table {
+  margin-top: .25rem;
 }
 
 table + .footnote {
-  margin-top: .5em;
+  margin-top: .25rem;
 }
 
-.footnote + h5 {
-  margin-top: .5rem;
+table ~ .footnote:not(.numbered) {
+  margin-left: 0;
+  text-indent: 0;
+}
+
+p:not(.footnote) + .footnote {
+  margin-top: 1.375rem;
 }
 
 .subsections {
-  margin: 0;
+  margin-left: 2em;
   counter-reset: counter;
   list-style: none;
 }
 
 .subsections > li {
+  text-indent: -2em;
   counter-increment: counter;
 }
 
 .subsections > li:before {
   content: counter(counter, cjk-decimal) '\3000';
-}
-
-.items {
-  margin: 0 0 0 3em;
 }
 
 .paragraphs > li, .history > li, .items > li {
@@ -257,13 +266,11 @@ table + .footnote {
   display: inline-block;
   font-size: 0.8em;
   height: 1.2em;
-  line-height: 1.1em;
+  line-height: 1em;
   margin: auto .08em auto .02em;
   min-width: 1.2em;
-  padding: .05em;
-  position: relative;
+  padding: 0 .05em .2em;
   text-indent: 0;
-  top: -0.05em;
 }
 
 .squared.icon:first-of-type {
