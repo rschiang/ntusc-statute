@@ -31,7 +31,14 @@
             "slug": "judicial",
             "caption": "司法部門",
             "label": "司法",
-            "folders": ["5_司法部門篇"]
+            "folders": ["5_司法部門篇"],
+            "replace": [
+                {
+                    "path": "02_國立臺灣大學學生會學生法院法施行細則.txt",
+                    "expr": "Ｏ",
+                    "repl": "〇"
+                }
+            ]
         },
         {
             "slug": "interpret",
@@ -48,7 +55,7 @@
                 {
                     "path": "01_國立臺灣大學組織規程.txt",
                     "expr": "^\\s*（備註：附表[^）]+。）",
-                    "repl": "statute/features/01_國立臺灣大學組織規程附表.html"
+                    "repl_path": "statute/features/01_國立臺灣大學組織規程附表.html"
                 }
             ]
         }

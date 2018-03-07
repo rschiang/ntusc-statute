@@ -53,8 +53,14 @@ class CategoryTask(Category):
         for item in self.replace:
             if file_path.endswith(item['path']):
                 expr = item['expr']
-                with open(item['repl'], 'r') as repl_buf:
-                    repl = repl_buf.read()
+                # Try to load replacement file first
+                try:
+                    with open(item['repl_path'], 'r') as repl_buf:
+                        repl = repl_buf.read()
+                except KeyError:
+                    # Fallback to use string
+                    repl = item['repl']
+                # Read in file
                 with file_buf:
                     string = file_buf.read()
                 # Wraps the replaced buffer like file
