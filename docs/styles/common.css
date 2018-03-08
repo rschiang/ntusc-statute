@@ -5,7 +5,7 @@
 }
 
 html, body {
-  font-family: Palatino, "Songti TC", "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", serif;
+  font-family: Palatino, "Songti TC", "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
   font-size: 8pt;
   line-height: 1.375rem;
 }
@@ -15,8 +15,8 @@ body {
 }
 
 section {
-  font-family: Didot, "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", "MSungHK", serif;
-  font-weight: bold;
+  font-family: Didot, "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
+  font-weight: 900;
   font-size: 3rem;
   margin: 1em;
   text-align: center;
@@ -24,11 +24,11 @@ section {
 }
 
 #intro {
-  font-family: "Source Han Sans", "Noto Sans CJK", sans-serif;
+  font-family: "Source Han Sans TC", "Noto Sans TC", sans-serif;
 }
 
 header {
-  font-family: Didot, "Source Han Serif", "Noto Serif CJK", "Hiragino Mincho ProN", "MSungHK", serif;
+  font-family: Didot, "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1.5rem;
@@ -48,7 +48,7 @@ h5 {
 }
 
 h6 {
-  font-family: "Pingfang TC", "Source Han Sans", "Noto Sans CJK", sans-serif;
+  font-family: "Pingfang TC", "Source Han Sans TC", "Noto Sans TC", sans-serif;
   font-weight: 600;
   font-size: inherit;
   margin: .125rem 0;
@@ -155,7 +155,7 @@ ol {
 }
 
 .interpretation .jargon {
-  font-family: Baskerville, "Source Han Serif", "Noto Serif CJK", sans-serif;
+  font-family: Baskerville, "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", sans-serif;
   font-weight: lighter;
 }
 
@@ -164,7 +164,7 @@ ol {
 }
 
 .interpretation .subheading {
-  font-family: "Pingfang TC", "Source Han Sans", "Noto Sans CJK", sans-serif;
+  font-family: "Pingfang TC", "Source Han Sans TC", "Noto Sans TC", sans-serif;
   font-weight: 500;
 }
 
@@ -186,6 +186,7 @@ cite {
 
 .footnote {
   font-size: .875rem;
+  line-height: 1.125rem;
   margin-left: 3em;
   text-indent: -3em;
 }
@@ -195,6 +196,7 @@ h6 + table {
 }
 
 table + .footnote {
+  line-height: 1.2rem;
   margin-top: .25rem;
 }
 
@@ -204,7 +206,11 @@ table ~ .footnote:not(.numbered) {
 }
 
 p:not(.footnote) + .footnote {
-  margin-top: 1.375rem;
+  margin-top: .6875rem;
+}
+
+.footnote + h5 {
+  margin-top: .8125rem;
 }
 
 .subsections {
