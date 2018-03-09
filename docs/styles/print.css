@@ -183,7 +183,16 @@ h2, h3, h4, h5, h6 {
 
 .act h6[data-appendix-table] {
   string-set: statute-now '', statute-prefix '\fe35', statute-unit '', statute-suffix attr(data-number) '\fe36';
+}
+
+.act h6[data-appendix-table]:not(.mini) {
   page-break-before: always;
+  margin-top: 0;
+  margin-bottom: .25rem;
+}
+
+h6 .note {
+  word-break: keep-all;
 }
 
 article th, article td {

@@ -63,6 +63,10 @@ h6 .deleted {
   word-break: keep-all;
 }
 
+h6 .note {
+  font-weight: normal;
+}
+
 h6 span:not(:last-of-type) {
   margin-right: -.5em;
 }
@@ -177,7 +181,7 @@ ol {
 .interpretation time::after { content: '\ff09'; }
 
 .note, .interpretation time, cite {
-  font-family: "Kaiti TC", cursive;
+  font-family: "Kaiti TC", cwTeXKai, BiaoKai, cursive;
 }
 
 cite {
@@ -209,7 +213,7 @@ p:not(.footnote) + .footnote {
   margin-top: .6875rem;
 }
 
-.footnote + h5 {
+.footnote + h5, .footnote + h6 {
   margin-top: .8125rem;
 }
 
