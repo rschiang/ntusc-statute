@@ -100,7 +100,7 @@ class HtmlRenderer(Renderer):
         buf.write('<li><a href="{href}">{name}</a></li>\n'.format(href=href, name=entry.name))
         if isinstance(entry, Act):
             all_chapters = [i for i in entry.articles if isinstance(i, Chapter)]
-            chapters = [i for i in all_chapters if '編' in i.number] or [i for i in all_chapters if '章' in i.number]
+            chapters = [i for i in all_chapters if '篇' in i.number] or [i for i in all_chapters if '章' in i.number]
             if chapters:
                 buf.write('<ul class="chapters">\n')
                 for chapter in chapters:
@@ -172,7 +172,12 @@ class HtmlRenderer(Renderer):
     def render_chapter(self, chapter):
         buf = self.buf
         chapter.number = chapter.number.replace('ㄧ', '一')  # Those who mistaken bopomofo with kanji should apologize
-        grade = 4 if '章' in chapter.number else 5
+        if '篇' in chapter.number:
+            grade = 3
+        elif '章' in chapter.number:
+            grade = 4
+        else:
+            grade = 5
         if chapter.bookmark_id:
             buf.write('<h{} id="{}">'.format(grade, chapter.bookmark_id))
         else:
