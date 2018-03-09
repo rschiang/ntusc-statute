@@ -9,6 +9,13 @@ from utils import RE_CJK_NUMERICS, RE_CJK_NUMERICS_MIXED, normalize_brackets, no
 # History specific
 RE_HIST_STATUTE_FORMAT = re.compile(r'([條項款])條文')
 RE_HIST_INS_FORMAT = re.compile(r'(\d)\s*條之\s*(\d+)\s*(條文)?')
+HIST_ABBREVIATION_LIST = [
+    ('學生代表大會', '學代會'),
+    ('選舉罷免執行委員會', '選委會'),
+    ('學生輔導委員會', '學輔會'),
+    ('校園規劃小組委員會', '校規小組'),
+    ('校務發展規劃委員會', '校發會'),
+    ]
 
 # Article-specific
 RE_ARTICLE_NUMBERING = re.compile(r'^第([' + RE_CJK_NUMERICS + r']+)條(之[' + RE_CJK_NUMERICS + r']+)?')
@@ -18,11 +25,13 @@ RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
 
 RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註|原名稱)：[^）]+）)')
-RE_JARGON_PATTERN = r'[a-zA-ZÀ-ɏβ][a-zA-ZÀ-ɏβ\- ]{2,}'
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
+RE_NUMERIC_DATE_INLINE_FORMAT = re.compile(r'(?<=[；。])(\d+)\.(\d+)\.(\d+)\s*')
 RE_REPUBLIC_DATE_FORMAT = re.compile(r'(中華)?民國\s*(?P<year>[\d' + RE_CJK_NUMERICS + r']+)\s*年\s*(?P<month>[\d' + RE_CJK_NUMERICS + r']+)\s*月\s*(?P<day>[\d' + RE_CJK_NUMERICS + r']+)\s*日')
+RE_SEMESTER_DATE_FORMAT = re.compile(r'(本校)?\s*(?P<year>[\d' + RE_CJK_NUMERICS + r']+)\s*學年度第\s*(?P<semester>[\d' + RE_CJK_NUMERICS + r']+)\s*學期')
 
 # Interpretation-specific
+RE_JARGON_PATTERN = r'[a-zA-ZÀ-ɏβ][a-zA-ZÀ-ɏβ\- ]{2,}'
 RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
 RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
 RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
@@ -105,7 +114,7 @@ class HtmlRenderer(Renderer):
                 buf.write('<ul class="chapters">\n')
                 for chapter in chapters:
                     self.render_index_chapter(chapter)
-                buf.write("</ul>")
+                buf.write("</ul>\n")
 
     def render_index_chapter(self, chapter):
         href = self.href_formatter(chapter.bookmark_id)
@@ -138,10 +147,12 @@ class HtmlRenderer(Renderer):
                   '<ol class="history">\n')
         for h in act.history:
             buf.write('<li>')
-            h = h.replace('學生代表大會', '學代會')
-            h = h.replace('選舉罷免執行委員會', '選委會')
-            h = RE_NUMERIC_DATE_FORMAT.sub(r'民國\1年\2月\3日', h)
+            for noun, abbr in HIST_ABBREVIATION_LIST:
+                h = h.replace(noun, abbr)
+            h = RE_NUMERIC_DATE_FORMAT.sub(utils.repl_numeric_date, h)
+            h = RE_NUMERIC_DATE_INLINE_FORMAT.sub(utils.repl_numeric_inline_date, h)
             h = RE_REPUBLIC_DATE_FORMAT.sub(utils.repl_cjk_date, h)
+            h = RE_SEMESTER_DATE_FORMAT.sub(utils.repl_cjk_semester, h)
             h = h.replace('中華民國', '民國')
             h = RE_HIST_INS_FORMAT.sub(r'\1-\2條', h)
             h = RE_HIST_STATUTE_FORMAT.sub(r'\1', h)
@@ -259,7 +270,7 @@ class HtmlRenderer(Renderer):
                 self.render_interpretation_text(subentry)
         if intp.date:
             buf.write('<time>民國 {} 年 {} 月 {} 日</time>\n'.format(*intp.date))
-        buf.write('</article>')
+        buf.write('</article>\n')
 
     def render_heading(self, heading):
         grade = 5 if heading.is_chapter else 6

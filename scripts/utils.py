@@ -35,7 +35,7 @@ def normalize_brackets(text):
     return text
 
 def normalize_bracketed_numbers(text):
-    text = RE_BRACKETED_NUMBER.sub(r'(\1)', text)
+    text = RE_BRACKETED_NUMBER.sub(r'<span class="bracketed number">\1</span>', text)
     text = RE_CJK_BRACKETED_NUMBER.sub(repl_cjk_bracketed_numbers, text)
     return text
 
@@ -93,3 +93,14 @@ def repl_cjk_date(matchobj):
         convert_cjk_number(matchobj.group('year')),
         convert_cjk_number(matchobj.group('month')),
         convert_cjk_number(matchobj.group('day')))
+
+def repl_cjk_semester(matchobj):
+    return '{}學年度第{}學期'.format(
+        convert_cjk_number(matchobj.group('year')),
+        convert_cjk_number(matchobj.group('semester')))
+
+def repl_numeric_date(matchobj):
+    return '民國{}年{}月{}日'.format(*(d.lstrip('0') for d in matchobj.groups()))
+
+def repl_numeric_inline_date(matchobj):
+    return '{}年{}月{}日'.format(*(d.lstrip('0') for d in matchobj.groups()))
