@@ -145,6 +145,14 @@ ol {
   margin: 0 0 1em 3em;
 }
 
+.history li:only-child {
+  margin-left: -1em;
+}
+
+.history li:only-child::before {
+  content: '';
+}
+
 .history + p { /* foreword */
   margin: 0;
   text-indent: 1em;
@@ -209,7 +217,8 @@ table ~ .footnote:not(.numbered) {
   text-indent: 0;
 }
 
-p:not(.footnote) + .footnote {
+p:not(.footnote) + .footnote,
+ol.paragraphs + p {
   margin-top: .6875rem;
 }
 
@@ -423,6 +432,9 @@ p:not(.footnote) + .footnote {
 .history>li:nth-of-type(100):before { content:'ⓧ'; }
 .history>li:nth-of-type(101):before { content:'ⓨ'; }
 .history>li:nth-of-type(102):before { content:'ⓩ'; }
+
+.history li:only-of-type { margin-left: -1em; }
+.history li:only-of-type::before { content: ''; }
 
 .items>li:nth-of-type(1):before { content:'㈠'; }
 .items>li:nth-of-type(2):before { content:'㈡'; }
