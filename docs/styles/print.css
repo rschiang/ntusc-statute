@@ -154,12 +154,24 @@ article.interpretation {
 
 header {
   string-set: statute-title content(), statute-prefix '', statute-unit '', statute-suffix '';
-  margin: .75rem -.1rem 1.25rem -.15rem;
+  margin-left: -.05em;
+  margin-right: -.05em;
   bookmark-level: 2;
 }
 
+/* === Page-specific treatments === */
+
+/* Keep bracket from breaking */
 #supreme_01 {
   word-break: keep-all;
+}
+
+#supreme_04,
+#admin_05,
+#admin_07 {
+  margin-left: -.1em;
+  margin-right: -.1em;
+  text-align: justify;
 }
 
 #admin_03 ~ .history,
@@ -167,7 +179,28 @@ header {
 #appendix_05 ~ .history,
 #appendix_06 ~ .history {
   string-set: statute-now ''; /* Witchcraft to clear lingering number from previous act */
+  margin-left: 2em; /* Decrease margin to accomodate more text */
 }
+
+/* HACK: keep orphan words on previous line */
+#supreme_01 ~ h6[data-number="二十四"] + ol,
+#supreme_01 ~ h6[data-number="三十一"] + ol,
+#admin_05 ~ h6[data-number="六"] + ol {
+  margin-left: .9em;
+  margin-right: -1em;
+}
+
+/* Special treatment to lingering paragraph */
+#supreme_07 ~ h6[data-number="三十六"] {
+  margin-bottom: 0;
+}
+
+/* Special treatment to outro */
+#supreme_02 ~ ol.paragraphs + p {
+  margin-top: .265rem;
+}
+
+/* ================================ */
 
 h2, h3, h4, h5, h6 {
   page-break-after: auto;
@@ -206,7 +239,10 @@ article th, article td {
   page-break-after: always;
 }
 
+#copyright td[colspan="2"] {
+  padding-right: 1em;
+}
+
 #cip {
-    width: 100%;
-    margin-top: 100%;
+  padding: 7.5rem 0 2.5rem;
 }

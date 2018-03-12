@@ -15,7 +15,7 @@ body {
 }
 
 section {
-  font-family: Didot, "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
+  font-family: "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
   font-weight: 900;
   font-size: 3rem;
   margin: 1em;
@@ -28,11 +28,11 @@ section {
 }
 
 header {
-  font-family: Didot, "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
+  font-family: "Source Han Serif TW", "Source Han Serif TC", "Noto Serif TC", "Hiragino Mincho ProN", serif;
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1.5rem;
-  margin: .565rem 0 1.935rem;
+  margin: .625rem 0;
 }
 
 h2, h3, h4, h5 {
@@ -145,17 +145,18 @@ ol {
   margin: 0 0 1em 3em;
 }
 
-.history li:only-child {
-  margin-left: -1em;
-}
-
-.history li:only-child::before {
-  content: '';
+.history li:first-child, .interpretation .meta:first-child {
+  padding-top: 1em;
 }
 
 .history + p { /* foreword */
   margin: 0;
   text-indent: 1em;
+}
+
+ol.paragraphs + p { /* outro */
+  margin: .6875rem 0 0;
+  text-indent: 0;
 }
 
 .interpretation h6 {
@@ -217,8 +218,7 @@ table ~ .footnote:not(.numbered) {
   text-indent: 0;
 }
 
-p:not(.footnote) + .footnote,
-ol.paragraphs + p {
+p:not(.footnote) + .footnote {
   margin-top: .6875rem;
 }
 
@@ -246,8 +246,26 @@ ol.paragraphs + p {
 }
 
 #cip {
-  margin: 1em;
-  min-height: 1em;
+  margin: 1.375rem auto 1.375rem 0;
+  width: 22rem;
+  font-size: .875rem;
+  line-height: 1.2rem;
+}
+
+#cip_title {
+  font-family: "Pingfang TC", "Source Han Sans TC", "Noto Sans TC", sans-serif;
+  font-weight: 600;
+}
+
+#cip_card {
+  font-family: "Source Han Sans HW TC", "Source Code Pro", monospace;
+  border: 1px solid black;
+  margin: .25em 0;
+  padding: .75em 1em;
+}
+
+#cip_number {
+  float: right;
 }
 
 .book.title {
@@ -433,7 +451,7 @@ ol.paragraphs + p {
 .history>li:nth-of-type(101):before { content:'ⓨ'; }
 .history>li:nth-of-type(102):before { content:'ⓩ'; }
 
-.history li:only-of-type { margin-left: -1em; }
+.history li:only-of-type { margin-left: -1em; text-indent: 0; }
 .history li:only-of-type::before { content: ''; }
 
 .items>li:nth-of-type(1):before { content:'㈠'; }

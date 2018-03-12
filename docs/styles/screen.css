@@ -16,6 +16,11 @@ nav, article, #readme {
     padding: 1rem .675rem;
 }
 
+#copyright {
+  max-width: 30em;
+  margin: auto;
+}
+
 article + article {
     margin-top: .5rem;
 }
