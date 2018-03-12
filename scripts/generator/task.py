@@ -1,5 +1,6 @@
 # generator/task.py - Derived models for generator use
 import glob
+import hashlib
 import io
 import json
 import os
@@ -36,17 +37,15 @@ class CategoryTask(Category):
         self.replace = replace or []
         self.blanks = blanks or 0
         self.is_intp = (slug == 'interpret')
-        self.counter = 0
+        self.hash_names = []
         super().__init__(slug=slug, caption=caption, label=label, entries=entries)
 
     def load(self, base_path='.'):
         for pattern in (os.path.join(base_path, f, '*.txt') for f in self.folders):
             for file_path in sorted(glob.glob(pattern)):
-                self.counter += 1
                 print(file_path)
                 with self.open_file(file_path) as file_buf:
-                    bookmark_id = '{}_{:02}'.format(self.slug, self.counter)
-                    entry = self.parse_entry(file_buf, bookmark_id)
+                    entry = self.parse_entry(file_buf, self.slug)
                     self.entries.append(entry)
 
     def open_file(self, file_path):
@@ -69,15 +68,22 @@ class CategoryTask(Category):
                 return io.StringIO(string)
         return file_buf
 
-    def parse_entry(self, buf, bookmark_id):
-        if self.is_intp:
-            entry = parser.parse_interpretation(buf)
-            entry.bookmark_id = bookmark_id
-        else:
-            entry = parser.parse_act(buf)
-            entry.bookmark_id = bookmark_id
+    def parse_entry(self, buf, slug):
+        entry = parser.parse_interpretation(buf) if self.is_intp else parser.parse_act(buf)
+        name = self.generate_unique_name(entry.name)
+        entry.bookmark_id = '_'.join((slug, name))
+        if not self.is_intp:
             entry.update_bookmark_id()
         return entry
+
+    def generate_unique_name(self, name):
+        hashed = hashlib.sha1(name.encode()).hexdigest()
+        for end_index in range(6, len(hashed)):
+            if hashed[:end_index] not in self.hash_names:
+                self.hash_names.append(hashed[:end_index])
+                return hashed[:end_index]
+        # Unlikely collision. Hmmm.
+        return name
 
 
 def render_custom_item(renderer, item):

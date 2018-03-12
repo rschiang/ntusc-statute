@@ -45,19 +45,7 @@
             "slug": "appendix",
             "caption": "附錄",
             "label": "附錄",
-            "folders": ["7_附錄", "../../statute/appendix/"],
-            "replace": [
-                {
-                    "path": "01_國立臺灣大學組織規程.txt",
-                    "expr": "^\\s*（備註：附表[^）]+。）",
-                    "repl": "statute/features/01_國立臺灣大學組織規程附表.html"
-                },
-                {
-                    "path": "13_會議規範.txt",
-                    "expr": "^\\s*（備註：會議規範附表）",
-                    "repl_path": "statute/features/13_會議規範附表.html"
-                }
-            ]
+            "folders": ["7_附錄"]
         }
     ],
     "prepend": [
