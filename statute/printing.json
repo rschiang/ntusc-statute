@@ -72,6 +72,9 @@
             ]
         }
     ],
+    "prepend": [
+        { "path": "statute/printing/editorial_notes.html" }
+    ],
     "append": [
         { "section": "intro", "content": "我們貢獻這所大學于宇宙之精神。" },
         { "path": "statute/printing/copyright.html" }

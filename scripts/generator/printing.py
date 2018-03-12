@@ -11,15 +11,15 @@ def generate(task):
     for category in task.categories:
         category.load(base_path=task.source)
 
-    # Process prepends
-    for item in task.prepend:
-        render_custom_item(renderer, item)
-
     # Build cover and TOC
     renderer.render_index_head()
     for category in task.categories:
         renderer.render_index_category(category)
     renderer.render_index_tail()
+
+    # Process prepends
+    for item in task.prepend:
+        render_custom_item(renderer, item)
 
     # Render individual categories
     for category in task.categories:

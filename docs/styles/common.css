@@ -145,18 +145,18 @@ ol {
   margin: 0 0 1em 3em;
 }
 
-.history li:first-child, .interpretation .meta:first-child {
+.history li:first-child, .interpretation .meta {
   padding-top: 1em;
 }
 
-.history + p { /* foreword */
+.history + p, p.text { /* foreword */
   margin: 0;
   text-indent: 1em;
 }
 
-ol.paragraphs + p { /* outro */
+.act .paragraphs + p { /* outro */
   margin: .6875rem 0 0;
-  text-indent: 0;
+  text-indent: 1em;
 }
 
 .interpretation h6 {

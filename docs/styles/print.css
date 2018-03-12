@@ -140,6 +140,7 @@ section {
   margin: 11rem 13.25rem;
   line-height: 1em;
   text-align: center;
+  bookmark-level: none;
 }
 
 article {
@@ -232,6 +233,18 @@ article th, article td {
   border: .4pt solid;
 }
 
+#editorial_notes p {
+  padding: .6875rem;
+}
+
+#editorial_notes p + ol li,
+#editorial_notes h4 {
+  padding-bottom: .6875rem;
+}
+
+#editorial_notes h4 + ol li {
+  padding-bottom: .275rem;
+}
 
 #copyright {
   page: others;
