@@ -51,7 +51,14 @@
             "slug": "interpret",
             "caption": "學生法院解釋",
             "label": "解釋",
-            "folders": ["6_學生法院解釋"]
+            "folders": ["6_學生法院解釋"],
+            "replace": [
+                {
+                    "path": "16_不受理決議第1號.txt",
+                    "expr": ":",
+                    "repl": "："
+                }
+            ]
         },
         {
             "slug": "appendix",

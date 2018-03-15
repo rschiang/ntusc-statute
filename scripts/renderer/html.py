@@ -34,7 +34,7 @@ RE_SEMESTER_DATE_FORMAT = re.compile(r'(本校)?\s*(?P<year>[\d' + RE_CJK_NUMERI
 RE_JARGON_PATTERN = r'[a-zA-ZÀ-ɏβ][a-zA-ZÀ-ɏβ\- ]{2,}'
 RE_INTP_META_REMARK_FORMAT = re.compile(r'(（(首席|註[^）]+)）)')
 RE_INTP_REMARK_FORMAT = re.compile(r'([（\(](以?下簡?稱|[備附]註|註\s*[\d' + RE_CJK_NUMERICS + r']+)[^）]*[）\)])')
-RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+參照[）\)])')
+RE_INTP_CITATION_FORMAT = re.compile(r'([（\(][^）\)]+(?:參照|出版|出刊|頁|條|，[' + RE_CJK_NUMERICS + r']+年)[）\)]|(?:許宗力，|[（\(]參照).+?[號年照][）\)])')
 RE_INTP_SUBHEADING_FORMAT = re.compile(r'^([（\(][' + RE_CJK_NUMERICS + r'A-Z][）\)]、?|[' + RE_CJK_NUMERICS_MIXED + r']、|\d\.\s?)([^。；]+：)')
 RE_INTP_JARGON_FORMAT = re.compile(r'(\(' + RE_JARGON_PATTERN + r'?\))')
 RE_INTP_JARGON_INLINE_FORMAT = re.compile(r'(?<=[（，」])(' + RE_JARGON_PATTERN + r'?)(?=[），「])')

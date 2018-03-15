@@ -218,6 +218,32 @@ header {
   margin-top: .265rem;
 }
 
+/* Force line wrap for adjacent punctuations */
+#interpret_10 ~ p:first-of-type {
+  word-break: break-word;
+}
+
+/* Adjust line wrap for mixed paragraph */
+#interpret_05 ~ p:nth-of-type(7) > .jargon,
+#interpret_11 ~ h6:nth-of-type(2) + p .jargon:first-of-type {
+  letter-spacing: -.01em;
+}
+
+#interpret_11 ~ p:not(.footnote) + p {
+  margin-right: -.1em;
+}
+
+/* Quote indentation */
+#interpret_14 ~ p:last-child {
+  margin-left: 1em;
+  text-indent: 0;
+}
+
+#interpret_16 ~ h5 + h6 + p {
+  margin-left: 1em;
+  text-indent: 0;
+}
+
 /* ================================ */
 
 h2, h3, h4, h5, h6 {

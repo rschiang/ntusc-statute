@@ -149,14 +149,16 @@ ol {
   padding-top: 1em;
 }
 
-.history + p, p.text { /* foreword */
+.history + p, /* foreword */
+.act .paragraphs + p, /* outro */
+.interpretation p:not(.footnote),
+p.text { /* these need to be rendered as text */
   margin: 0;
   text-indent: 1em;
 }
 
-.act .paragraphs + p { /* outro */
-  margin: .6875rem 0 0;
-  text-indent: 1em;
+.act .paragraphs + p { /* outro-specific */
+  margin-top: .6875rem;
 }
 
 .interpretation h6 {
@@ -164,7 +166,7 @@ ol {
 }
 
 .interpretation p {
-  margin-bottom: 2pt;
+  margin-bottom: .25rem;
 }
 
 .interpretation .jargon {
