@@ -181,15 +181,15 @@ ol {
   font-weight: 500;
 }
 
-.interpretation time {
+time {
   display: block;
   text-align: right;
 }
 
-.interpretation time::before { content: '\ff08'; }
-.interpretation time::after { content: '\ff09'; }
+time::before { content: '\ff08'; }
+time::after { content: '\ff09'; }
 
-.note, .interpretation time, cite {
+.note, time, cite {
   font-family: "Kaiti TC", cwTeXKai, BiaoKai, cursive;
 }
 

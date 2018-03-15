@@ -52,6 +52,13 @@
   }
 }
 
+@page foreword:left:blank {
+  border: none;
+  @left-bottom {
+    content: '';
+  }
+}
+
 @page category {
   margin: 8.5mm; /* = 24pt (<section> 1em) */
   border: none;
@@ -162,6 +169,16 @@ header {
 
 /* === Page-specific treatments === */
 
+/* HACK: Force word wrap */
+/*.indices a[href="#admin_06"]::before,
+.indices a[href="#admin_07"]::before {
+    content: '';
+    display: block;
+    float: right;
+    width: 1em;
+    height: 1em;
+}*/
+
 /* Keep bracket from breaking */
 #supreme_01 {
   word-break: keep-all;
@@ -233,8 +250,12 @@ article th, article td {
   border: .4pt solid;
 }
 
+#editorial_notes {
+  page: foreword;
+}
+
 #editorial_notes p {
-  padding: .6875rem;
+  padding: .6875rem 0;
 }
 
 #editorial_notes p + ol li,
