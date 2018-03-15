@@ -324,6 +324,10 @@ td li.lingering .squared.icon.first {
   page-break-after: always;
 }
 
+.book.title .secondary {
+  font-size: .6667em;
+}
+
 #copyright td[colspan="2"] {
   padding-right: 1em;
 }
