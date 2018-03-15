@@ -300,3 +300,6 @@ class HtmlRenderer(Renderer):
     def render_file(self, path):
         with open(path, 'r') as f:
             self.buf.write(f.read())
+
+    def render_blank(self):
+        self.buf.write('<div class="blank"><p></p></div>\n')

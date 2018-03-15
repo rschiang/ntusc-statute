@@ -31,9 +31,10 @@ class Task(object):
 
 
 class CategoryTask(Category):
-    def __init__(self, slug, caption, label, folders=None, entries=None, replace=None):
+    def __init__(self, slug, caption, label, folders=None, entries=None, replace=None, blanks=None):
         self.folders = folders or []
         self.replace = replace or []
+        self.blanks = blanks or 0
         self.is_intp = (slug == 'interpret')
         self.counter = 0
         super().__init__(slug=slug, caption=caption, label=label, entries=entries)

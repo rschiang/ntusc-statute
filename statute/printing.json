@@ -26,7 +26,8 @@
             "slug": "admin",
             "caption": "行政部門",
             "label": "行政",
-            "folders": ["3_會長暨行政部門篇"]
+            "folders": ["3_會長暨行政部門篇"],
+            "blanks": 1
         },
         {
             "slug": "legis",

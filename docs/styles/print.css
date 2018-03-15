@@ -106,6 +106,18 @@
   }
 }
 
+@page blank:left {
+  @left-top {
+    content: '\8cc7\6599\88dc\5145\6b04';
+  }
+}
+
+@page blank:right {
+  @right-top {
+    content: '\8cc7\6599\88dc\5145\6b04';
+  }
+}
+
 @page others {
   border: none;
   padding: 0;
@@ -168,16 +180,6 @@ header {
 }
 
 /* === Page-specific treatments === */
-
-/* HACK: Force word wrap */
-/*.indices a[href="#admin_06"]::before,
-.indices a[href="#admin_07"]::before {
-    content: '';
-    display: block;
-    float: right;
-    width: 1em;
-    height: 1em;
-}*/
 
 /* Keep bracket from breaking */
 #supreme_01 {
@@ -244,6 +246,14 @@ header {
   text-indent: 0;
 }
 
+/* Chapter title too long; pad it */
+#appendix_01_ch06 {
+  margin-left: 7.5em;
+  margin-right: 3.5em;
+  text-indent: -4em;
+  text-align: left;
+}
+
 /* ================================ */
 
 h2, h3, h4, h5, h6 {
@@ -276,6 +286,15 @@ article th, article td {
   border: .4pt solid;
 }
 
+td li.lingering {
+  margin-right: -.5em;
+}
+
+td li.lingering .squared.icon:first-of-type,
+td li.lingering .squared.icon.first {
+  margin-left: .14em;
+}
+
 #editorial_notes {
   page: foreword;
 }
@@ -291,6 +310,12 @@ article th, article td {
 
 #editorial_notes h4 + ol li {
   padding-bottom: .275rem;
+}
+
+.blank {
+  page: blank;
+  page-break-before: right;
+  page-break-after: always;
 }
 
 #copyright {

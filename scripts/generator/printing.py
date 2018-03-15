@@ -30,6 +30,9 @@ def generate(task):
         else:
             for entry in category.entries:
                 renderer.render_act(entry)
+        # Render blank pages if requested
+        for i in range(category.blanks):
+            renderer.render_blank()
 
     # Process appends
     for item in task.append:
