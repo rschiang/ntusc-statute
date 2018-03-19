@@ -23,7 +23,7 @@ RE_ATTACHMENT_NUMBERING = re.compile(r'^附件（?([' + RE_CJK_NUMERICS + r']+)�
 RE_SUBSECTION_NUMBERING = re.compile(r'^[' + RE_CJK_NUMERICS + r']+、\s*')
 RE_ITEM_NUMBERING = re.compile(r'^\([' + RE_CJK_NUMERICS + r']+\)\s*')
 
-RE_DELETED_FORMAT = re.compile(r'^[（\(]刪除[\)）]')
+RE_DELETED_FORMAT = re.compile(r'^[（\(](?:本條(?P<note>[^\)）]*))?刪除[\)）]')
 RE_EMPHASIS_FORMAT = re.compile(r'(（(編按|例如|備註|附註|原名稱)：[^）]+）)')
 RE_NUMERIC_DATE_FORMAT = re.compile(r'^(\d+)\.(\d+)\.(\d+)\s*')
 RE_NUMERIC_DATE_INLINE_FORMAT = re.compile(r'(?<=[；。])(\d+)\.(\d+)\.(\d+)\s*')
@@ -210,9 +210,15 @@ class HtmlRenderer(Renderer):
             buf.write('<span class="caption">（')
             buf.write(article.caption)
             buf.write('）</span>')
-        if len(article.subitems) == 1 and RE_DELETED_FORMAT.match(article.subitems[0].caption):
-            buf.write('\u200b<span class="caption deleted">（刪除）</span></h6>\n')
-            return  # Short circuit
+        if len(article.subitems) == 1:
+            # Determine if article was deleted
+            m = RE_DELETED_FORMAT.match(article.subitems[0].caption)
+            if m:
+                buf.write('\u200b<span class="caption deleted">（')
+                if m.group('note'): # Append additional notes if available
+                    buf.write(m.group('note'))
+                buf.write('刪除）</span></h6>\n')
+                return  # Short circuit
         buf.write('</h6>\n')
         if article.subitems:
             buf.write('<ol class="paragraphs">')

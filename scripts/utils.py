@@ -35,8 +35,8 @@ def normalize_brackets(text):
     return text
 
 def normalize_bracketed_numbers(text):
-    text = RE_BRACKETED_NUMBER.sub(r'<span class="bracketed number">\1</span>', text)
     text = RE_CJK_BRACKETED_NUMBER.sub(repl_cjk_bracketed_numbers, text)
+    text = RE_BRACKETED_NUMBER.sub(r'<span class="bracketed number">\1</span>', text)
     return text
 
 def convert_cjk_number(text):
