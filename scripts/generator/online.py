@@ -28,6 +28,8 @@ def generate_index_page(task, renderer):
     if append_path:
         renderer.render_file(append_path)
 
+    renderer.render_tail()
+
 def generate_entry(task, renderer, entry, is_intp=False):
     # Process header and prepends
     renderer.render_head(title=entry.name, meta=task.options.get('entry_meta', task.meta), base_url=task.base_url)

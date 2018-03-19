@@ -45,7 +45,7 @@
             "slug": "appendix",
             "caption": "附錄",
             "label": "附錄",
-            "folders": ["7_附錄"]
+            "folders": ["../../statute/online/appendix"]
         }
     ],
     "prepend": [
