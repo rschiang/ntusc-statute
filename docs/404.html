@@ -3,23 +3,28 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://rschiang.github.io/ntusc-statute/styles/common.css" />
+<link rel="stylesheet" href="https://rschiang.github.io/ntusc-statute/styles/print.css" media="print" />
+<link rel="stylesheet" href="https://rschiang.github.io/ntusc-statute/styles/screen.css" media="screen" />
 <title>國立臺灣大學學生會簡明法規彙編</title>
 <meta name="author" content="國立臺灣大學開源社" />
 <meta name="description" content="收錄國立臺灣大學學生會自治規程、學生法院解釋，以及相關之校級與國家法規。" />
 <meta property="og:image" content="https://rschiang.github.io/ntusc-statute/assets/social-cover.png" />
 <meta property="og:type" content="website" />
 </head>
-<body>
+<body class="page404">
   <hgroup class="gray book title">
       <a href="https://rschiang.github.io/ntusc-statute/">
           <span class="secondary">國立臺灣大學學生會</span>
           <span>簡明法規彙編</span>
       </a>
   </hgroup>
-  <nav>
-    <header>找不到網頁</header>
-    <p>如果是線上版《簡明法規彙編》仍有收錄的章節，將會自動跳轉至新網址；若否，則將自動回到<a href="https://rschiang.github.io/ntusc-statute/">目錄頁</a>。</p>
-  </nav>
+  <div id="readme">
+      <header>找不到頁面</header>
+      <p>這篇法規可能已經更名、或是移動到其他章節了；關於線上版《簡明法規彙編》收錄的範圍，還請參照本書<a href="https://rschiang.github.io/ntusc-statute/">目錄頁</a>。</p>
+      <h5>備註</h5>
+      <p>自紙本二版（<a href="https://github.com/rschiang/ntusc-statute/commits/106-1">106-1</a>）起，為了便於參考引用、不受紙本版章節調動影響，改取法規名稱的「<abbr title="hash value">雜湊值</abbr>」作為該法規的編號；若所欲瀏覽的是舊連結、而線上版《簡明法規彙編》仍有收錄該法規，則將自動轉址至新頁面。</p>
+  </div>
   <footer>
       <a href="https://ntuosc.org/" rel="external" target="_blank" class="ntuosc-logo">
           <img src="https://rschiang.github.io/ntusc-statute/assets/ntuosc.svg" width="192" height="79.2" alt="國立臺灣大學開源社發行 / Published by NTU Open Source Community">
@@ -81,7 +86,7 @@
       'appendix/07.html': 'appendix/193bc3.html' /* 內政部會議規範 */
     };
 
-    (function() {
+    window.addEventListener("load", function() {
       var url = window.location.href;
       for (var oldPath in routes) {
         var index = url.indexOf(oldPath);
@@ -93,7 +98,7 @@
       }
       // Fallback redirection to index
       window.location = 'https://rschiang.github.io/ntusc-statute/';
-    })();
+    });
   </script>
 </body>
 </html>

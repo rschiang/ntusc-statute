@@ -157,6 +157,10 @@ hgroup.gray.book.title, footer {
     background: #fafafa;
 }
 
+.page404 #readme {
+  min-height: calc(100vh - 12.9875em);
+}
+
 /* Mobile devices */
 @media screen and (max-width: 30em) {
     .gray.book.title a {
