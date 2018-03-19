@@ -182,72 +182,72 @@ header {
 /* === Page-specific treatments === */
 
 /* Keep bracket from breaking */
-#supreme_01 {
+#supreme_5ae5bf {
   word-break: keep-all;
 }
 
-#supreme_04,
-#admin_05,
-#admin_07 {
+#supreme_67334d,
+#admin_be0134,
+#admin_ee0711 {
   margin-left: -.1em;
   margin-right: -.1em;
   text-align: justify;
 }
 
-#admin_03 ~ .history,
-#appendix_01 ~ .history,
-#appendix_05 ~ .history,
-#appendix_06 ~ .history {
+#admin_2bc3ea ~ .history,
+#appendix_fcc513 ~ .history,
+#appendix_209221 ~ .history,
+#appendix_67854a ~ .history {
   string-set: statute-now ''; /* Witchcraft to clear lingering number from previous act */
   margin-left: 2em; /* Decrease margin to accomodate more text */
 }
 
 /* HACK: keep orphan words on previous line */
-#supreme_01 ~ h6[data-number="二十四"] + ol,
-#supreme_01 ~ h6[data-number="三十一"] + ol,
-#admin_05 ~ h6[data-number="六"] + ol {
+#supreme_5ae5bf ~ h6[data-number="二十四"] + ol,
+#supreme_5ae5bf ~ h6[data-number="三十一"] + ol,
+#admin_be0134 ~ h6[data-number="六"] + ol {
   margin-left: .9em;
   margin-right: -1em;
 }
 
 /* Special treatment to lingering paragraph */
-#supreme_07 ~ h6[data-number="三十六"] {
+#supreme_ec3907 ~ h6[data-number="三十六"] {
   margin-bottom: 0;
 }
 
 /* Special treatment to outro */
-#supreme_02 ~ ol.paragraphs + p {
+#supreme_85cbef ~ ol.paragraphs + p {
   margin-top: .265rem;
 }
 
 /* Force line wrap for adjacent punctuations */
-#interpret_10 ~ p:first-of-type {
+#interpret_3c64f6 ~ p:first-of-type {
   word-break: break-word;
 }
 
 /* Adjust line wrap for mixed paragraph */
-#interpret_05 ~ p:nth-of-type(7) > .jargon,
-#interpret_11 ~ h6:nth-of-type(2) + p .jargon:first-of-type {
+#interpret_ada762 ~ p:nth-of-type(7) > .jargon,
+#interpret_55ce5d ~ h6:nth-of-type(2) + p .jargon:first-of-type {
   letter-spacing: -.01em;
 }
 
-#interpret_11 ~ p:not(.footnote) + p {
+#interpret_55ce5d ~ p:not(.footnote) + p {
   margin-right: -.1em;
 }
 
 /* Quote indentation */
-#interpret_14 ~ p:last-child {
+#interpret_6719c4 ~ p:last-child {
   margin-left: 1em;
   text-indent: 0;
 }
 
-#interpret_16 ~ h5 + h6 + p {
+#interpret_05ec9f ~ h5 + h6 + p {
   margin-left: 1em;
   text-indent: 0;
 }
 
 /* Chapter title too long; pad it */
-#appendix_01_ch06 {
+#appendix_fcc513_ch06 {
   margin-left: 7.5em;
   margin-right: 3.5em;
   text-indent: -4em;
