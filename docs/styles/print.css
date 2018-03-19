@@ -335,3 +335,12 @@ td li.lingering .squared.icon.first {
 #cip {
   padding: 7.5rem 0 2.5rem;
 }
+
+/* Online-specific settings */
+
+
+body > hgroup.book.title,
+body > footer,
+.github-corner {
+  display: none;
+}

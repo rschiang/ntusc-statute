@@ -188,10 +188,6 @@ hgroup.gray.book.title, footer {
   .github-corner .octo-arm { animation:octocat-wave 560ms ease-in-out; }
 }
 
-@media print {
-  .github-corner { display: none; }
-}
-
 /* Web font fallback for mobile devices, from Google Font Early Access */
 @font-face {
    font-family: 'Noto Sans TC';
